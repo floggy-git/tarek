@@ -33,7 +33,7 @@
       <button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)">
         <b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
 <script>
-const API="https://script.google.com/macros/s/AKfycby3BaorA5fPncSWCneRgpvzIZyEopig_i1x0VE3WNcNDECRCooCbvl5I3qp09UAgV95Hw/exec";
+const API="https://script.google.com/macros/s/AKfycbx_qjsExu0sq22wtuvZBoEuBi1z7YxFfkthY_k7uV_d0FeDH-OsD2gm0URXV7xkliYtVA/exec";
   const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
   const $=id=>document.getElementById(id);
   function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
