@@ -175,14 +175,27 @@ async function loadTrainers(){
   const t = state.trainers.find(x => x.name === trainer);
   if(!t) return;
 
-  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const day = dayNames[new Date(date + 'T12:00:00').getDay()];
+const dayNames = [
+  ['Sunday','Zondag'],
+  ['Monday','Maandag'],
+  ['Tuesday','Dinsdag'],
+  ['Wednesday','Woensdag'],
+  ['Thursday','Donderdag'],
+  ['Friday','Vrijdag'],
+  ['Saturday','Zaterdag']
+];
 
-  if(!t.workDays || !t.workDays.includes(day)){
-    timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
-    return;
-  }
+const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
+const workDays = String(t.workDays || '').toLowerCase();
 
+const worksToday = dayOptions.some(d =>
+  workDays.includes(d.toLowerCase())
+);
+
+if(!worksToday){
+  timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
+  return;
+}
   let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
