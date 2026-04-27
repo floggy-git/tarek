@@ -198,7 +198,7 @@ if(!worksToday){
   timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
   return;
 }
-  let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
+ let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
   const booked = r.booked || [];
