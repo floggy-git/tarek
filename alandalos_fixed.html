@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Al-Andalos Rijschool</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🏎️%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#071a35;--blue:#1465d8;--green:#10a86a;--red:#dc2626;--gold:#f59e0b;--bg:#f4f7fb;--text:#102033;--muted:#64748b;--line:#e2e8f0;--shadow:0 18px 48px rgba(10,31,68,.12)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Cairo,system-ui,sans-serif;background:linear-gradient(180deg,#eef7ff,#f8fafc);color:var(--text);min-height:100vh}.hidden{display:none!important}button,input,select,textarea{font-family:inherit}button{border:0;cursor:pointer}.top{position:sticky;top:0;background:rgba(244,247,251,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);z-index:20}.topin{max-width:1180px;margin:auto;padding:13px 18px;display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;border-radius:17px;background:linear-gradient(135deg,var(--navy),var(--blue));display:grid;place-items:center;color:white;font-size:24px}.brand h1{font-size:17px;font-weight:900}.brand p{font-size:12px;color:var(--muted)}.main{max-width:1180px;margin:auto;padding:20px 18px 105px}.screen,.page{display:none}.screen.active,.page.active{display:block}.card,.login-card{background:white;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:18px}.grid{display:grid;gap:14px}.cols2{grid-template-columns:repeat(2,1fr)}.cols3{grid-template-columns:repeat(3,1fr)}.cols4{grid-template-columns:repeat(4,1fr)}.input,.select,.textarea{width:100%;border:1.5px solid #dbe5ef;border-radius:17px;padding:13px 14px;font-size:14px;background:white}.textarea{min-height:96px}.group label{display:block;font-size:12px;font-weight:900;margin-bottom:6px;color:#334155}.btn{border-radius:17px;padding:13px 15px;font-weight:900;font-size:14px;display:inline-flex;justify-content:center;align-items:center;gap:8px;box-shadow:0 9px 24px rgba(15,23,42,.10)}.primary{background:linear-gradient(135deg,var(--navy),var(--blue));color:white}.green{background:var(--green);color:white}.red{background:var(--red);color:white}.gold{background:var(--gold);color:white}.ghost{background:white;border:1px solid var(--line);color:var(--text)}.full{width:100%}.login-grid{display:grid;grid-template-columns:1fr 420px;gap:20px}.welcome{background:linear-gradient(135deg,#061936,#0d47a1,#1688e8);color:white;border-radius:32px;box-shadow:var(--shadow);padding:30px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between}.welcome h2{font-size:32px}.welcome p{opacity:.82;line-height:1.9}.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#eef3f8;border-radius:18px;padding:5px;gap:5px;margin-bottom:16px}.tab{background:transparent;border-radius:14px;padding:11px 7px;font-weight:900;color:var(--muted)}.tab.active{background:white;color:var(--blue)}.kpi{background:white;border:1px solid var(--line);border-radius:22px;padding:15px;display:flex;gap:12px;align-items:center;box-shadow:0 9px 25px rgba(15,23,42,.07)}.kpi i{width:44px;height:44px;border-radius:16px;background:#eef6ff;display:grid;place-items:center;font-style:normal;font-size:23px}.kpi b{font-size:21px;font-weight:900;display:block}.kpi span{font-size:12px;color:var(--muted);font-weight:800}.wallet{background:linear-gradient(135deg,#071a35,#0d57bd,#38a8ff);color:white}.wallet h2{font-size:42px}.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.list{display:grid;gap:10px}.item{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:13px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center}.item strong{display:block}.item small{display:block;color:var(--muted);font-size:12px}.badge{border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}.blue{background:#dbeafe;color:#1e40af}.greenb{background:#dcfce7;color:#166534}.redb{background:#fee2e2;color:#991b1b}.goldb{background:#fef3c7;color:#92400e}.student-card{background:linear-gradient(135deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:22px;padding:16px;cursor:pointer}.student-card:nth-child(4n+1){border-right:5px solid var(--blue)}.student-card:nth-child(4n+2){border-right:5px solid var(--green)}.student-card:nth-child(4n+3){border-right:5px solid var(--gold)}.student-card:nth-child(4n+4){border-right:5px solid var(--red)}.notice{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:17px;padding:12px 13px;font-size:13px;line-height:1.75}.warn{background:#fff1f2;border-color:#fecdd3;color:#9f1239}.quick,.paygrid,.statusgrid{display:grid;gap:10px}.quick{grid-template-columns:repeat(5,1fr);margin:12px 0}.paygrid{grid-template-columns:repeat(4,1fr)}.statusgrid{grid-template-columns:repeat(2,1fr)}.quick button,.payopt,.statusopt{background:#eef6ff;color:var(--blue);border-radius:14px;padding:12px 10px;font-weight:900;border:1.5px solid transparent}.payopt.active{border-color:var(--blue);background:white}.statusopt.paid.active{background:#dcfce7;color:#166534;border-color:#22c55e}.statusopt.unpaid.active{background:#fee2e2;color:#991b1b;border-color:#ef4444}.nav{position:fixed;bottom:13px;left:50%;transform:translateX(-50%);width:min(780px,calc(100% - 24px));background:rgba(255,255,255,.94);border:1px solid var(--line);box-shadow:0 18px 54px rgba(15,23,42,.16);border-radius:28px;padding:8px;display:none;z-index:30}.nav.active{display:grid}.nav.student{grid-template-columns:repeat(7,1fr)}.nav.trainer{grid-template-columns:repeat(6,1fr)}.nav button{background:transparent;border-radius:20px;padding:8px 2px;color:var(--muted);font-size:10px;font-weight:900;display:grid;place-items:center}.nav b{font-size:18px}.nav button.active{background:#eef6ff;color:var(--blue)}.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-18px);z-index:100;min-width:280px;padding:14px 18px;border-radius:18px;background:#0f172a;color:white;box-shadow:var(--shadow);opacity:0;transition:.25s;font-weight:900;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast.ok{background:#059669}.toast.err{background:#dc2626}.toast.info{background:#1465d8}.learnbox{background:linear-gradient(135deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:22px;padding:18px}.choice{width:100%;background:white;border:1.5px solid var(--line);border-radius:16px;padding:12px;text-align:start;margin-top:8px;font-weight:800}.choice.correct{background:#dcfce7;border-color:#22c55e;color:#166534}.choice.wrong{background:#fee2e2;border-color:#ef4444;color:#991b1b}@media(max-width:860px){.login-grid,.cols2,.cols3,.cols4{grid-template-columns:1fr}.welcome{display:none}.paygrid{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(2,1fr)}.nav button{font-size:9px}.nav b{font-size:16px}}
+</style>
+</head>
+<body><div class="toast" id="toast"></div><div class="app">
+<header class="top"><div class="topin"><div class="brand"><div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
+<main class="main">
+<section class="screen active" id="loginScreen"><div class="login-grid"><div class="welcome"><div><h2>مدرسة الأندلس لتعليم قيادة السيارات</h2><p>تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div><div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div><div class="login-card"><div class="tabs"><button class="tab active" id="tabStudent" onclick="switchAuth('student')">طالب</button><button class="tab" id="tabRegister" onclick="switchAuth('register')">تسجيل</button><button class="tab" id="tabTrainer" onclick="switchAuth('trainer')">مدرب</button></div><div id="authStudent" class="grid"><div class="group"><label>الإيميل</label><input class="input" id="sEmail" type="email"></div><div class="group"><label>الهاتف</label><input class="input" id="sPhone"></div><button class="btn primary full" onclick="studentLogin(this)">🔓 دخول</button></div><div id="authRegister" class="grid hidden"><div class="grid cols2"><div class="group"><label>الاسم</label><input class="input" id="rName"></div><div class="group"><label>الهاتف</label><input class="input" id="rPhone"></div></div><div class="group"><label>الإيميل</label><input class="input" id="rEmail" type="email"></div><div class="grid cols2"><div class="group"><label>نوع السيارة</label><select class="select" id="rCar"><option value="manual">Manual / عادي</option><option value="automatic">Automatic / أوتوماتيك</option></select></div><div class="group"><label>اللغة</label><select class="select" id="rLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option></select></div></div><div class="group"><label>المدرب</label><select class="select" id="rTrainer"></select></div><div class="group"><label>العنوان</label><input class="input" id="rAddress"></div><button class="btn green full" onclick="registerStudent(this)">📝 إنشاء حساب</button></div><div id="authTrainer" class="grid hidden"><div class="group"><label>إيميل المدرب</label><input class="input" id="tEmail" type="email"></div><div class="group"><label>كلمة المرور</label><input class="input" id="tPass" type="password" placeholder="admin123"></div><button class="btn primary full" onclick="trainerLogin(this)">👨‍🏫 دخول</button></div></div></div></section>
+<section class="screen" id="studentScreen"><div class="page active" id="sHome"><div class="grid cols2"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet">€0</h2><p id="sName"></p></div><div class="grid cols2"><div class="kpi"><i>📚</i><div><b id="sTotal">0</b><span>Lessons</span></div></div><div class="kpi"><i>✅</i><div><b id="sPaid">0</b><span>Paid</span></div></div><div class="kpi"><i>⏳</i><div><b id="sUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>💶</i><div><b id="sRevenue">€0</b><span>Total</span></div></div></div></div><div class="grid cols2" style="margin-top:14px"><div class="card"><div class="title"><h3>📅 Upcoming Lessons</h3></div><div id="sUpcoming" class="list"></div></div><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="dailyLearn"></div></div></div></div><div class="page" id="sLessons"><div class="card"><div class="title"><h3>📚 Lessons</h3><small id="lessonCount">0</small></div><div id="sLessonsList" class="list"></div></div></div><div class="page" id="sBookings"><div class="card"><div class="title"><h3>📅 Bookings</h3><button class="btn primary" onclick="studentPage('sBook')">حجز جديد</button></div><div id="sBookingsList" class="list"></div></div></div><div class="page" id="sBook"><div class="card"><div class="title"><h3>🚗 Book Lesson</h3></div><div class="grid cols2"><div class="group"><label>المدرب</label><select class="select" id="bookTrainer" onchange="loadBookedSlots()"></select></div><div class="group"><label>التاريخ</label><input class="input" id="bookDate" type="date" onchange="loadBookedSlots()"></div><div class="group"><label>الوقت</label><select class="select" id="bookTime"></select></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="bookAddress"></div></div><div class="notice" style="margin:12px 0">لا يمكن حجز تاريخ قديم.</div><button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button></div></div><div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
+<section class="screen" id="trainerScreen"><div class="page active" id="tHome"><div class="card"><div class="title"><h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span></div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div><b id="trUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>📅</i><div><b id="trBookings">0</b><span>Bookings</span></div></div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3></div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)"><div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"><div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group"><label>Trainer</label><select class="select" id="trLessonTrainer"></select></div><div class="group"><label>Date</label><input class="input" id="trLessonDate" type="date"></div><div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div><div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div><div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div><div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div><div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div></div><div class="group" style="margin-top:12px"><label>Payment Status</label><div class="statusgrid"><button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button><button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button></div></div><div class="group" id="trPayMethodBox"><label>Payment Method</label><div class="paygrid" id="trPayMethods"></div></div><button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button></div></div><div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><input class="input" id="trDepositNotes"></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div><div class="page" id="tReminder"><div class="card"><div class="title"><h3>💌 Payment Reminder</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trReminderStudent"></select></div><div class="group"><label>Suggested Amount</label><input class="input" id="trReminderAmount" type="number" placeholder="مبلغ مقترح"></div></div><div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage"></textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
+</main><nav class="nav student" id="studentNav"><button class="active" onclick="studentPage('sHome',this)"><b>🏠</b>Home</button><button onclick="studentPage('sLessons',this)"><b>📚</b>Lessons</button><button onclick="studentPage('sBookings',this)"><b>📅</b>Bookings</button><button onclick="studentPage('sBook',this)"><b>🚗</b>Book</button><button onclick="studentPage('sWalletPage',this)"><b>💳</b>Wallet</button><button onclick="studentPage('sLearning',this)"><b>🎓</b>Learn</button><button onclick="studentPage('sProfile',this)"><b>👤</b>Profile</button></nav><nav class="nav trainer" id="trainerNav"><button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)"><b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
+<script>
+const API='https://script.google.com/macros/s/AKfycbxtnIewQXdbxdpMcfpAIAk6Ah1GbIWfNhcni6cR1jpV30RqTqkimNRXkNX4H36l3WGXmw/exec';
+  const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
+  const $=id=>document.getElementById(id);
+  function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
+  function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
+  function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+  function money(n){return '€'+(Number(n)||0).toFixed(2).replace('.00','')}
+  function isoToday(){return new Date().toISOString().slice(0,10)}
+  function compactDate(v){if(!v)return '—';let s=String(v);if(/^\d{4}-\d{2}-\d{2}/.test(s))return new Date(s+'T12:00:00').toLocaleDateString('nl-NL');return s.split(' GMT')[0]}
+  function compactTime(v){if(!v)return '—';let s=String(v);return s.length>5?s.substring(0,5):s}
+  function mapsUrl(addr){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(addr||'')}
+  const API_TIMEOUT = 15000;
+
+  function buildApiUrl(action, params = {}) {
+    return API + '?' + new URLSearchParams({
+      ...params,
+      action
+    }).toString();
+  }
+
+  async function fetchWithTimeout(url, options = {}, ms = API_TIMEOUT) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    try {
+      return await fetch(url, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  // قراءة البيانات من Google Apps Script عبر doGet + JSONP لتجنب مشكلة CORS.
+  function apiGet(action, params = {}) {
+    return new Promise(resolve => {
+      const cb = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 999999);
+      const script = document.createElement('script');
+      let done = false;
+
+      function finish(result) {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        try { delete window[cb]; } catch(e) { window[cb] = undefined; }
+        if (script.parentNode) script.parentNode.removeChild(script);
+        resolve(result || {});
+      }
+
+      const timer = setTimeout(() => {
+        finish({
+          success: false,
+          message: 'No API response. تأكد من رابط /exec ومن صلاحيات Anyone.'
+        });
+      }, API_TIMEOUT);
+
+      window[cb] = res => finish(res);
+
+      script.onerror = () => finish({
+        success: false,
+        message: 'API failed. الرابط غير قابل للتحميل أو ليس Web App /exec.'
+      });
+
+      script.src = API + '?' + new URLSearchParams({
+        ...params,
+        action,
+        callback: cb,
+        _: Date.now()
+      }).toString();
+
+      document.body.appendChild(script);
+    });
+  }
+
+  // إرسال البيانات إلى doPost. للعمليات التي لا تحتاج قراءة الرد نستخدم no-cors كحل آمن مع Apps Script.
+  async function apiPost(action, data = {}, read = true) {
+    const payload = JSON.stringify({ ...data, action });
+
+    try {
+      const r = await fetchWithTimeout(API, {
+        method: 'POST',
+        body: payload,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+      });
+
+      const txt = await r.text();
+      try {
+        return JSON.parse(txt);
+      } catch(e) {
+        return { success: false, message: 'Invalid server response: ' + txt.substring(0, 160) };
+      }
+    } catch(e) {
+      if (!read) {
+        try {
+          await fetchWithTimeout(API, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: payload,
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+          }, 5000);
+          return { success: true, message: 'Sent' };
+        } catch(x) {}
+      }
+
+      return {
+        success: false,
+        message: (e.name === 'AbortError')
+          ? 'Connection timeout. تأكد من رابط Apps Script.'
+          : 'Failed to fetch. القراءة عبر POST ممنوعة من المتصفح بسبب CORS. استخدم JSONP للقراءة أو أضف doGet لهذا الأمر في Apps Script.'
+      };
+    }
+  }
+
+  function showScreen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');$('logoutBtn').classList.toggle('hidden',id==='loginScreen');$('studentNav').classList.toggle('active',id==='studentScreen');$('trainerNav').classList.toggle('active',id==='trainerScreen')}
+  function switchAuth(tab){['student','register','trainer'].forEach(x=>{$('tab'+x[0].toUpperCase()+x.slice(1)).classList.toggle('active',x===tab);$('auth'+x[0].toUpperCase()+x.slice(1)).classList.toggle('hidden',x!==tab)})}
+  function logout(){sessionStorage.clear();state.role=null;state.user=null;showScreen('loginScreen')}
+  async function loadTrainers(){const r=await apiGet('getTrainers');state.trainers=r.trainers||[];const opts='<option value="">—</option>'+state.trainers.map(t=>`<option value="${esc(t.name)}">${esc(t.name)}${t.type?' · '+esc(t.type):''}</option>`).join('');['rTrainer','bookTrainer','trLessonTrainer'].forEach(id=>{if($(id))$(id).innerHTML=opts})}
+  async function loadStudents(){const r=await apiGet('getStudentList');state.students=r.students||[];trainerFillStudentSelects();trainerRenderStudents()}
+  function setDefaults(){
+  const d=isoToday();
+
+  ['bookDate','trLessonDate'].forEach(id=>{
+    if($(id)){
+      $(id).value=d;
+      $(id).min=d;
+    }
+  });
+
+  if($('trInvoiceTo')) $('trInvoiceTo').value=d;
+
+  if($('trInvoiceFrom')){
+    let m=new Date();
+    m.setMonth(m.getMonth()-1);
+    $('trInvoiceFrom').value=m.toISOString().slice(0,10);
+    $('trInvoiceFrom').removeAttribute('min');
+    if($('trInvoiceTo')) $('trInvoiceTo').removeAttribute('min');
+  }
+
+  if($('trLessonTime')) $('trLessonTime').value=new Date().toTimeString().slice(0,5);
+  trainerRenderPayMethods();
+  trainerSetPayStatus('Paid');
+}
+async function studentLogin(btn){
+  const email = $('sEmail').value.trim();
+  const phone = $('sPhone').value.trim();
+
+  if(!email || !phone) return toast('أدخل الإيميل والهاتف','err');
+
+  setBtn(btn,true,'⏳');
+
+  const r = await apiGet('studentLogin',{
+    email: email,
+    phone: phone
+  });
+
+  setBtn(btn,false);
+
+  if(!r.success) return toast(r.message || 'Login failed','err');
+
+  state.role = 'student';
+  state.user = r.student;
+
+  enterStudent();
+}
+async function registerStudent(btn){
+  const name=$('rName').value.trim();
+  const email=$('rEmail').value.trim();
+  const phone=$('rPhone').value.trim();
+  const car=$('rCar').value;
+  const lang=$('rLang').value;
+  const address=$('rAddress').value.trim();
+  const trainer=$('rTrainer').value;
+
+  if(!name||!email||!phone||!car) return toast('أكمل الحقول','err');
+
+  setBtn(btn,true,'⏳');
+  const r=await apiPost('registerStudent',{
+    name,email,phone,car,lang,address,
+    notes:trainer?('Preferred trainer: '+trainer):''
+  },false);
+  setBtn(btn,false);
+
+  if(r.success){
+    toast('تم إنشاء الحساب','ok');
+    switchAuth('student');
+    $('sEmail').value=email;
+    $('sPhone').value=phone;
+  }else toast(r.message||'Registration failed','err');
+}
+
+async function enterStudent(){
+  showScreen('studentScreen');
+  renderStudentDashboard();
+  await Promise.all([loadStudentLessons(),loadStudentBookings()]);
+  renderProfile();
+  renderDailyLearn();
+}
+
+function renderStudentDashboard(){
+  let u=state.user||{};
+  $('sName').textContent=u.name||'';
+  $('sWallet').textContent=money(u.wallet);
+  $('sWallet2').textContent=money(u.wallet);
+  $('sTotal').textContent=u.totalLessons||0;
+  $('sPaid').textContent=u.paidLessons||0;
+  $('sUnpaid').textContent=u.unpaidLessons||0;
+  $('sRevenue').textContent=money(u.revenue);
+}
+
+async function loadStudentLessons(){
+  const r=await apiPost('getStudentLessons',{email:state.user.email});
+  const arr=r.lessons||[];
+  $('lessonCount').textContent=arr.length;
+  $('sLessonsList').innerHTML=arr.length
+    ? arr.slice().reverse().map(l=>`<div class="item"><div><strong>#${esc(l.lessonNum)} · ${compactDate(l.date)} ${compactTime(l.time)}</strong><small>${esc(l.trainer)} · ${esc(l.method||'—')}</small></div><span class="badge ${l.isPaid?'green':'red'}">${esc(l.status)}</span></div>`).join('')
+    : '<div class="notice">لا توجد دروس</div>';
+}
+
+async function loadStudentBookings(){
+  const r=await apiPost('getStudentBookings',{email:state.user.email});
+  const arr=r.bookings||[];
+  $('sBookingsList').innerHTML=arr.length
+    ? arr.slice().reverse().map(b=>bookingCard(b)).join('')
+    : '<div class="notice">لا توجد حجوزات</div>';
+  renderUpcomingStudent(arr);
+}
+
+function renderUpcomingStudent(arr){
+  const confirmed=(arr||[]).filter(b=>String(b.status)==='Confirmed'&&String(b.date)>=isoToday());
+  $('sUpcoming').innerHTML=confirmed.length
+    ? confirmed.slice(0,3).map(b=>bookingCard(b,true)).join('')
+    : '<div class="notice">لا يوجد حجز قادم</div>';
+}
+
+function bookingCard(b,highlight=false){
+  let cls=String(b.status)==='Confirmed'?(highlight?'red':'blue'):String(b.status)==='Cancelled'?'red':'gold';
+  return `<div class="item"><div><strong>${compactDate(b.date)} · ${compactTime(b.time)}</strong><small>${esc(b.id)} · ${esc(b.trainer||'—')} · ${esc(b.car||'—')}</small></div><span class="badge ${cls}">${esc(b.status)}</span></div>`;
+}
+
+function renderProfile(){
+  let u=state.user||{},addr=u.address||'';
+  $('profileInfo').innerHTML=`<div class="item"><div><strong>${esc(u.name)}</strong><small>Name</small></div></div><div class="item"><div><strong>${esc(u.email)}</strong><small>Email</small></div></div><div class="item"><div><strong>${esc(u.phone)}</strong><small>Phone</small></div></div><div class="item"><div><strong>${esc(u.carType)}</strong><small>Car</small></div></div><div class="item"><div><strong>${esc(u.trainer||'—')}</strong><small>Trainer</small></div></div>`;
+  $('profileAddress').value=addr;
+  $('mapLink').href=mapsUrl(addr);
+}
+
+function studentPage(id,btn){
+  document.querySelectorAll('#studentScreen .page').forEach(p=>p.classList.remove('active'));
+  $(id).classList.add('active');
+  document.querySelectorAll('#studentNav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(id==='sLearning') renderLearning();
+}
+
+function trainerLogin(btn){
+  const email=$('tEmail').value.trim().toLowerCase();
+  const pass=$('tPass').value.trim();
+
+  if(pass!==TRAINER_PASS) return toast('كلمة المرور غير صحيحة','err');
+
+  const ok=state.trainers.some(t=>String(t.email||'').trim().toLowerCase()===email);
+  if(!ok) return toast('إيميل المدرب غير موجود في الشيت','err');
+
+  state.role='trainer';
+  state.user={email};
+  enterTrainer();
+}
+
+async function enterTrainer(){
+  showScreen('trainerScreen');
+  await trainerInit();
+}
+
+async function trainerInit(){
+  await loadTrainers();
+  await loadStudents();
+  await trainerDashboard();
+  setDefaults();
+}
+
+async function trainerDashboard(){
+  const r=await apiPost('getTrainerDashboard',{});
+  if(r.success){
+    $('trStudents').textContent=r.students||0;
+    $('trRevenue').textContent=money(r.revenue);
+    $('trUnpaid').textContent=r.unpaidLessons||0;
+    $('trBookings').textContent=r.bookings||0;
+  }
+}
+
+function trainerPage(id,btn){
+  document.querySelectorAll('#trainerScreen .page').forEach(p=>p.classList.remove('active'));
+  $(id).classList.add('active');
+  document.querySelectorAll('#trainerNav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(id==='tStudents') trainerRenderStudents();
+}
+
+function trainerFillStudentSelects(){
+  const opts='<option value="">—</option>'+(state.students||[]).map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');
+  ['trLessonStudent','trDepositStudent','trReminderStudent','trInvoiceStudent'].forEach(id=>{if($(id))$(id).innerHTML=opts});
+}
+
+function trainerRenderStudents(q=''){
+  q=String(q).toLowerCase();
+  const arr=(state.students||[]).filter(s=>String((s.name||'')+' '+(s.email||'')+' '+(s.phone||'')+' '+(s.carType||'')).toLowerCase().includes(q));
+  const html=arr.length?arr.map(s=>`<div class="student-card" onclick="trainerSelectStudent('${String(s.name).replace(/'/g,"\\'")}')"><div class="item"><div><strong>${esc(s.name)}</strong><small>${esc(s.email||'')}<br>${esc(s.phone||'')} · ${esc(s.carType||'')}</small></div><span class="badge blue">${money(s.wallet)}</span></div></div>`).join(''):'<div class="notice">لا يوجد طلاب</div>';
+  if($('trStudentsList')) $('trStudentsList').innerHTML=html;
+  if($('trStudentCards')) $('trStudentCards').innerHTML=html;
+}
+
+function trainerSelectStudent(name){
+  const s=state.students.find(x=>x.name===name);
+  if(!s||!$('trSelectedStudentCard')) return;
+  $('trSelectedStudentCard').classList.remove('hidden');
+  $('trSelectedStudentCard').innerHTML=`<div class="title"><h3>👤 ${esc(s.name)}</h3><span class="badge blue">${money(s.wallet)}</span></div>`;
+}
+
+async function trainerLoadStudentDetails(){
+  const name=$('trLessonStudent').value;
+  if(!name) return;
+  const r=await apiPost('getStudentDetails',{name});
+  if(r.success){
+    $('trLessonNumber').value=r.nextLesson||1;
+    $('trLessonCar').value=r.carType||'';
+    $('trLessonWallet').value=money(r.walletBalance);
+    if(r.trainer&&$('trLessonTrainer')) $('trLessonTrainer').value=r.trainer;
+  }
+}
+
+function trainerRenderPayMethods(){
+  const box=$('trPayMethods');
+  if(!box) return;
+  box.innerHTML=payMethods.map((m,i)=>`<button class="payopt ${i===1?'active':''}" onclick="trainerSetPayMethod('${m}',this)">${m}</button>`).join('');
+}
+
+function trainerSetPayMethod(m,btn){
+  trainerPayMethod=m;
+  document.querySelectorAll('#trPayMethods .payopt').forEach(x=>x.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+
+function trainerSetPayStatus(status){
+  trainerPayStatus=status;
+  $('trPaidBtn').className='statusopt paid '+(status==='Paid'?'active':'');
+  $('trUnpaidBtn').className='statusopt unpaid '+(status==='Unpaid'?'active':'');
+  $('trPayMethodBox').style.display=status==='Paid'?'block':'none';
+}
+
+async function trainerCompleteLesson(btn){
+  const student=$('trLessonStudent').value;
+  const date=$('trLessonDate').value;
+  const time=$('trLessonTime').value;
+  const lessonNumber=$('trLessonNumber').value||'1';
+  const trainer=$('trLessonTrainer').value;
+  const customPrice=$('trLessonPrice').value;
+  const carType=$('trLessonCar').value;
+
+  if(!student||!date||!time) return toast('أكمل البيانات','err');
+
+  setBtn(btn,true,'⏳');
+  const r=await apiPost('completeLesson',{student,date,time,trainer,carType,paymentStatus:trainerPayStatus,paymentMethod:trainerPayMethod,lessonNumber,customPrice,notes:'',sendEmail:true}, false);
+  setBtn(btn,false);
+
+  if(r.success){
+    toast('تم حفظ الدرس','ok');
+    await loadStudents();
+    await trainerDashboard();
+    await trainerLoadStudentDetails();
+  }else toast(r.message||'Error','err');
+}
+
+function trainerFillDepositEmail(){
+  const s=state.students.find(x=>x.name===$('trDepositStudent').value);
+  $('trDepositEmail').value=s?s.email:'';
+}
+
+function trSetDepositAmount(n){$('trDepositAmount').value=n}
+
+async function trainerSubmitDeposit(btn){
+  const student=$('trDepositStudent').value;
+  const email=$('trDepositEmail').value;
+  const amount=Number($('trDepositAmount').value);
+  const notes=$('trDepositNotes').value;
+
+  if(!student||!amount) return toast('أكمل البيانات','err');
+
+  setBtn(btn,true,'⏳');
+  const r=await apiPost('processDeposit',{student,email,amount,notes,sendEmail:true}, false);
+  setBtn(btn,false);
+
+  if(r.success){
+    toast('تم الإيداع','ok');
+    await loadStudents();
+    await trainerDashboard();
+  }else{
+    toast(r.message||'Error','err');
+  }
+}
+
+async function trainerSendReminder(btn){
+  const student=$('trReminderStudent').value;
+  const amount=$('trReminderAmount').value;
+  const message=$('trReminderMessage').value;
+
+  if(!student) return toast('اختر الطالب','err');
+
+  setBtn(btn,true,'⏳');
+  await apiPost('sendPaymentReminder',{student,amount,customAmount:amount,message},false);
+  setBtn(btn,false);
+  toast('تم إرسال التذكير','ok');
+}
+
+function trainerSendInvoice(btn){
+  const student=$('trInvoiceStudent').value;
+  const from=$('trInvoiceFrom').value;
+  const to=$('trInvoiceTo').value;
+  const vatRate=Number($('trInvoiceVat').value);
+
+  if(!student||!from||!to) return toast('أكمل البيانات','err');
+
+  const s=state.students.find(x=>x.name===student)||{};
+
+  setBtn(btn,true,'⏳');
+
+  fetch(API,{
+    method:'POST',
+    mode:'no-cors',
+    body:JSON.stringify({action:'generateInvoice',student,email:s.email||'',from,to,vatRate,sendEmail:true}),
+    headers:{'Content-Type':'text/plain;charset=utf-8'}
+  });
+
+  setTimeout(()=>{
+    setBtn(btn,false);
+    toast('✅ تم إرسال الفاتورة','ok');
+  },700);
+}
+  const LEARNING_QUESTIONS=[{img:'🛑',q:'ترى إشارة STOP. ماذا تفعل؟',a:['أتوقف بالكامل','أخفف فقط','أتابع'],c:0},{img:'🚸',q:'طفل قرب معبر مشاة. ماذا تفعل؟',a:['أخفف وأستعد للتوقف','أزيد السرعة','أتابع'],c:0},{img:'🌫️',q:'تقود في ضباب كثيف. ما الأفضل؟',a:['أخفف السرعة وأزيد المسافة','أستخدم الضوء العالي','أقود عادي'],c:0}];function renderDailyLearn(){let q=LEARNING_QUESTIONS[Math.floor(Date.now()/18000000)%LEARNING_QUESTIONS.length];$('dailyLearn').innerHTML=`<div class="learnbox"><div style="font-size:44px">${q.img}</div><strong>${esc(q.q)}</strong></div>`}function renderLearning(){let q=LEARNING_QUESTIONS[Math.floor(Math.random()*LEARNING_QUESTIONS.length)];$('learningBox').innerHTML=`<div class="learnbox"><div style="font-size:54px">${q.img}</div><h3>${esc(q.q)}</h3>${q.a.map((x,i)=>`<button class="choice" onclick="answerLearn(this,${i},${q.c})">${esc(x)}</button>`).join('')}<div id="learnMsg" style="margin-top:12px"></div></div>`}function answerLearn(btn,i,c){document.querySelectorAll('.choice').forEach(b=>b.disabled=true);let ok=i===c;btn.classList.add(ok?'correct':'wrong');$('learnMsg').innerHTML=ok?'<div class="notice">إجابة صحيحة 👏</div>':'<div class="notice warn">إجابة غير صحيحة</div>';setTimeout(renderLearning,1800)}document.addEventListener('DOMContentLoaded',async()=>{
+  try { await loadTrainers(); } catch(e) { console.warn('loadTrainers', e); }
+  try { await loadStudents(); } catch(e) { console.warn('loadStudents', e); }
+  setDefaults();
+  sessionStorage.clear();
+});
+</script></body></html>
