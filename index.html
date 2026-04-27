@@ -178,13 +178,13 @@ async function loadTrainers(){
 alert(JSON.stringify(t));
 
 const dayNames = [
-  ['Sunday','Zondag'],
-  ['Monday','Maandag'],
-  ['Tuesday','Dinsdag'],
-  ['Wednesday','Woensdag'],
-  ['Thursday','Donderdag'],
-  ['Friday','Vrijdag'],
-  ['Saturday','Zaterdag']
+  ['Sunday','Zondag','Zondag'],
+  ['Monday','Maandag','Maandag'],
+  ['Tuesday','Dinsdag','Dinsdag'],
+  ['Wednesday','Woensdag','Woensdag'],
+  ['Thursday','Donderdag','Donderdag'],
+  ['Friday','Vrijdag','Vrijdag'],
+  ['Saturday','Zaterdag','Zaterdag']
 ];
 
 const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
