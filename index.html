@@ -15,13 +15,13 @@
   <div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
 <main class="main">
 <section class="screen active" id="loginScreen"><div class="login-grid"><div class="welcome"><div><h2>مدرسة الأندلس لتعليم قيادة السيارات</h2><p>تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div><div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div><div class="login-card"><div class="tabs"><button class="tab active" id="tabStudent" onclick="switchAuth('student')">طالب</button><button class="tab" id="tabRegister" onclick="switchAuth('register')">تسجيل</button><button class="tab" id="tabTrainer" onclick="switchAuth('trainer')">مدرب</button></div><div id="authStudent" class="grid"><div class="group"><label>الإيميل</label><input class="input" id="sEmail" type="email"></div><div class="group"><label>الهاتف</label><input class="input" id="sPhone"></div><button class="btn primary full" onclick="studentLogin(this)">🔓 دخول</button></div><div id="authRegister" class="grid hidden"><div class="grid cols2"><div class="group"><label>الاسم</label><input class="input" id="rName"></div><div class="group"><label>الهاتف</label><input class="input" id="rPhone"></div></div><div class="group"><label>الإيميل</label><input class="input" id="rEmail" type="email"></div><div class="grid cols2"><div class="group"><label>نوع السيارة</label><select class="select" id="rCar"><option value="manual">Manual / عادي</option><option value="automatic">Automatic / أوتوماتيك</option></select></div><div class="group"><label>اللغة</label><select class="select" id="rLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option></select></div></div><div class="group"><label>المدرب</label><select class="select" id="rTrainer"></select></div><div class="group"><label>العنوان</label><input class="input" id="rAddress"></div><button class="btn green full" onclick="registerStudent(this)">📝 إنشاء حساب</button></div><div id="authTrainer" class="grid hidden"><div class="group"><label>إيميل المدرب</label><input class="input" id="tEmail" type="email"></div><div class="group"><label>كلمة المرور</label><input class="input" id="tPass" type="password" placeholder="admin123"></div><button class="btn primary full" onclick="trainerLogin(this)">👨‍🏫 دخول</button></div></div></div></section>
-<section class="screen" id="studentScreen"><div class="page active" id="sHome"><div class="grid cols2"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet">€0</h2><p id="sName"></p></div><div class="grid cols2"><div class="kpi"><i>📚</i><div><b id="sTotal">0</b><span>Lessons</span></div></div><div class="kpi"><i>✅</i><div><b id="sPaid">0</b><span>Paid</span></div></div><div class="kpi"><i>⏳</i><div><b id="sUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>💶</i><div><b id="sRevenue">€0</b><span>Total</span></div></div></div></div><div class="grid cols2" style="margin-top:14px"><div class="card"><div class="title"><h3>📅 Upcoming Lessons</h3></div><div id="sUpcoming" class="list"></div></div><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="dailyLearn"></div></div></div></div><div class="page" id="sLessons"><div class="card"><div class="title"><h3>📚 Lessons</h3><small id="lessonCount">0</small></div><div id="sLessonsList" class="list"></div></div></div><div class="page" id="sBookings"><div class="card"><div class="title"><h3>📅 Bookings</h3><button class="btn primary" onclick="studentPage('sBook')">حجز جديد</button></div><div id="sBookingsList" class="list"></div></div></div><div class="page" id="sBook"><div class="card"><div class="title"><h3>🚗 Book Lesson</h3></div><div class="grid cols2"><div class="group"><label>المدرب</label><select class="select" id="bookTrainer" onchange="loadBookedSlots()"></select></div><div class="group"><label>التاريخ</label><input class="input" id="bookDate" type="date" onchange="loadBookedSlots()"></div><div class="group"><label>الوقت</label><select class="select" id="bookTime"></select></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="bookAddress"></div></div><div class="notice" style="margin:12px 0">لا يمكن حجز تاريخ قديم.</div><button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button></div></div><div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
+<section class="screen" id="studentScreen"><div class="page active" id="sHome"><div class="grid cols2"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet">€0</h2><p id="sName"></p></div><div class="grid cols2"><div class="kpi"><i>📚</i><div><b id="sTotal">0</b><span>Lessons</span></div></div><div class="kpi"><i>✅</i><div><b id="sPaid">0</b><span>Paid</span></div></div><div class="kpi"><i>⏳</i><div><b id="sUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>💶</i><div><b id="sRevenue">€0</b><span>Total</span></div></div></div></div><div class="grid cols2" style="margin-top:14px"><div class="card"><div class="title"><h3>📅 Upcoming Lessons</h3></div><div id="sUpcoming" class="list"></div></div><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="dailyLearn"></div></div></div></div><div class="page" id="sLessons"><div class="card"><div class="title"><h3>📚 Lessons</h3><small id="lessonCount">0</small></div><div id="sLessonsList" class="list"></div></div></div><div class="page" id="sBookings"><div class="card"><div class="title"><h3>📅 Bookings</h3><button class="btn primary" onclick="studentPage('sBook')">حجز جديد</button></div><div id="sBookingsList" class="list"></div></div></div><div class="page" id="sBook"><div class="card"><div class="title"><h3>🚗 Book Lesson</h3></div><div class="grid cols2"><div class="group"><label>المدرب</label><select class="select" id="bookTrainer" onchange="loadBookedSlots()"></select></div><div class="group"><label>التاريخ</label><input class="input" id="bookDate" type="date" onchange="if(validateBookingDate()) loadBookedSlots();"></div><div class="group"><label>الوقت</label><select class="select" id="bookTime"></select></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="bookAddress"></div></div><div class="notice" style="margin:12px 0">لا يمكن حجز تاريخ قديم.</div><button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button></div></div><div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
 <section class="screen" id="trainerScreen"><div class="page active" id="tHome"><div class="card"><div class="title">
-  <h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span>
-  </div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div>
- <b id="trUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>📅</i><div><b id="trBookings">0</b><span>Bookings</span>
- </div></div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
- </div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
+<h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span>
+</div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div>
+<b id="trUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>📅</i><div><b id="trBookings">0</b><span>Bookings</span>
+</div></div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
+</div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
 <div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"> <div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label> <select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group">
 <label>Trainer</label><select class="select" id="trLessonTrainer"></select></div><div class="group"><label>Date</label>
 <input class="input" id="trLessonDate" type="date"></div><div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div><div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div><div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div><div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div><div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div></div><div class="group" style="margin-top:12px"><label>Payment Status</label><div class="statusgrid"><button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button><button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button></div></div><div class="group" id="trPayMethodBox"><label>Payment Method</label><div class="paygrid" id="trPayMethods"></div></div><button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button></div></div><div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><input class="input" id="trDepositNotes"></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div><div class="page" id="tReminder"><div class="card"><div class="title"><h3>💌 Payment Reminder</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trReminderStudent"></select></div><div class="group"><label>Suggested Amount</label><input class="input" id="trReminderAmount" type="number" placeholder="مبلغ مقترح"></div></div><div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage"></textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
@@ -30,34 +30,34 @@
 <b>📚</b>Lessons</button><button onclick="studentPage('sBookings',this)"><b>📅</b>Bookings</button><button onclick="studentPage('sBook',this)"><b>🚗</b>Book</button>
 <button onclick="studentPage('sWalletPage',this)"><b>💳</b>Wallet</button><button onclick="studentPage('sLearning',this)">
 <b>🎓</b>Learn</button><button onclick="studentPage('sProfile',this)"><b>👤</b>Profile</button></nav><nav class="nav trainer" id="trainerNav">
-      <button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)">
-        <b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
+<button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)">
+<b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
 <script>
 const API="https://script.google.com/macros/s/AKfycbx_qjsExu0sq22wtuvZBoEuBi1z7YxFfkthY_k7uV_d0FeDH-OsD2gm0URXV7xkliYtVA/exec";
-  const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
-  const $=id=>document.getElementById(id);
-  function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
-  function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
-  function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-  function money(n){return '€'+(Number(n)||0).toFixed(2).replace('.00','')}
-  function isoToday(){return new Date().toISOString().slice(0,10)}
-  function compactDate(v){if(!v)return '—';let s=String(v);if(/^\d{4}-\d{2}-\d{2}/.test(s))return new Date(s+'T12:00:00').toLocaleDateString('nl-NL');return s.split(' GMT')[0]}
-  function compactTime(v){if(!v)return '—';let s=String(v);return s.length>5?s.substring(0,5):s}
-  function mapsUrl(addr){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(addr||'')}
-  const API_TIMEOUT = 15000;
+const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
+const $=id=>document.getElementById(id);
+function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
+function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function money(n){return '€'+(Number(n)||0).toFixed(2).replace('.00','')}
+function isoToday(){return new Date().toISOString().slice(0,10)}
+function compactDate(v){if(!v)return '—';let s=String(v);if(/^\d{4}-\d{2}-\d{2}/.test(s))return new Date(s+'T12:00:00').toLocaleDateString('nl-NL');return s.split(' GMT')[0]}
+function compactTime(v){if(!v)return '—';let s=String(v);return s.length>5?s.substring(0,5):s}
+function mapsUrl(addr){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(addr||'')}
+const API_TIMEOUT = 15000;
 
-  function buildApiUrl(action, params = {}) {
-    return API + '?' + new URLSearchParams({
-      ...params,
-      action
-    }).toString();
-  }
+function buildApiUrl(action, params = {}) {
+return API + '?' + new URLSearchParams({
+ ...params,
+ action
+ }).toString();
+ }
 
-  async function fetchWithTimeout(url, options = {}, ms = API_TIMEOUT) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), ms);
-    try {
-      return await fetch(url, { ...options, signal: controller.signal });
+async function fetchWithTimeout(url, options = {}, ms = API_TIMEOUT) {
+const controller = new AbortController();
+const timer = setTimeout(() => controller.abort(), ms);
+try {
+ return await fetch(url, { ...options, signal: controller.signal });
     } finally {
       clearTimeout(timer);
     }
@@ -244,6 +244,54 @@ if(!worksToday){
   if($('trLessonTime')) $('trLessonTime').value=new Date().toTimeString().slice(0,5);
   trainerRenderPayMethods();
   trainerSetPayStatus('Paid');
+}
+  function validateBookingDate(){
+  const trainer = $('bookTrainer')?.value;
+  const dateInput = $('bookDate');
+  const timeSelect = $('bookTime');
+
+  if(!dateInput) return;
+
+  const date = dateInput.value;
+
+  if(timeSelect){
+    timeSelect.innerHTML = '<option value="">— اختر الوقت —</option>';
+  }
+
+  if(!trainer || !date) return;
+
+  const t = state.trainers.find(x => x.name === trainer);
+  if(!t) return;
+
+  const dayNames = [
+    ['Sunday','Zondag','Zondag'],
+    ['Monday','Maandag','Maandag'],
+    ['Tuesday','Dinsdag','Dinsdag'],
+    ['Wednesday','Woensdag','Woensdag'],
+    ['Thursday','Donderdag','Donderdag'],
+    ['Friday','Vrijdag','Vrijdag'],
+    ['Saturday','Zaterdag','Zaterdag']
+  ];
+
+  const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
+  const workDays = String(t.workDays || '').toLowerCase();
+
+  const worksToday = dayOptions.some(d =>
+    workDays.includes(d.toLowerCase())
+  );
+
+  if(!worksToday){
+    dateInput.value = '';
+
+    if(timeSelect){
+      timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
+    }
+
+    showToast('❌ المدرب لا يعمل في هذا اليوم', 'err');
+    return false;
+  }
+
+  return true;
 }
 async function studentLogin(btn){
   const email = $('sEmail').value.trim();
