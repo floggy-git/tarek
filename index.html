@@ -161,6 +161,11 @@ async function loadTrainers(){
   // 👇 هذا السطر مهم جدًا
   loadBookedSlots();
 }
+  setInterval(() => {
+  if ($('bookTrainer') && $('bookDate')) {
+    loadTrainers();
+  }
+}, 30000);
   async function loadBookedSlots(){
   const trainer = $('bookTrainer')?.value;
   const date = $('bookDate')?.value;
