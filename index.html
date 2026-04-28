@@ -716,11 +716,24 @@ async function trainerCompleteLesson(btn){
   const date=$('trLessonDate').value;
   const time=$('trLessonTime').value;
   const lessonNumber=$('trLessonNumber').value||'1';
-  const trainer=$('trLessonTrainer').value;
+  let trainer = $('trLessonTrainer').value;
+
+if(!trainer){
+  const currentTrainer = state.trainers.find(t =>
+    String(t.email || '').trim().toLowerCase() === String(state.user?.email || '').trim().toLowerCase()
+  );
+
+  if(currentTrainer){
+    trainer = currentTrainer.name;
+    $('trLessonTrainer').value = trainer;
+  }
+}
   const customPrice=$('trLessonPrice').value;
   const carType=$('trLessonCar').value;
 
-  if(!student||!date||!time) return toast('أكمل البيانات','err');
+if(!student || !date || !time || !trainer){
+  return toast('أكمل البيانات: الطالب، التاريخ، الوقت، والمدرب','err');
+}
 
   setBtn(btn,true,'⏳');
   const r=await apiPost('completeLesson',{student,date,time,trainer,carType,paymentStatus:trainerPayStatus,paymentMethod:trainerPayMethod,lessonNumber,customPrice,notes:'',sendEmail:true}, false);
