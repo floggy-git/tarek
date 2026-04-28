@@ -80,20 +80,20 @@
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
 <header class="top"><div class="topin"><div class="brand">
-  <div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
+<div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
 <main class="main">
 <section class="screen active" id="loginScreen"><div class="login-grid"><div class="welcome"><div><h2>مدرسة الأندلس لتعليم قيادة السيارات</h2><p>تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div><div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div><div class="login-card"><div class="tabs"><button class="tab active" id="tabStudent" onclick="switchAuth('student')">طالب</button><button class="tab" id="tabRegister" onclick="switchAuth('register')">تسجيل</button><button class="tab" id="tabTrainer" onclick="switchAuth('trainer')">مدرب</button></div><div id="authStudent" class="grid"><div class="group"><label>الإيميل</label><input class="input" id="sEmail" type="email"></div><div class="group"><label>الهاتف</label><input class="input" id="sPhone"></div><button class="btn primary full" onclick="studentLogin(this)">🔓 دخول</button></div><div id="authRegister" class="grid hidden"><div class="grid cols2"><div class="group"><label>الاسم</label><input class="input" id="rName"></div><div class="group"><label>الهاتف</label><input class="input" id="rPhone"></div></div><div class="group"><label>الإيميل</label><input class="input" id="rEmail" type="email"></div><div class="grid cols2"><div class="group"><label>نوع السيارة</label><select class="select" id="rCar"><option value="manual">Manual / عادي</option><option value="automatic">Automatic / أوتوماتيك</option></select></div><div class="group"><label>اللغة</label><select class="select" id="rLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option></select></div></div><div class="group"><label>المدرب</label><select class="select" id="rTrainer"></select></div><div class="group"><label>العنوان</label><input class="input" id="rAddress"></div><button class="btn green full" onclick="registerStudent(this)">📝 إنشاء حساب</button></div><div id="authTrainer" class="grid hidden"><div class="group"><label>إيميل المدرب</label><input class="input" id="tEmail" type="email"></div><div class="group"><label>كلمة المرور</label><input class="input" id="tPass" type="password" placeholder="admin123"></div><button class="btn primary full" onclick="trainerLogin(this)">👨‍🏫 دخول</button></div></div></div></section>
 <section class="screen" id="studentScreen"><div class="page active" id="sHome"><div class="grid cols2"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet">€0</h2><p id="sName"></p></div><div class="grid cols2"><div class="kpi"><i>📚</i><div><b id="sTotal">0</b><span>Lessons</span></div></div><div class="kpi"><i>✅</i><div><b id="sPaid">0</b><span>Paid</span></div></div><div class="kpi"><i>⏳</i><div><b id="sUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>💶</i><div><b id="sRevenue">€0</b><span>Total</span></div></div></div></div><div class="grid cols2" style="margin-top:14px"><div class="card"><div class="title"><h3>📅 Upcoming Lessons</h3></div><div id="sUpcoming" class="list"></div></div><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="dailyLearn"></div></div></div></div><div class="page" id="sLessons"><div class="card"><div class="title"><h3>📚 Lessons</h3><small id="lessonCount">0</small></div><div id="sLessonsList" class="list"></div></div></div><div class="page" id="sBookings"><div class="card"><div class="title"><h3>📅 Bookings</h3><button class="btn primary" onclick="studentPage('sBook')">حجز جديد</button></div><div id="sBookingsList" class="list"></div></div></div><div class="page" id="sBook"><div class="card"><div class="title"><h3>🚗 Book Lesson</h3></div><div class="grid cols2"><div class="group"><label>المدرب</label><select class="select" id="bookTrainer" onchange="renderBookingCalendar(); loadBookedSlots()"></select></div><div class="group">
-  <label>التاريخ</label>
+<label>التاريخ</label>
 
-  <input class="input hidden" id="bookDate" type="date">
+<input class="input hidden" id="bookDate" type="date">
 
-  <div class="custom-calendar">
-    <div class="cal-head">
-      <button type="button" onclick="changeBookingMonth(-1)">‹</button>
-      <strong id="bookingCalTitle">الشهر</strong>
-      <button type="button" onclick="changeBookingMonth(1)">›</button>
-    </div>
+<div class="custom-calendar">
+<div class="cal-head">
+<button type="button" onclick="changeBookingMonth(-1)">‹</button>
+<strong id="bookingCalTitle">الشهر</strong>
+<button type="button" onclick="changeBookingMonth(1)">›</button>
+</div>
 
     <div class="cal-days">
       <span>أحد</span>
@@ -125,12 +125,25 @@
 <button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)">
 <b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
 <script>
+  const API="...";
+const MIN_BOOKING_HOURS = 12;
+const TRAINER_PASS='admin123';
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
 const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
 function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
 function showToast(msg,type='info'){
   toast(msg,type);
+}
+  function isTooSoonToBook(date, time){
+  if(!date || !time) return true;
+
+  const lessonDateTime = new Date(date + 'T' + time + ':00');
+  const now = new Date();
+
+  const diffHours = (lessonDateTime - now) / (1000 * 60 * 60);
+
+  return diffHours < MIN_BOOKING_HOURS;
 }
 function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
@@ -261,7 +274,7 @@ async function loadTrainers(){
     loadTrainers();
   }
 }, 30000);
-  async function loadBookedSlots(){
+ async function loadBookedSlots(){
   const trainer = $('bookTrainer')?.value;
   const date = $('bookDate')?.value;
   const timeSelect = $('bookTime');
@@ -274,29 +287,30 @@ async function loadTrainers(){
 
   const t = state.trainers.find(x => x.name === trainer);
   if(!t) return;
-    
-const dayNames = [
-  ['Sunday','Zondag','Zondag'],
-  ['Monday','Maandag','Maandag'],
-  ['Tuesday','Dinsdag','Dinsdag'],
-  ['Wednesday','Woensdag','Woensdag'],
-  ['Thursday','Donderdag','Donderdag'],
-  ['Friday','Vrijdag','Vrijdag'],
-  ['Saturday','Zaterdag','Zaterdag']
-];
 
-const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
-const workDays = String(t.workDays || '').toLowerCase();
+  const dayNames = [
+    ['Sunday','Zondag','Zondag'],
+    ['Monday','Maandag','Maandag'],
+    ['Tuesday','Dinsdag','Dinsdag'],
+    ['Wednesday','Woensdag','Woensdag'],
+    ['Thursday','Donderdag','Donderdag'],
+    ['Friday','Vrijdag','Vrijdag'],
+    ['Saturday','Zaterdag','Zaterdag']
+  ];
 
-const worksToday = dayOptions.some(d =>
-  workDays.includes(d.toLowerCase())
-);
+  const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
+  const workDays = String(t.workDays || '').toLowerCase();
 
-if(!worksToday){
-  timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
-  return;
-}
- let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
+  const worksToday = dayOptions.some(d =>
+    workDays.includes(d.toLowerCase())
+  );
+
+  if(!worksToday){
+    timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
+    return;
+  }
+
+  let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
   const booked = r.booked || [];
@@ -306,9 +320,21 @@ if(!worksToday){
   let [eh,em] = end.split(':').map(Number);
 
   while(h < eh){
-    const time = String(h).padStart(2,'0')+':'+String(m || 0).padStart(2,'0');
-    if(!booked.includes(time)) slots.push(time);
+    const time = String(h).padStart(2,'0') + ':' + String(m || 0).padStart(2,'0');
+
+    const isBooked = booked.includes(time);
+    const tooSoon = isTooSoonToBook(date, time);
+
+    if(!isBooked && !tooSoon){
+      slots.push(time);
+    }
+
     h++;
+  }
+
+  if(!slots.length){
+    timeSelect.innerHTML = `<option value="">لا توجد أوقات متاحة قبل ${MIN_BOOKING_HOURS} ساعة</option>`;
+    return;
   }
 
   timeSelect.innerHTML =
