@@ -805,9 +805,17 @@ function trainerSendInvoice(btn){
   }
 
   const u = state.user || {};
-  const t = state.trainers.find(x => x.name === trainer) || {};
 
-  btn.disabled = true;
+console.log('USER DATA:', u);
+
+if(!u.name || !u.email || !u.phone){
+  showToast('❌ بيانات الطالب غير موجودة. سجّل دخول من جديد', 'err');
+  return;
+}
+
+const t = state.trainers.find(x => x.name === trainer) || {};
+
+btn.disabled = true;
 
   const r = await apiPost('saveBooking', {
     studentName: u.name || '',
