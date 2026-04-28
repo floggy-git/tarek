@@ -526,10 +526,15 @@ async function registerStudent(btn){
 
   setBtn(btn,true,'⏳');
   const r=await apiPost('registerStudent',{
-    name,email,phone,car,lang,address,
-    notes:trainer?('Preferred trainer: '+trainer):''
-  },false);
-  setBtn(btn,false);
+  name,
+  email,
+  phone,
+  car,
+  lang,
+  address,
+  trainer,
+  notes:''
+},false);
 
   if(r.success){
     toast('تم إنشاء الحساب','ok');
