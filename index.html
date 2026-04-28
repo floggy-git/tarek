@@ -399,11 +399,18 @@ function selectBookingDate(iso, available){
     return;
   }
 
+  const trainer = $('bookTrainer')?.value;
+
+  if(!trainer){
+    showToast('اختر المدرب أولاً', 'err');
+    return;
+  }
+
   $('bookDate').value = iso;
+
   renderBookingCalendar();
   loadBookedSlots();
 }
-
 function changeBookingMonth(step){
   bookingCalendarDate.setMonth(bookingCalendarDate.getMonth() + step);
   renderBookingCalendar();
@@ -591,6 +598,7 @@ function studentPage(id,btn){
   document.querySelectorAll('#studentNav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   if(id==='sLearning') renderLearning();
+  if(id==='sBook') renderBookingCalendar();
 }
 
 function trainerLogin(btn){
