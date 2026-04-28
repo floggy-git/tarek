@@ -107,7 +107,19 @@
 
     <div class="cal-grid" id="bookingCalendar"></div>
   </div>
-</div><div class="group"><label>الوقت</label><select class="select" id="bookTime"></select></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="bookAddress"></div></div><div class="notice" style="margin:12px 0">لا يمكن حجز تاريخ قديم.</div><button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button></div></div><div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
+</div><div class="group"><label>الوقت</label><select class="select" id="bookTime">
+  <div class="group">
+  <label>مدة الدرس</label>
+  <select class="select" id="bookDuration" onchange="updateBookingPrice()">
+    <option value="1">1 ساعة</option>
+    <option value="2">2 ساعة</option>
+  </select>
+</div>
+
+<div class="notice" id="bookingPriceBox">
+  السعر: —
+</div>
+</select></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="bookAddress"></div></div><div class="notice" style="margin:12px 0">لا يمكن حجز تاريخ قديم.</div><button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button></div></div><div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
 <section class="screen" id="trainerScreen"><div class="page active" id="tHome"><div class="card"><div class="title">
 <h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span>
 </div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div>
@@ -125,6 +137,22 @@
 <button class="active" onclick="trainerPage('tHome',this)"><b>🏠</b>Home</button><button onclick="trainerPage('tLesson',this)">
 <b>✅</b>Lesson</button><button onclick="trainerPage('tDeposit',this)"><b>💰</b>Deposit</button><button onclick="trainerPage('tReminder',this)"><b>💌</b>Reminder</button><button onclick="trainerPage('tDocs',this)"><b>🧾</b>Docs</button><button onclick="trainerPage('tStudents',this)"><b>👥</b>Students</button></nav>
 <script>
+  function updateBookingPrice(){
+  const duration = Number($('bookDuration')?.value || 1);
+  const u = state.user || {};
+
+  const isAuto =
+    String(u.carType || '').toLowerCase().includes('auto') ||
+    String(u.carType || '').toLowerCase().includes('automaat') ||
+    String(u.carType || '').includes('أوتوماتيك');
+
+  const pricePerHour = isAuto ? 65 : 60;
+  const total = duration * pricePerHour;
+
+  if($('bookingPriceBox')){
+    $('bookingPriceBox').textContent = 'السعر: €' + total;
+  }
+}
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
 const MIN_BOOKING_HOURS = 12;
 window.TRAINER_PASS = 'admin123';
@@ -631,7 +659,9 @@ function studentPage(id,btn){
   document.querySelectorAll('#studentNav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   if(id==='sLearning') renderLearning();
-  if(id==='sBook') renderBookingCalendar();
+  if(id==='sBook'){
+  renderBookingCalendar();
+  setTimeout(updateBookingPrice, 300);
 }
 
 function trainerLogin(btn){
