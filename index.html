@@ -665,12 +665,16 @@ function studentPage(id,btn){
   $(id).classList.add('active');
   document.querySelectorAll('#studentNav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  if(id==='sLearning') renderLearning();
-  if(id==='sBook'){
-  renderBookingCalendar();
-  setTimeout(updateBookingPrice, 300);
-}
 
+  if(id === 'sLearning'){
+    renderLearning();
+  }
+
+  if(id === 'sBook'){
+    renderBookingCalendar();
+    setTimeout(updateBookingPrice, 300);
+  }
+}
 function trainerLogin(btn){
   const email=$('tEmail').value.trim().toLowerCase();
   const pass=$('tPass').value.trim();
