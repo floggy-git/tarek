@@ -803,6 +803,18 @@ function trainerSendInvoice(btn){
     showToast('اختر المدرب والتاريخ والوقت', 'err');
     return;
   }
+    const check = await apiGet('getSlots', {
+  date: date,
+  trainer: trainer
+});
+
+const bookedNow = check.booked || [];
+
+if(bookedNow.includes(time)){
+  showToast('❌ هذا الوقت تم حجزه قبل قليل، اختر وقتًا آخر', 'err');
+  await loadBookedSlots();
+  return;
+}
 
   const u = state.user || {};
 
