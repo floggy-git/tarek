@@ -790,4 +790,45 @@ function trainerSendInvoice(btn){
   setDefaults();
   sessionStorage.clear();
 });
+  async function submitBooking(btn){
+  const trainer = $('bookTrainer')?.value || '';
+  const date = $('bookDate')?.value || '';
+  const time = $('bookTime')?.value || '';
+  const pickupAddress = $('bookAddress')?.value || '';
+
+  if(!trainer || !date || !time){
+    showToast('اختر المدرب والتاريخ والوقت', 'err');
+    return;
+  }
+
+  const u = state.user || {};
+  const t = state.trainers.find(x => x.name === trainer) || {};
+
+  btn.disabled = true;
+
+  const r = await apiPost('saveBooking', {
+    studentName: u.name || '',
+    studentEmail: u.email || '',
+    studentPhone: u.phone || '',
+    trainer: trainer,
+    trainerEmail: t.email || '',
+    date: date,
+    time: time,
+    carType: u.carType || 'manual',
+    carLabel: u.carType || '',
+    carPrice: String(u.carType || '').toLowerCase().includes('auto') ? 65 : 60,
+    lang: u.lang || 'ar',
+    pickupAddress: pickupAddress
+  });
+
+  btn.disabled = false;
+
+  if(r.success){
+    showToast('✅ تم الحجز بنجاح', 'ok');
+    loadStudentBookings();
+    studentPage('sBookings');
+  }else{
+    showToast(r.message || 'خطأ في الحجز', 'err');
+  }
+}
 </script></body></html>
