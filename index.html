@@ -669,17 +669,29 @@ function trainerSelectStudent(name){
 }
 
 async function trainerLoadStudentDetails(){
-  const name=$('trLessonStudent').value;
+  const name = $('trLessonStudent').value;
   if(!name) return;
-  const r=await apiPost('getStudentDetails',{name});
+
+  const r = await apiPost('getStudentDetails',{name});
+
   if(r.success){
-    $('trLessonNumber').value=r.nextLesson||1;
-    $('trLessonCar').value=r.carType||'';
-    $('trLessonWallet').value=money(r.walletBalance);
-    if(r.trainer&&$('trLessonTrainer')) $('trLessonTrainer').value=r.trainer;
+    $('trLessonNumber').value = r.nextLesson || 1;
+    $('trLessonCar').value = r.carType || '';
+    $('trLessonWallet').value = money(r.walletBalance);
+
+    const currentTrainer = state.trainers.find(t =>
+      String(t.email || '').trim().toLowerCase() === String(state.user?.email || '').trim().toLowerCase()
+    );
+
+    if($('trLessonTrainer')){
+      if(r.trainer){
+        $('trLessonTrainer').value = r.trainer;
+      }else if(currentTrainer){
+        $('trLessonTrainer').value = currentTrainer.name;
+      }
+    }
   }
 }
-
 function trainerRenderPayMethods(){
   const box=$('trPayMethods');
   if(!box) return;
