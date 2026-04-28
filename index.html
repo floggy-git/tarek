@@ -129,6 +129,9 @@ const API="https://script.google.com/macros/s/AKfycbx_qjsExu0sq22wtuvZBoEuBi1z7Y
 const TRAINER_PASS='admin123';const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
 function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
+function showToast(msg,type='info'){
+  toast(msg,type);
+}
 function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function money(n){return '€'+(Number(n)||0).toFixed(2).replace('.00','')}
@@ -831,4 +834,5 @@ function trainerSendInvoice(btn){
     showToast(r.message || 'خطأ في الحجز', 'err');
   }
 }
+  window.submitBooking = submitBooking;
 </script></body></html>
