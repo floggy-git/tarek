@@ -116,15 +116,15 @@
 <div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
 <main class="main">
 <section class="screen active" id="loginScreen"><div class="login-grid"><div class="welcome"><div><h2>مدرسة الأندلس لتعليم قيادة السيارات</h2><p>تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div><div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div>
- <div class="login-card"><div class="login-card">
+<div class="login-card">
 
-  <!-- أزرار اللغة -->
   <div class="lang-switch">
-  <button type="button" class="lang-btn active" onclick="setAppLang('ar', this)">AR</button>
-  <button type="button" class="lang-btn" onclick="setAppLang('nl', this)">NL</button>
-  <button type="button" class="lang-btn" onclick="setAppLang('en', this)">EN</button>
- </div>
- <div class="tabs"><div class="tabs">
+    <button type="button" class="lang-btn active" onclick="setAppLang('ar', this)">AR</button>
+    <button type="button" class="lang-btn" onclick="setAppLang('nl', this)">NL</button>
+    <button type="button" class="lang-btn" onclick="setAppLang('en', this)">EN</button>
+  </div>
+
+  <div class="tabs">
 <button class="tab active" id="tabStudent" onclick="switchAuth('student')">طالب</button>
 <button class="tab" id="tabRegister" onclick="switchAuth('register')">تسجيل</button>
 <button class="tab" id="tabTrainer" onclick="switchAuth('trainer')">مدرب</button></div>
