@@ -946,13 +946,14 @@ function trainerSendInvoice(btn){
     trainer: trainer
   });
 
-  const bookedNow = check.booked || [];
+ const bookedNow = (check.booked || []).map(x => String(x).padStart(5, '0'));
+const requestedTime = String(time).padStart(5, '0');
 
-  if(bookedNow.includes(time)){
-    showToast('❌ هذا الوقت تم حجزه قبل قليل، اختر وقتًا آخر', 'err');
-    await loadBookedSlots();
-    return;
-  }
+if(bookedNow.includes(requestedTime)){
+  showToast('❌ هذا الوقت محجوز، اختر وقتًا آخر', 'err');
+  await loadBookedSlots();
+  return;
+}
 
   const u = state.user || {};
 
