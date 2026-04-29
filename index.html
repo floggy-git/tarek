@@ -342,6 +342,8 @@ function applyAppLang(){
 
   if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
   if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
+
+  if($('studentLoginBtn')) $('studentLoginBtn').innerHTML = '🔓 ' + t.studentLogin;
 }
 function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
 function showToast(msg,type='info'){
