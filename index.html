@@ -264,19 +264,12 @@ let appLang = localStorage.getItem('appLang') || 'ar';
 let bookingDayHasSlots = {};
 let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
- function setAppLang(lang, btn){
-  appLang = lang;
-  localStorage.setItem('appLang', lang);
+ function applyAppLang(){
+  const t = I18N[appLang] || I18N.ar;
 
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.remove('active');
-  });
-
-  if(btn){
-    btn.classList.add('active');
-  }
-
-  applyAppLang(); // 🔥 هذا السطر مهم
+  if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
+  if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
+  if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
 }
 function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
 function showToast(msg,type='info'){
