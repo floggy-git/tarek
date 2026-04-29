@@ -115,7 +115,15 @@
 <header class="top"><div class="topin"><div class="brand">
 <div class="logo">🏎️</div><div><h1>Al-Andalos Rijschool</h1><p>مدرسة الأندلس لتعليم قيادة السيارات</p></div></div><button class="btn ghost hidden" id="logoutBtn" onclick="logout()">🚪 خروج</button></div></header>
 <main class="main">
-<section class="screen active" id="loginScreen"><div class="login-grid"><div class="welcome"><div><h2>مدرسة الأندلس لتعليم قيادة السيارات</h2><p>تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div><div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white"><i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div>
+<section class="screen active" id="loginScreen">
+  <div class="login-grid"><div class="welcome">
+    <div>
+      <h2 id="loginTitle">مدرسة الأندلس لتعليم قيادة السيارات</h2>
+<p id="loginSubtitle">تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.</p></div>
+    <div class="grid cols3"><div class="kpi" style="background:rgba(255,255,255,.12);color:white">
+      <i>🚗</i><div><b>Lessons</b><span style="color:#ddd">Rijlessen</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white">
+        <i>💳</i><div><b>Wallet</b><span style="color:#ddd">Saldo</span></div></div><div class="kpi" style="background:rgba(255,255,255,.12);color:white">
+          <i>📅</i><div><b>Booking</b><span style="color:#ddd">Afspraak</span></div></div></div></div>
 <div class="login-card">
 
   <div class="lang-switch">
@@ -237,29 +245,40 @@ window.TRAINER_PASS = 'admin123';
 const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];
 let state={role:null,user:null,students:[],trainers:[],bookings:[]};
 let appLang = localStorage.getItem('appLang') || 'ar';
-  const I18N = {
+const I18N = {
   ar: {
     studentTab: 'طالب',
     registerTab: 'تسجيل',
-    trainerTab: 'مدرب'
+    trainerTab: 'مدرب',
+    loginTitle: 'مدرسة الأندلس لتعليم قيادة السيارات',
+    loginSubtitle: 'تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.'
   },
   nl: {
     studentTab: 'Student',
     registerTab: 'Registreren',
-    trainerTab: 'Instructeur'
+    trainerTab: 'Instructeur',
+    loginTitle: 'Al-Andalos Rijschool',
+    loginSubtitle: 'App voor studenten en instructeurs verbonden met Google Sheets.'
   },
   en: {
     studentTab: 'Student',
     registerTab: 'Register',
-    trainerTab: 'Trainer'
+    trainerTab: 'Trainer',
+    loginTitle: 'Al-Andalos Driving School',
+    loginSubtitle: 'App for students and trainers connected to Google Sheets.'
   }
 };
   function applyAppLang(){
   const t = I18N[appLang] || I18N.ar;
 
+  // التبويبات
   if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
   if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
   if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
+
+  // العنوان
+  if($('loginTitle')) $('loginTitle').textContent = t.loginTitle;
+  if($('loginSubtitle')) $('loginSubtitle').textContent = t.loginSubtitle;
 }
 let bookingDayHasSlots = {};
 let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
