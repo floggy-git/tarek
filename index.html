@@ -574,6 +574,7 @@ function applyAppLang(){
   setText('studentPhoneLabel', t.studentPhone);
   setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
 
+  // ===== Register =====
   const registerLabels = document.querySelectorAll('#authRegister label');
   const registerText = [
     t.name,
@@ -592,6 +593,7 @@ function applyAppLang(){
   const registerBtn = document.querySelector('#authRegister button');
   if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
 
+  // ===== Trainer Login =====
   const trainerLabels = document.querySelectorAll('#authTrainer label');
   const trainerText = [
     t.trainerEmail,
@@ -606,8 +608,21 @@ function applyAppLang(){
   if(trainerBtn) trainerBtn.innerHTML = '👨‍🏫 ' + t.trainerLogin;
 
   setHtml('logoutBtn', '🚪 ' + t.logout);
-}
 
+  // ===== 🆕 Calendar Days =====
+  document.querySelectorAll('.cal-days span').forEach((el, i) => {
+    if(t.calendarDays && t.calendarDays[i]){
+      el.textContent = t.calendarDays[i];
+    }
+  });
+
+  // ===== 🆕 Lesson Duration =====
+  const opt1 = document.querySelector('#bookDuration option[value="1"]');
+  const opt2 = document.querySelector('#bookDuration option[value="2"]');
+
+  if(opt1 && t.hour1) opt1.textContent = t.hour1;
+  if(opt2 && t.hour2) opt2.textContent = t.hour2;
+}
 function translateStaticLabels(t){
   const map = [
     ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
