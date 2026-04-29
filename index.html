@@ -61,6 +61,11 @@
   border-color:#93c5fd;
   cursor:pointer;
 }
+  .cal-day.busy {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
 
 .cal-day.selected{
   background:linear-gradient(135deg,var(--navy),var(--blue));
@@ -187,7 +192,10 @@
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
 const MIN_BOOKING_HOURS = 12;
 window.TRAINER_PASS = 'admin123';
-const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];let state={role:null,user:null,students:[],trainers:[],bookings:[]};let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
+const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];
+let state={role:null,user:null,students:[],trainers:[],bookings:[]};
+let bookingDayHasSlots = {};
+let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
 function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
 function showToast(msg,type='info'){
@@ -372,6 +380,8 @@ async function loadTrainers(){
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
   const booked = (r.booked || []).map(x => String(x).padStart(5, '0'));
+
+  bookingDayHasSlots[date] = booked.length > 0;
   const duration = Number($('bookDuration')?.value || 1);
 
   const slots = [];
@@ -410,7 +420,21 @@ async function loadTrainers(){
     '<option value="">— اختر الوقت —</option>' +
     slots.map(t=>`<option value="${t}">${t}</option>`).join('');
 }
+async function loadBookingDaysStatus(){
+  const trainer = $('bookTrainer')?.value;
+  const date = $('bookDate')?.value;
 
+  if(!trainer || !date) return;
+
+  const r = await apiGet('getSlots', {
+    date: date,
+    trainer: trainer
+  });
+
+  bookingDayHasSlots[date] = (r.booked || []).length > 0;
+
+  renderBookingCalendar();
+}
   let bookingCalendarDate = new Date();
 
 function getTrainerWorkDaysForBooking(){
@@ -476,14 +500,16 @@ function renderBookingCalendar(){
 
     const iso = d.toISOString().slice(0,10);
     const isPast = d < today;
+    const hasBookings = bookingDayHasSlots[iso];
     const available = !isPast && isBookingDateAvailable(d);
     const selected = $('bookDate')?.value === iso;
 
-    const cls =
-      'cal-day ' +
-      (available ? 'available ' : '') +
-      (selected ? 'selected ' : '') +
-      (isPast ? 'disabled ' : '');
+     const cls =
+  'cal-day ' +
+  (available ? 'available ' : '') +
+  (hasBookings ? 'busy ' : '') +
+  (selected ? 'selected ' : '') +
+  (isPast ? 'disabled ' : '');
 
     grid.insertAdjacentHTML(
       'beforeend',
@@ -707,14 +733,14 @@ function studentPage(id,btn){
     renderLearning();
   }
 
-  if(id === 'sBook'){
-    setTimeout(() => {
-      renderBookingCalendar();
-      loadBookedSlots();
-    }, 100);
+ if(id === 'sBook'){
+  setTimeout(() => {
+    loadBookingDaysStatus();
+    renderBookingCalendar();
+    loadBookedSlots();
+  }, 100);
 
-    setTimeout(updateBookingPrice, 300);
-  }
+  setTimeout(updateBookingPrice, 300);
 }
 function trainerLogin(btn){
   const email=$('tEmail').value.trim().toLowerCase();
