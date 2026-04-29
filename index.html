@@ -248,9 +248,10 @@ window.TRAINER_PASS = 'admin123';
 const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];
 let state={role:null,user:null,students:[],trainers:[],bookings:[]};
 let appLang = localStorage.getItem('appLang') || 'ar';
- const $ = id => document.getElementById(id);
 
-window.setAppLang = function(lang, btn){
+const $ = id => document.getElementById(id);
+
+function setAppLang(lang, btn){
   appLang = lang;
   localStorage.setItem('appLang', lang);
 
@@ -258,7 +259,9 @@ window.setAppLang = function(lang, btn){
   if(btn) btn.classList.add('active');
 
   applyAppLang();
-};
+}
+
+window.setAppLang = setAppLang;
 
 const I18N = {
   ar: {
