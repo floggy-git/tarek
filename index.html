@@ -351,6 +351,7 @@ const I18N = {
     navStudents: 'طلاب',
 
     calendarDays: ['أحد','إثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'],
+    months: ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
     hour1: '1 ساعة',
     hour2: '2 ساعة'
   },
@@ -442,6 +443,7 @@ const I18N = {
     navStudents: 'Studenten',
 
     calendarDays: ['Zo','Ma','Di','Wo','Do','Vr','Za'],
+    months: ['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
     hour1: '1 uur',
     hour2: '2 uur'
   },
@@ -533,6 +535,7 @@ const I18N = {
     navStudents: 'Students',
 
     calendarDays: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+    months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     hour1: '1 hour',
     hour2: '2 hours'
   }
@@ -1003,15 +1006,14 @@ function renderBookingCalendar(){
   const title = $('bookingCalTitle');
   if(!grid || !title) return;
 
+  const t = I18N[appLang] || I18N.ar;
+
   const year = bookingCalendarDate.getFullYear();
   const month = bookingCalendarDate.getMonth();
 
-  const monthNames = [
-    'يناير','فبراير','مارس','أبريل','مايو','يونيو',
-    'يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'
-  ];
+  const monthNames = t.months || [];
+  title.textContent = (monthNames[month] || '') + ' ' + year;
 
-  title.textContent = monthNames[month] + ' ' + year;
   grid.innerHTML = '';
 
   const firstDay = new Date(year, month, 1);
@@ -1033,12 +1035,12 @@ function renderBookingCalendar(){
     const available = !isPast && isBookingDateAvailable(d);
     const selected = $('bookDate')?.value === iso;
 
-     const cls =
-  'cal-day ' +
-  (available ? 'available ' : '') +
-  (hasBookings ? 'busy ' : '') +
-  (selected ? 'selected ' : '') +
-  (isPast ? 'disabled ' : '');
+    const cls =
+      'cal-day ' +
+      (available ? 'available ' : '') +
+      (hasBookings ? 'busy ' : '') +
+      (selected ? 'selected ' : '') +
+      (isPast ? 'disabled ' : '');
 
     grid.insertAdjacentHTML(
       'beforeend',
@@ -1046,7 +1048,6 @@ function renderBookingCalendar(){
     );
   }
 }
-
 function selectBookingDate(iso, available){
   if(!available){
     showToast('❌ المدرب لا يعمل في هذا اليوم', 'err');
