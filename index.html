@@ -913,41 +913,43 @@ function trainerSendInvoice(btn){
   setDefaults();
   sessionStorage.clear();
 });
-  async function submitBooking(btn){
+ async function submitBooking(btn){
   const trainer = $('bookTrainer')?.value || '';
   const date = $('bookDate')?.value || '';
   const time = $('bookTime')?.value || '';
+  const duration = $('bookDuration')?.value || '1';
   const pickupAddress = $('bookAddress')?.value || '';
 
   if(!trainer || !date || !time){
     showToast('اختر المدرب والتاريخ والوقت', 'err');
     return;
   }
-    const check = await apiGet('getSlots', {
-  date: date,
-  trainer: trainer
-});
 
-const bookedNow = check.booked || [];
+  const check = await apiGet('getSlots', {
+    date: date,
+    trainer: trainer
+  });
 
-if(bookedNow.includes(time)){
-  showToast('❌ هذا الوقت تم حجزه قبل قليل، اختر وقتًا آخر', 'err');
-  await loadBookedSlots();
-  return;
-}
+  const bookedNow = check.booked || [];
+
+  if(bookedNow.includes(time)){
+    showToast('❌ هذا الوقت تم حجزه قبل قليل، اختر وقتًا آخر', 'err');
+    await loadBookedSlots();
+    return;
+  }
 
   const u = state.user || {};
 
-console.log('USER DATA:', u);
+  console.log('USER DATA:', u);
 
-if(!u.name || !u.email || !u.phone){
-  showToast('❌ بيانات الطالب غير موجودة. سجّل دخول من جديد', 'err');
-  return;
-}
+  if(!u.name || !u.email || !u.phone){
+    showToast('❌ بيانات الطالب غير موجودة. سجّل دخول من جديد', 'err');
+    return;
+  }
 
-const t = state.trainers.find(x => x.name === trainer) || {};
+  const t = state.trainers.find(x => x.name === trainer) || {};
 
-btn.disabled = true;
+  btn.disabled = true;
 
   const r = await apiPost('saveBooking', {
     studentName: u.name || '',
@@ -957,21 +959,24 @@ btn.disabled = true;
     trainerEmail: t.email || '',
     date: date,
     time: time,
+    duration: duration,
+
     carType:
-  String(u.carType || '').toLowerCase().includes('auto') ||
-  String(u.carType || '').toLowerCase().includes('automaat') ||
-  String(u.carType || '').includes('أوتوماتيك')
-    ? 'automatic'
-    : 'manual',
+      String(u.carType || '').toLowerCase().includes('auto') ||
+      String(u.carType || '').toLowerCase().includes('automaat') ||
+      String(u.carType || '').includes('أوتوماتيك')
+        ? 'automatic'
+        : 'manual',
 
-carLabel: u.carType || '',
+    carLabel: u.carType || '',
 
-carPrice:
-  String(u.carType || '').toLowerCase().includes('auto') ||
-  String(u.carType || '').toLowerCase().includes('automaat') ||
-  String(u.carType || '').includes('أوتوماتيك')
-    ? 65
-    : 60,
+    carPrice:
+      String(u.carType || '').toLowerCase().includes('auto') ||
+      String(u.carType || '').toLowerCase().includes('automaat') ||
+      String(u.carType || '').includes('أوتوماتيك')
+        ? 65 * Number(duration)
+        : 60 * Number(duration),
+
     lang: u.lang || 'ar',
     pickupAddress: pickupAddress
   });
