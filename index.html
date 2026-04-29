@@ -383,13 +383,14 @@ async function loadTrainers(){
 
     let blockedByDuration = false;
 
-    for(let i = 0; i < duration; i++){
-      const checkTime = String(h + i).padStart(2,'0') + ':' + String(m || 0).padStart(2,'0');
+    for(let bookedTime of booked){
+  const [bh] = bookedTime.split(':').map(Number);
 
-      if(booked.includes(checkTime) || (h + i) >= eh){
-        blockedByDuration = true;
-      }
-    }
+  // إذا الوقت الحالي يقع داخل حجز سابق (مدته ساعتين)
+  if(h === bh || h === bh + 1){
+    blockedByDuration = true;
+  }
+}
 
     const tooSoon = isTooSoonToBook(date, time);
 
