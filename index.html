@@ -371,7 +371,8 @@ async function loadTrainers(){
   let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
-  const booked = r.booked || [];
+  const booked = (r.booked || []).map(x => String(x).padStart(5, '0'));
+  const duration = Number($('bookDuration')?.value || 1);
 
   const slots = [];
   let [h,m] = start.split(':').map(Number);
@@ -380,10 +381,19 @@ async function loadTrainers(){
   while(h < eh){
     const time = String(h).padStart(2,'0') + ':' + String(m || 0).padStart(2,'0');
 
-    const isBooked = booked.includes(time);
+    let blockedByDuration = false;
+
+    for(let i = 0; i < duration; i++){
+      const checkTime = String(h + i).padStart(2,'0') + ':' + String(m || 0).padStart(2,'0');
+
+      if(booked.includes(checkTime) || (h + i) >= eh){
+        blockedByDuration = true;
+      }
+    }
+
     const tooSoon = isTooSoonToBook(date, time);
 
-    if(!isBooked && !tooSoon){
+    if(!blockedByDuration && !tooSoon){
       slots.push(time);
     }
 
@@ -398,105 +408,6 @@ async function loadTrainers(){
   timeSelect.innerHTML =
     '<option value="">— اختر الوقت —</option>' +
     slots.map(t=>`<option value="${t}">${t}</option>`).join('');
-}
-  let bookingCalendarDate = new Date();
-
-function getTrainerWorkDaysForBooking(){
-  const trainer = $('bookTrainer')?.value;
-  if(!trainer) return '';
-
-  const t = state.trainers.find(x => x.name === trainer);
-  return String(t?.workDays || '').toLowerCase();
-}
-
-function isBookingDateAvailable(dateObj){
-  const trainer = $('bookTrainer')?.value;
-  if(!trainer) return false;
-
-  const workDays = getTrainerWorkDaysForBooking();
-  if(!workDays) return false;
-
-  const dayNames = [
-    ['Sunday','Zondag','Zondag'],
-    ['Monday','Maandag','Maandag'],
-    ['Tuesday','Dinsdag','Dinsdag'],
-    ['Wednesday','Woensdag','Woensdag'],
-    ['Thursday','Donderdag','Donderdag'],
-    ['Friday','Vrijdag','Vrijdag'],
-    ['Saturday','Zaterdag','Zaterdag']
-  ];
-
-  const dayOptions = dayNames[dateObj.getDay()];
-
-  return dayOptions.some(d =>
-    workDays.includes(d.toLowerCase())
-  );
-}
-
-function renderBookingCalendar(){
-  const grid = $('bookingCalendar');
-  const title = $('bookingCalTitle');
-  if(!grid || !title) return;
-
-  const year = bookingCalendarDate.getFullYear();
-  const month = bookingCalendarDate.getMonth();
-
-  const monthNames = [
-    'يناير','فبراير','مارس','أبريل','مايو','يونيو',
-    'يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'
-  ];
-
-  title.textContent = monthNames[month] + ' ' + year;
-  grid.innerHTML = '';
-
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const today = new Date();
-  today.setHours(0,0,0,0);
-
-  for(let i = 0; i < firstDay.getDay(); i++){
-    grid.insertAdjacentHTML('beforeend', '<div class="cal-empty"></div>');
-  }
-
-  for(let day = 1; day <= lastDay.getDate(); day++){
-    const d = new Date(year, month, day);
-    d.setHours(12,0,0,0);
-
-    const iso = d.toISOString().slice(0,10);
-    const isPast = d < today;
-    const available = !isPast && isBookingDateAvailable(d);
-    const selected = $('bookDate')?.value === iso;
-
-    const cls =
-      'cal-day ' +
-      (available ? 'available ' : '') +
-      (selected ? 'selected ' : '') +
-      (isPast ? 'disabled ' : '');
-
-    grid.insertAdjacentHTML(
-      'beforeend',
-      `<button type="button" class="${cls}" onclick="selectBookingDate('${iso}', ${available})">${day}</button>`
-    );
-  }
-}
-
-function selectBookingDate(iso, available){
-  if(!available){
-    showToast('❌ المدرب لا يعمل في هذا اليوم', 'err');
-    return;
-  }
-
-  const trainer = $('bookTrainer')?.value;
-
-  if(!trainer){
-    showToast('اختر المدرب أولاً', 'err');
-    return;
-  }
-
-  $('bookDate').value = iso;
-
-  renderBookingCalendar();
-  loadBookedSlots();
 }
 function changeBookingMonth(step){
   bookingCalendarDate.setMonth(bookingCalendarDate.getMonth() + step);
