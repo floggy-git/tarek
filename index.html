@@ -283,6 +283,20 @@ let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
 
 function applyAppLang(){
+  function setAppLang(lang, btn){
+  appLang = lang;
+  localStorage.setItem('appLang', lang);
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.remove('active');
+  });
+
+  if(btn){
+    btn.classList.add('active');
+  }
+
+  applyAppLang();
+}
   const t = I18N[appLang] || I18N.ar;
 
   if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
