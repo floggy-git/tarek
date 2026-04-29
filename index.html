@@ -283,6 +283,17 @@ let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
 const $=id=>document.getElementById(id);
 
 function applyAppLang(){
+
+  if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
+  if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
+  if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
+
+  if($('loginTitle')) $('loginTitle').textContent = t.loginTitle;
+  if($('loginSubtitle')) $('loginSubtitle').textContent = t.loginSubtitle;
+
+  if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
+  if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
+}
   function setAppLang(lang, btn){
   appLang = lang;
   localStorage.setItem('appLang', lang);
@@ -297,6 +308,8 @@ function applyAppLang(){
 
   applyAppLang();
 }
+
+function applyAppLang(){
   const t = I18N[appLang] || I18N.ar;
 
   if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
