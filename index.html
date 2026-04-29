@@ -238,9 +238,9 @@
   const pricePerHour = isAuto ? 65 : 60;
   const total = duration * pricePerHour;
 
-  if($('bookingPriceBox')){
-    $('bookingPriceBox').textContent = 'السعر: €' + total;
-  }
+ if($('bookingPriceBox')){
+  $('bookingPriceBox').textContent = 'السعر: €' + total;
+}
 }
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
 const MIN_BOOKING_HOURS = 12;
