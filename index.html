@@ -534,12 +534,22 @@ function setHtml(id, value){
   if(el) el.innerHTML = value;
 }
 
+function setText(id, value){
+  const el = document.getElementById(id);
+  if(el) el.textContent = value;
+}
+
+function setHtml(id, value){
+  const el = document.getElementById(id);
+  if(el) el.innerHTML = value;
+}
+
 function applyAppLang(){
   const t = I18N[appLang] || I18N.ar;
 
   document.documentElement.lang = appLang;
-  document.documentElement.dir = t.dir;
-  document.body.dir = t.dir;
+  document.documentElement.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
+  document.body.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
 
   setText('tabStudent', t.studentTab);
   setText('tabRegister', t.registerTab);
@@ -550,13 +560,38 @@ function applyAppLang(){
   setText('studentPhoneLabel', t.studentPhone);
   setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
 
+  const registerLabels = document.querySelectorAll('#authRegister label');
+  const registerText = [
+    t.name,
+    t.phone,
+    t.email,
+    t.carType,
+    t.language,
+    t.trainer,
+    t.address
+  ];
+
+  registerLabels.forEach((label, i) => {
+    if(registerText[i]) label.textContent = registerText[i];
+  });
+
+  const registerBtn = document.querySelector('#authRegister button');
+  if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
+
+  const trainerLabels = document.querySelectorAll('#authTrainer label');
+  const trainerText = [
+    t.trainerEmail,
+    t.password
+  ];
+
+  trainerLabels.forEach((label, i) => {
+    if(trainerText[i]) label.textContent = trainerText[i];
+  });
+
+  const trainerBtn = document.querySelector('#authTrainer button');
+  if(trainerBtn) trainerBtn.innerHTML = '👨‍🏫 ' + t.trainerLogin;
+
   setHtml('logoutBtn', '🚪 ' + t.logout);
-
-  translateStaticLabels(t);
-  translateNavs(t);
-  translateCalendarDays(t);
-
-  if(typeof updateBookingPrice === 'function') updateBookingPrice();
 }
 
 function translateStaticLabels(t){
