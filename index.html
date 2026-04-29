@@ -140,7 +140,7 @@
   <label id="studentEmailLabel">الإيميل</label>
 <input class="input" id="sEmail" type="email"></div>
 <div class="group"><label id="studentPhoneLabel">الهاتف</label>
-<input class="input" id="sPhone"></div><button class="btn primary full" onclick="studentLogin(this)">🔓 دخول</button></div><div id="authRegister" class="grid hidden"><div class="grid cols2"><div class="group"><label>الاسم</label><input class="input" id="rName"></div><div class="group"><label>الهاتف</label><input class="input" id="rPhone"></div></div><div class="group"><label>الإيميل</label><input class="input" id="rEmail" type="email"></div><div class="grid cols2"><div class="group"><label>نوع السيارة</label><select class="select" id="rCar"><option value="manual">Manual / عادي</option><option value="automatic">Automatic / أوتوماتيك</option></select></div><div class="group"><label>اللغة</label><select class="select" id="rLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option></select></div></div><div class="group"><label>المدرب</label><select class="select" id="rTrainer"></select></div><div class="group"><label>العنوان</label><input class="input" id="rAddress"></div><button class="btn green full" onclick="registerStudent(this)">📝 إنشاء حساب</button></div><div id="authTrainer" class="grid hidden"><div class="group"><label>إيميل المدرب</label><input class="input" id="tEmail" type="email"></div><div class="group"><label>كلمة المرور</label><input class="input" id="tPass" type="password" placeholder="admin123"></div><button class="btn primary full" onclick="trainerLogin(this)">👨‍🏫 دخول</button></div></div></div></section>
+<input class="input" id="sPhone"></div><button id="studentLoginBtn" class="btn primary full" onclick="studentLogin(this)">🔓 دخول</button></div><div id="authRegister" class="grid hidden"><div class="grid cols2"><div class="group"><label>الاسم</label><input class="input" id="rName"></div><div class="group"><label>الهاتف</label><input class="input" id="rPhone"></div></div><div class="group"><label>الإيميل</label><input class="input" id="rEmail" type="email"></div><div class="grid cols2"><div class="group"><label>نوع السيارة</label><select class="select" id="rCar"><option value="manual">Manual / عادي</option><option value="automatic">Automatic / أوتوماتيك</option></select></div><div class="group"><label>اللغة</label><select class="select" id="rLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option></select></div></div><div class="group"><label>المدرب</label><select class="select" id="rTrainer"></select></div><div class="group"><label>العنوان</label><input class="input" id="rAddress"></div><button class="btn green full" onclick="registerStudent(this)">📝 إنشاء حساب</button></div><div id="authTrainer" class="grid hidden"><div class="group"><label>إيميل المدرب</label><input class="input" id="tEmail" type="email"></div><div class="group"><label>كلمة المرور</label><input class="input" id="tPass" type="password" placeholder="admin123"></div><button class="btn primary full" onclick="trainerLogin(this)">👨‍🏫 دخول</button></div></div></div></section>
 <section class="screen" id="studentScreen"><div class="page active" id="sHome"><div class="grid cols2"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet">€0</h2><p id="sName"></p></div><div class="grid cols2"><div class="kpi"><i>📚</i><div><b id="sTotal">0</b><span>Lessons</span></div></div><div class="kpi"><i>✅</i><div><b id="sPaid">0</b><span>Paid</span></div></div><div class="kpi"><i>⏳</i><div><b id="sUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>💶</i><div><b id="sRevenue">€0</b><span>Total</span></div></div></div></div><div class="grid cols2" style="margin-top:14px"><div class="card"><div class="title"><h3>📅 Upcoming Lessons</h3></div><div id="sUpcoming" class="list"></div></div><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="dailyLearn"></div></div></div></div><div class="page" id="sLessons"><div class="card"><div class="title"><h3>📚 Lessons</h3><small id="lessonCount">0</small></div><div id="sLessonsList" class="list"></div></div></div><div class="page" id="sBookings"><div class="card"><div class="title"><h3>📅 Bookings</h3><button class="btn primary" onclick="studentPage('sBook')">حجز جديد</button></div><div id="sBookingsList" class="list"></div></div></div>
   <div class="page" id="sBook">
   <div class="card">
@@ -257,6 +257,7 @@ const I18N = {
     loginSubtitle: 'تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.',
     studentEmail: 'الإيميل',
     studentPhone: 'الهاتف'
+    studentLogin: 'دخول'
   },
   nl: {
     studentTab: 'Student',
@@ -266,6 +267,7 @@ const I18N = {
     loginSubtitle: 'App voor studenten en instructeurs verbonden met Google Sheets.',
     studentEmail: 'E-mail',
     studentPhone: 'Telefoon'
+    studentLogin: 'Inloggen'
   },
   en: {
     studentTab: 'Student',
@@ -275,6 +277,7 @@ const I18N = {
     loginSubtitle: 'App for students and trainers connected to Google Sheets.',
     studentEmail: 'Email',
     studentPhone: 'Phone'
+    studentLogin: 'Login'
   }
 };
 
@@ -307,6 +310,7 @@ function applyAppLang(){
 
   if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
   if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
+  if($('studentLoginBtn')) $('studentLoginBtn').innerHTML = '🔓 ' + t.studentLogin;
 }
   function setAppLang(lang, btn){
   appLang = lang;
