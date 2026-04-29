@@ -251,72 +251,430 @@ let appLang = localStorage.getItem('appLang') || 'ar';
 
 const I18N = {
   ar: {
+    dir: 'rtl',
+    logout: 'خروج',
+
     studentTab: 'طالب',
     registerTab: 'تسجيل',
     trainerTab: 'مدرب',
+
     loginTitle: 'مدرسة الأندلس لتعليم قيادة السيارات',
     loginSubtitle: 'تطبيق الطلاب والمدربين المتصل مباشرة مع Google Sheets.',
     studentEmail: 'الإيميل',
     studentPhone: 'الهاتف',
-    studentLogin: 'دخول'
+    studentLogin: 'دخول',
+
+    name: 'الاسم',
+    phone: 'الهاتف',
+    email: 'الإيميل',
+    carType: 'نوع السيارة',
+    language: 'اللغة',
+    trainer: 'المدرب',
+    address: 'العنوان',
+    registerBtn: 'إنشاء حساب',
+
+    trainerEmail: 'إيميل المدرب',
+    password: 'كلمة المرور',
+    trainerLogin: 'دخول',
+
+    walletBalance: 'رصيد المحفظة',
+    lessons: 'الدروس',
+    paid: 'مدفوع',
+    unpaid: 'غير مدفوع',
+    total: 'المجموع',
+    upcomingLessons: 'الدروس القادمة',
+    learningCenter: 'مركز التعليم',
+    bookings: 'الحجوزات',
+    newBooking: 'حجز جديد',
+    bookLesson: 'حجز درس',
+    date: 'التاريخ',
+    time: 'الوقت',
+    duration: 'مدة الدرس',
+    pickupAddress: 'عنوان الانطلاق',
+    price: 'السعر',
+    oldDateWarning: 'لا يمكن حجز تاريخ قديم.',
+    confirmBooking: 'تأكيد الحجز',
+
+    profile: 'الملف الشخصي',
+    saveAddress: 'حفظ العنوان',
+
+    trainerDashboard: 'لوحة المدرب',
+    students: 'الطلاب',
+    revenue: 'الإيرادات',
+    studentSearch: 'بحث عن طالب',
+    completeLesson: 'إنهاء درس',
+    lessonNumber: 'رقم الدرس',
+    wallet: 'المحفظة',
+    customPrice: 'سعر مخصص',
+    paymentStatus: 'حالة الدفع',
+    paymentMethod: 'طريقة الدفع',
+    saveLesson: 'حفظ الدرس',
+    walletDeposit: 'إيداع محفظة',
+    amount: 'المبلغ',
+    notes: 'ملاحظات',
+    confirmDeposit: 'تأكيد الإيداع',
+    paymentReminder: 'تذكير دفع',
+    suggestedAmount: 'مبلغ مقترح',
+    message: 'الرسالة',
+    send: 'إرسال',
+    invoice: 'فاتورة',
+    from: 'من',
+    to: 'إلى',
+    vat: 'الضريبة',
+    sendInvoice: 'إرسال فاتورة',
+
+    navHome: 'الرئيسية',
+    navLessons: 'الدروس',
+    navBookings: 'الحجوزات',
+    navBook: 'حجز',
+    navWallet: 'المحفظة',
+    navLearn: 'تعلم',
+    navProfile: 'الملف',
+    navLesson: 'درس',
+    navDeposit: 'إيداع',
+    navReminder: 'تذكير',
+    navDocs: 'مستندات',
+    navStudents: 'طلاب',
+
+    calendarDays: ['أحد','إثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'],
+    hour1: '1 ساعة',
+    hour2: '2 ساعة'
   },
+
   nl: {
+    dir: 'ltr',
+    logout: 'Uitloggen',
+
     studentTab: 'Student',
     registerTab: 'Registreren',
     trainerTab: 'Instructeur',
+
     loginTitle: 'Al-Andalos Rijschool',
     loginSubtitle: 'App voor studenten en instructeurs verbonden met Google Sheets.',
     studentEmail: 'E-mail',
     studentPhone: 'Telefoon',
-    studentLogin: 'Inloggen'
+    studentLogin: 'Inloggen',
+
+    name: 'Naam',
+    phone: 'Telefoon',
+    email: 'E-mail',
+    carType: 'Type auto',
+    language: 'Taal',
+    trainer: 'Instructeur',
+    address: 'Adres',
+    registerBtn: 'Account aanmaken',
+
+    trainerEmail: 'E-mail instructeur',
+    password: 'Wachtwoord',
+    trainerLogin: 'Inloggen',
+
+    walletBalance: 'Wallet saldo',
+    lessons: 'Rijlessen',
+    paid: 'Betaald',
+    unpaid: 'Openstaand',
+    total: 'Totaal',
+    upcomingLessons: 'Aankomende rijlessen',
+    learningCenter: 'Leercentrum',
+    bookings: 'Boekingen',
+    newBooking: 'Nieuwe boeking',
+    bookLesson: 'Rijles boeken',
+    date: 'Datum',
+    time: 'Tijd',
+    duration: 'Duur van de les',
+    pickupAddress: 'Ophaaladres',
+    price: 'Prijs',
+    oldDateWarning: 'Een datum in het verleden kan niet worden geboekt.',
+    confirmBooking: 'Boeking bevestigen',
+
+    profile: 'Profiel',
+    saveAddress: 'Adres opslaan',
+
+    trainerDashboard: 'Instructeur dashboard',
+    students: 'Studenten',
+    revenue: 'Omzet',
+    studentSearch: 'Student zoeken',
+    completeLesson: 'Les afronden',
+    lessonNumber: 'Lesnummer',
+    wallet: 'Wallet',
+    customPrice: 'Aangepaste prijs',
+    paymentStatus: 'Betaalstatus',
+    paymentMethod: 'Betaalmethode',
+    saveLesson: 'Les opslaan',
+    walletDeposit: 'Wallet opwaarderen',
+    amount: 'Bedrag',
+    notes: 'Notities',
+    confirmDeposit: 'Opwaardering bevestigen',
+    paymentReminder: 'Betalingsherinnering',
+    suggestedAmount: 'Voorgesteld bedrag',
+    message: 'Bericht',
+    send: 'Verzenden',
+    invoice: 'Factuur',
+    from: 'Van',
+    to: 'Tot',
+    vat: 'BTW',
+    sendInvoice: 'Factuur verzenden',
+
+    navHome: 'Home',
+    navLessons: 'Lessen',
+    navBookings: 'Boekingen',
+    navBook: 'Boeken',
+    navWallet: 'Wallet',
+    navLearn: 'Leren',
+    navProfile: 'Profiel',
+    navLesson: 'Les',
+    navDeposit: 'Storting',
+    navReminder: 'Reminder',
+    navDocs: 'Docs',
+    navStudents: 'Studenten',
+
+    calendarDays: ['Zo','Ma','Di','Wo','Do','Vr','Za'],
+    hour1: '1 uur',
+    hour2: '2 uur'
   },
+
   en: {
+    dir: 'ltr',
+    logout: 'Logout',
+
     studentTab: 'Student',
     registerTab: 'Register',
     trainerTab: 'Trainer',
+
     loginTitle: 'Al-Andalos Driving School',
     loginSubtitle: 'App for students and trainers connected to Google Sheets.',
     studentEmail: 'Email',
     studentPhone: 'Phone',
-    studentLogin: 'Login'
+    studentLogin: 'Login',
+
+    name: 'Name',
+    phone: 'Phone',
+    email: 'Email',
+    carType: 'Car type',
+    language: 'Language',
+    trainer: 'Trainer',
+    address: 'Address',
+    registerBtn: 'Create account',
+
+    trainerEmail: 'Trainer email',
+    password: 'Password',
+    trainerLogin: 'Login',
+
+    walletBalance: 'Wallet balance',
+    lessons: 'Lessons',
+    paid: 'Paid',
+    unpaid: 'Unpaid',
+    total: 'Total',
+    upcomingLessons: 'Upcoming lessons',
+    learningCenter: 'Learning center',
+    bookings: 'Bookings',
+    newBooking: 'New booking',
+    bookLesson: 'Book lesson',
+    date: 'Date',
+    time: 'Time',
+    duration: 'Lesson duration',
+    pickupAddress: 'Pickup address',
+    price: 'Price',
+    oldDateWarning: 'You cannot book a past date.',
+    confirmBooking: 'Confirm booking',
+
+    profile: 'Profile',
+    saveAddress: 'Save address',
+
+    trainerDashboard: 'Trainer dashboard',
+    students: 'Students',
+    revenue: 'Revenue',
+    studentSearch: 'Student search',
+    completeLesson: 'Complete lesson',
+    lessonNumber: 'Lesson number',
+    wallet: 'Wallet',
+    customPrice: 'Custom price',
+    paymentStatus: 'Payment status',
+    paymentMethod: 'Payment method',
+    saveLesson: 'Save lesson',
+    walletDeposit: 'Wallet deposit',
+    amount: 'Amount',
+    notes: 'Notes',
+    confirmDeposit: 'Confirm deposit',
+    paymentReminder: 'Payment reminder',
+    suggestedAmount: 'Suggested amount',
+    message: 'Message',
+    send: 'Send',
+    invoice: 'Invoice',
+    from: 'From',
+    to: 'To',
+    vat: 'VAT',
+    sendInvoice: 'Send invoice',
+
+    navHome: 'Home',
+    navLessons: 'Lessons',
+    navBookings: 'Bookings',
+    navBook: 'Book',
+    navWallet: 'Wallet',
+    navLearn: 'Learn',
+    navProfile: 'Profile',
+    navLesson: 'Lesson',
+    navDeposit: 'Deposit',
+    navReminder: 'Reminder',
+    navDocs: 'Docs',
+    navStudents: 'Students',
+
+    calendarDays: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+    hour1: '1 hour',
+    hour2: '2 hours'
   }
 };
 
-let bookingDayHasSlots = {};
-let trainerPayStatus='Paid', trainerPayMethod='Cash / كاش';
-const $ = id => document.getElementById(id);
+function setText(id, value){
+  const el = $(id);
+  if(el) el.textContent = value;
+}
 
-window.setAppLang = function(lang, btn){
-  appLang = lang;
-  localStorage.setItem('appLang', lang);
-
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-
-  applyAppLang();
-};
+function setHtml(id, value){
+  const el = $(id);
+  if(el) el.innerHTML = value;
+}
 
 function applyAppLang(){
   const t = I18N[appLang] || I18N.ar;
 
-  if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
-  if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
-  if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
-  if($('loginTitle')) $('loginTitle').textContent = t.loginTitle;
-  if($('loginSubtitle')) $('loginSubtitle').textContent = t.loginSubtitle;
-  if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
-  if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
-  if($('studentLoginBtn')) $('studentLoginBtn').innerHTML = '🔓 ' + t.studentLogin;
+  document.documentElement.lang = appLang;
+  document.documentElement.dir = t.dir;
+  document.body.dir = t.dir;
+
+  setText('tabStudent', t.studentTab);
+  setText('tabRegister', t.registerTab);
+  setText('tabTrainer', t.trainerTab);
+  setText('loginTitle', t.loginTitle);
+  setText('loginSubtitle', t.loginSubtitle);
+  setText('studentEmailLabel', t.studentEmail);
+  setText('studentPhoneLabel', t.studentPhone);
+  setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
+
+  setHtml('logoutBtn', '🚪 ' + t.logout);
+
+  translateStaticLabels(t);
+  translateNavs(t);
+  translateCalendarDays(t);
+
+  if(typeof updateBookingPrice === 'function') updateBookingPrice();
 }
-  function isTooSoonToBook(date, time){
-  if(!date || !time) return true;
 
-  const lessonDateTime = new Date(date + 'T' + time + ':00');
-  const now = new Date();
+function translateStaticLabels(t){
+  const map = [
+    ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
+    ['#authTrainer label', [t.trainerEmail, t.password]],
+    ['#sBook label', [t.trainer, t.date, t.time, t.duration, t.pickupAddress]],
+    ['#sProfile label', [t.pickupAddress]],
+    ['#tLesson label', [t.students, t.trainer, t.date, t.time, t.lessonNumber, t.carType, t.walletBalance, t.customPrice, t.paymentStatus, t.paymentMethod]],
+    ['#tDeposit label', [t.students, t.email, t.amount, t.notes]],
+    ['#tReminder label', [t.students, t.suggestedAmount, t.message]],
+    ['#tDocs label', [t.students, t.from, t.to, t.vat]]
+  ];
 
-  const diffHours = (lessonDateTime - now) / (1000 * 60 * 60);
+  map.forEach(([selector, values]) => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      if(values[i]) el.textContent = values[i];
+    });
+  });
 
-  return diffHours < MIN_BOOKING_HOURS;
+  const titles = {
+    '#sHome .wallet small': t.walletBalance,
+    '#sHome .kpi:nth-child(1) span': t.lessons,
+    '#sHome .kpi:nth-child(2) span': t.paid,
+    '#sHome .kpi:nth-child(3) span': t.unpaid,
+    '#sHome .kpi:nth-child(4) span': t.total,
+    '#sHome .card:nth-child(1) .title h3': '📅 ' + t.upcomingLessons,
+    '#sHome .card:nth-child(2) .title h3': '🎓 ' + t.learningCenter,
+    '#sLessons h3': '📚 ' + t.lessons,
+    '#sBookings h3': '📅 ' + t.bookings,
+    '#sBook h3': '🚗 ' + t.bookLesson,
+    '#sWalletPage small': t.walletBalance,
+    '#sLearning h3': '🎓 ' + t.learningCenter,
+    '#sProfile h3': '👤 ' + t.profile,
+    '#tHome h3': '👨‍🏫 ' + t.trainerDashboard,
+    '#tHome .card:nth-child(2) h3': '🔎 ' + t.studentSearch,
+    '#tLesson h3': '✅ ' + t.completeLesson,
+    '#tDeposit h3': '💰 ' + t.walletDeposit,
+    '#tReminder h3': '💌 ' + t.paymentReminder,
+    '#tDocs h3': '🧾 ' + t.invoice,
+    '#tStudents h3': '👥 ' + t.students
+  };
+
+  Object.entries(titles).forEach(([selector, value]) => {
+    const el = document.querySelector(selector);
+    if(el) el.textContent = value;
+  });
+
+  const registerBtn = document.querySelector('#authRegister button');
+  if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
+
+  const trainerBtn = document.querySelector('#authTrainer button');
+  if(trainerBtn) trainerBtn.innerHTML = '👨‍🏫 ' + t.trainerLogin;
+
+  const newBookingBtn = document.querySelector('#sBookings button');
+  if(newBookingBtn) newBookingBtn.textContent = t.newBooking;
+
+  const confirmBookingBtn = document.querySelector('#sBook button.full');
+  if(confirmBookingBtn) confirmBookingBtn.innerHTML = '✅ ' + t.confirmBooking;
+
+  const oldDateNotice = document.querySelector('#sBook .notice[style]');
+  if(oldDateNotice) oldDateNotice.textContent = t.oldDateWarning;
+
+  const saveAddressBtn = document.querySelector('#sProfile button');
+  if(saveAddressBtn) saveAddressBtn.textContent = t.saveAddress;
+
+  const saveLessonBtn = document.querySelector('#tLesson button.full');
+  if(saveLessonBtn) saveLessonBtn.innerHTML = '✅ ' + t.saveLesson;
+
+  const confirmDepositBtn = document.querySelector('#tDeposit button.full');
+  if(confirmDepositBtn) confirmDepositBtn.innerHTML = '💳 ' + t.confirmDeposit;
+
+  const reminderBtn = document.querySelector('#tReminder button.full');
+  if(reminderBtn) reminderBtn.textContent = t.send;
+
+  const invoiceBtn = document.querySelector('#tDocs button.full');
+  if(invoiceBtn) invoiceBtn.textContent = t.sendInvoice;
+}
+
+function translateNavs(t){
+  const student = [
+    ['🏠', t.navHome],
+    ['📚', t.navLessons],
+    ['📅', t.navBookings],
+    ['🚗', t.navBook],
+    ['💳', t.navWallet],
+    ['🎓', t.navLearn],
+    ['👤', t.navProfile]
+  ];
+
+  const trainer = [
+    ['🏠', t.navHome],
+    ['✅', t.navLesson],
+    ['💰', t.navDeposit],
+    ['💌', t.navReminder],
+    ['🧾', t.navDocs],
+    ['👥', t.navStudents]
+  ];
+
+  document.querySelectorAll('#studentNav button').forEach((btn, i) => {
+    if(student[i]) btn.innerHTML = `<b>${student[i][0]}</b>${student[i][1]}`;
+  });
+
+  document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
+    if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
+  });
+}
+
+function translateCalendarDays(t){
+  document.querySelectorAll('.cal-days span').forEach((el, i) => {
+    if(t.calendarDays[i]) el.textContent = t.calendarDays[i];
+  });
+
+  const opt1 = document.querySelector('#bookDuration option[value="1"]');
+  const opt2 = document.querySelector('#bookDuration option[value="2"]');
+
+  if(opt1) opt1.textContent = t.hour1;
+  if(opt2) opt2.textContent = t.hour2;
 }
 function setBtn(btn,on,text){if(!btn)return;if(on){btn.dataset.old=btn.innerHTML;btn.disabled=true;btn.innerHTML=text||'...'}else{btn.disabled=false;btn.innerHTML=btn.dataset.old||btn.innerHTML}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
