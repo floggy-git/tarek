@@ -248,7 +248,7 @@ window.TRAINER_PASS = 'admin123';
 const payMethods=['Wallet / محفظة','Cash / كاش','Bank Transfer / تحويل','Card / بطاقة'];
 let state={role:null,user:null,students:[],trainers:[],bookings:[]};
 let appLang = localStorage.getItem('appLang') || 'ar';
-const I18N = {
+
 const I18N = {
   ar: {
     studentTab: 'طالب',
@@ -283,20 +283,15 @@ const I18N = {
 };
 
 let bookingDayHasSlots = {};
-let trainerPayStatus='Paid',trainerPayMethod='Cash / كاش';
-const $=id=>document.getElementById(id);
+let trainerPayStatus='Paid', trainerPayMethod='Cash / كاش';
+const $ = id => document.getElementById(id);
 
 window.setAppLang = function(lang, btn){
   appLang = lang;
   localStorage.setItem('appLang', lang);
 
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.remove('active');
-  });
-
-  if(btn){
-    btn.classList.add('active');
-  }
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 
   applyAppLang();
 };
@@ -307,47 +302,11 @@ function applyAppLang(){
   if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
   if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
   if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
-
   if($('loginTitle')) $('loginTitle').textContent = t.loginTitle;
   if($('loginSubtitle')) $('loginSubtitle').textContent = t.loginSubtitle;
-
   if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
   if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
   if($('studentLoginBtn')) $('studentLoginBtn').innerHTML = '🔓 ' + t.studentLogin;
-}
-  function setAppLang(lang, btn){
-  appLang = lang;
-  localStorage.setItem('appLang', lang);
-
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.remove('active');
-  });
-
-  if(btn){
-    btn.classList.add('active');
-  }
-
-  applyAppLang();
-}
-
-function applyAppLang(){
-  const t = I18N[appLang] || I18N.ar;
-
-  if($('tabStudent')) $('tabStudent').textContent = t.studentTab;
-  if($('tabRegister')) $('tabRegister').textContent = t.registerTab;
-  if($('tabTrainer')) $('tabTrainer').textContent = t.trainerTab;
-
-  if($('loginTitle')) $('loginTitle').textContent = t.loginTitle;
-  if($('loginSubtitle')) $('loginSubtitle').textContent = t.loginSubtitle;
-
-  if($('studentEmailLabel')) $('studentEmailLabel').textContent = t.studentEmail;
-  if($('studentPhoneLabel')) $('studentPhoneLabel').textContent = t.studentPhone;
-
-  if($('studentLoginBtn')) $('studentLoginBtn').innerHTML = '🔓 ' + t.studentLogin;
-}
-function toast(msg,type='info'){const t=$('toast');t.textContent=msg;t.className='toast show '+type;setTimeout(()=>t.className='toast '+type,3200)}
-function showToast(msg,type='info'){
-  toast(msg,type);
 }
   function isTooSoonToBook(date, time){
   if(!date || !time) return true;
