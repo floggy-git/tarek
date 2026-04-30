@@ -629,27 +629,6 @@ function translateStaticLabels(t){
     });
   });
 
-  const titles = {
-    '#sHome .wallet small': t.walletBalance,
-    '#sHome .kpi:nth-child(1) span': t.lessons,
-    '#sHome .kpi:nth-child(2) span': t.paid,
-    '#sHome .kpi:nth-child(3) span': t.unpaid,
-    '#sHome .kpi:nth-child(4) span': t.total,
-    '#sLessons h3': '📚 ' + t.lessons,
-    '#sBookings h3': '📅 ' + t.bookings,
-    '#sBook h3': '🚗 ' + t.bookLesson,
-    '#sWalletPage small': t.walletBalance,
-    '#sLearning h3': '🎓 ' + t.learningCenter,
-    '#sProfile h3': '👤 ' + t.profile,
-    '#tHome h3': '👨‍🏫 ' + t.trainerDashboard,
-    '#tHome .card:nth-child(2) h3': '🔎 ' + t.studentSearch,
-    '#tLesson h3': '✅ ' + t.completeLesson,
-    '#tDeposit h3': '💰 ' + t.walletDeposit,
-    '#tReminder h3': '💌 ' + t.paymentReminder,
-    '#tDocs h3': '🧾 ' + t.invoice,
-    '#tStudents h3': '👥 ' + t.students
-  };
-
   Object.entries(titles).forEach(([selector, value]) => {
     const el = document.querySelector(selector);
     if(el) el.textContent = value;
