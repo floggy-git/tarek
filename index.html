@@ -663,7 +663,7 @@ function buildApiUrl(action, params = {}){
   }).toString();
 }
 
-async function fetchWithTimeout(url, options = {}, ms = API_TIMEOUT){
+async function fetchWithTimeout(url, options = {}, ms = window.API_TIMEOUT){
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ms);
 
@@ -737,8 +737,7 @@ function translateCalendarDays(t){
           success: false,
           message: 'No API response. تأكد من رابط /exec ومن صلاحيات Anyone.'
         });
-      }, API_TIMEOUT);
-
+        }, window.API_TIMEOUT);
       window[cb] = res => finish(res);
 
       script.onerror = () => finish({
