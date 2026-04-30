@@ -1737,7 +1737,7 @@ if(btn){
     if(res.success){
       showToast(t.bookingSuccess || 'تم الحجز بنجاح', 'ok');
 
-      await loadStudentBookings();
+      loadStudentBookings(); // ✅ صحيح
       studentPage('sBookings');
 
     }else{
