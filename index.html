@@ -891,7 +891,8 @@ function showToast(key, type = 'info'){
 
   if(!timeSelect) return;
 
-  timeSelect.innerHTML = '<option value="">— اختر الوقت —</option>';
+ const t = I18N[appLang] || I18N.ar;
+timeSelect.innerHTML = `<option value="">${t.selectTime}</option>`;
 
   if(!trainer || !date) return;
 
@@ -961,8 +962,8 @@ function showToast(key, type = 'info'){
   }
 
   timeSelect.innerHTML =
-    '<option value="">— اختر الوقت —</option>' +
-    slots.map(t=>`<option value="${t}">${t}</option>`).join('');
+  `<option value="">${t.selectTime}</option>` +
+  slots.map(s=>`<option value="${s}">${s}</option>`).join('');
 }
 async function loadBookingDaysStatus(){
   const trainer = $('bookTrainer')?.value;
