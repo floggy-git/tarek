@@ -641,14 +641,7 @@ function applyAppLang(){
       el.textContent = t.calendarDays[i];
     }
   });
-
-  // ===== 🆕 Lesson Duration =====
-  const opt1 = document.querySelector('#bookDuration option[value="1"]');
-  const opt2 = document.querySelector('#bookDuration option[value="2"]');
-
-  if(opt1 && t.hour1) opt1.textContent = t.hour1;
-  if(opt2 && t.hour2) opt2.textContent = t.hour2;
-}
+  
 function translateStaticLabels(t){
   const map = [
     ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
