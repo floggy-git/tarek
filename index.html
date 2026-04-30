@@ -871,7 +871,7 @@ try {
     loadTrainers();
   }
 }, 30000);
-  const MIN_BOOKING_HOURS = 12;
+  window.MIN_BOOKING_HOURS = window.MIN_BOOKING_HOURS || 12;
 
 function isTooSoonToBook(date, time){
   if(!date || !time) return true;
@@ -881,7 +881,7 @@ function isTooSoonToBook(date, time){
 
   const diffHours = (lessonDateTime - now) / (1000 * 60 * 60);
 
-  return diffHours < MIN_BOOKING_HOURS;
+  return diffHours < window.MIN_BOOKING_HOURS;
 }
 
 function showToast(message, type = 'info'){
@@ -971,7 +971,7 @@ function showToast(message, type = 'info'){
   }
 
   if(!slots.length){
-    timeSelect.innerHTML = `<option value="">لا توجد أوقات متاحة قبل ${MIN_BOOKING_HOURS} ساعة</option>`;
+    timeSelect.innerHTML = `<option value="">لا توجد أوقات متاحة قبل ${window.MIN_BOOKING_HOURS} ساعة</option>`;
     return;
   }
 
