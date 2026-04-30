@@ -591,6 +591,8 @@ priceLabel: 'Price'
   }
 };
 
+const API_TIMEOUT = 15000;
+
 function setText(id, value){
   const el = document.getElementById(id);
   if(el) el.textContent = value;
@@ -600,141 +602,78 @@ function setHtml(id, value){
   const el = document.getElementById(id);
   if(el) el.innerHTML = value;
 }
-  function translateNavs(t){
-  const student = [
-    ['🏠', t.navHome],
-    ['📚', t.navLessons],
-    ['📅', t.navBookings],
-    ['🚗', t.navBook],
-    ['💳', t.navWallet],
-    ['🎓', t.navLearn],
-    ['👤', t.navProfile]
-  ];
 
-  const trainer = [
-    ['🏠', t.navHome],
-    ['✅', t.navLesson],
-    ['💰', t.navDeposit],
-    ['💌', t.navReminder],
-    ['🧾', t.navDocs],
-    ['👥', t.navStudents]
-  ];
-
-  document.querySelectorAll('#studentNav button').forEach((btn, i) => {
-    if(student[i]) btn.innerHTML = `<b>${student[i][0]}</b>${student[i][1]}`;
-  });
-
-  document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
-    if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
-  });
-}
-
-function applyAppLang(){
-  const t = I18N[appLang] || I18N.ar;
-
-  document.documentElement.lang = appLang;
-  document.documentElement.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
-  document.body.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
-
-  setText('tabStudent', t.studentTab);
-  setText('tabRegister', t.registerTab);
-  setText('tabTrainer', t.trainerTab);
-  setText('loginTitle', t.loginTitle);
-  setText('loginSubtitle', t.loginSubtitle);
-  setText('studentEmailLabel', t.studentEmail);
-  setText('studentPhoneLabel', t.studentPhone);
-  setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
-  setHtml('logoutBtn', '🚪 ' + t.logout);
-
-  translateStaticLabels(t);
-  translateNavs(t);
-  translateCalendarDays(t);
-
-  if(typeof renderBookingCalendar === 'function'){
-    renderBookingCalendar();
+function setBtn(btn,on,text){
+  if(!btn) return;
+  if(on){
+    btn.dataset.old = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = text || '...';
+  }else{
+    btn.disabled = false;
+    btn.innerHTML = btn.dataset.old || btn.innerHTML;
   }
 }
 
-function translateStaticLabels(t){
-  const map = [
-    ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
-    ['#authTrainer label', [t.trainerEmail, t.password]],
-    ['#sBook label', [t.trainer, t.date, t.time, t.duration, t.pickupAddress]],
-    ['#sProfile label', [t.pickupAddress]],
-    ['#tLesson label', [t.students, t.trainer, t.date, t.time, t.lessonNumber, t.carType, t.walletBalance, t.customPrice, t.paymentStatus, t.paymentMethod]],
-    ['#tDeposit label', [t.students, t.email, t.amount, t.notes]],
-    ['#tReminder label', [t.students, t.suggestedAmount, t.message]],
-    ['#tDocs label', [t.students, t.from, t.to, t.vat]]
-  ];
-
-  map.forEach(([selector, values]) => {
-    document.querySelectorAll(selector).forEach((el, i) => {
-      if(values[i]) el.textContent = values[i];
-    });
-  });
-
-  const titles = {
-    '#sHome .wallet small': t.walletBalance,
-    '#sHome .kpi:nth-child(1) span': t.lessons,
-    '#sHome .kpi:nth-child(2) span': t.paid,
-    '#sHome .kpi:nth-child(3) span': t.unpaid,
-    '#sHome .kpi:nth-child(4) span': t.total,
-    '#sLessons h3': '📚 ' + t.lessons,
-    '#sBookings h3': '📅 ' + t.bookings,
-    '#sBook h3': '🚗 ' + t.bookLesson,
-    '#sWalletPage small': t.walletBalance,
-    '#sLearning h3': '🎓 ' + t.learningCenter,
-    '#sProfile h3': '👤 ' + t.profile,
-    '#tHome h3': '👨‍🏫 ' + t.trainerDashboard,
-    '#tHome .card:nth-child(2) h3': '🔎 ' + t.studentSearch,
-    '#tLesson h3': '✅ ' + t.completeLesson,
-    '#tDeposit h3': '💰 ' + t.walletDeposit,
-    '#tReminder h3': '💌 ' + t.paymentReminder,
-    '#tDocs h3': '🧾 ' + t.invoice,
-    '#tStudents h3': '👥 ' + t.students
-  };
-
-  Object.entries(titles).forEach(([selector, value]) => {
-    const el = document.querySelector(selector);
-    if(el) el.textContent = value;
-  });
-
-  const upcomingTitle = document.querySelector('#sUpcoming')?.closest('.card')?.querySelector('.title h3');
-  if(upcomingTitle) upcomingTitle.textContent = '📅 ' + t.upcomingLessons;
-
-  const learningTitle = document.querySelector('#dailyLearn')?.closest('.card')?.querySelector('.title h3');
-  if(learningTitle) learningTitle.textContent = '🎓 ' + t.learningCenter;
-
-  const registerBtn = document.querySelector('#authRegister button');
-  if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
-
-  const trainerBtn = document.querySelector('#authTrainer button');
-  if(trainerBtn) trainerBtn.innerHTML = '👨‍🏫 ' + t.trainerLogin;
-
-  const newBookingBtn = document.querySelector('#sBookings button');
-  if(newBookingBtn) newBookingBtn.textContent = t.newBooking;
-
-  const confirmBookingBtn = document.querySelector('#sBook button.full');
-  if(confirmBookingBtn) confirmBookingBtn.innerHTML = '✅ ' + t.confirmBooking;
-
-  const oldDateNotice = document.querySelector('#sBook .notice[style]');
-  if(oldDateNotice) oldDateNotice.textContent = t.oldDateWarning;
-
-  const saveAddressBtn = document.querySelector('#sProfile button');
-  if(saveAddressBtn) saveAddressBtn.textContent = t.saveAddress;
-
-  const saveLessonBtn = document.querySelector('#tLesson button.full');
-  if(saveLessonBtn) saveLessonBtn.innerHTML = '✅ ' + t.saveLesson;
-
-  const confirmDepositBtn = document.querySelector('#tDeposit button.full');
-  if(confirmDepositBtn) confirmDepositBtn.innerHTML = '💳 ' + t.confirmDeposit;
-
-  const reminderBtn = document.querySelector('#tReminder button.full');
-  if(reminderBtn) reminderBtn.textContent = t.send;
-
-   const invoiceBtn = document.querySelector('#tDocs button.full');
-  if(invoiceBtn) invoiceBtn.textContent = t.sendInvoice;
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, m => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[m]));
 }
+
+function money(n){
+  return '€' + (Number(n) || 0).toFixed(2).replace('.00','');
+}
+
+function isoToday(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function compactDate(v){
+  if(!v) return '—';
+  let s = String(v);
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)){
+    return new Date(s + 'T12:00:00').toLocaleDateString('nl-NL');
+  }
+  return s.split(' GMT')[0];
+}
+
+function compactTime(v){
+  if(!v) return '—';
+  let s = String(v);
+  return s.length > 5 ? s.substring(0,5) : s;
+}
+
+function mapsUrl(addr){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr || '');
+}
+
+function toast(message, type = 'info'){
+  showToast(message, type);
+}
+
+function buildApiUrl(action, params = {}){
+  return API + '?' + new URLSearchParams({
+    ...params,
+    action
+  }).toString();
+}
+
+async function fetchWithTimeout(url, options = {}, ms = API_TIMEOUT){
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+
+  try{
+    return await fetch(url, { ...options, signal: controller.signal });
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
 function translateNavs(t){
   const student = [
     ['🏠', t.navHome],
@@ -762,6 +701,20 @@ function translateNavs(t){
   document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
     if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
   });
+}
+
+function translateCalendarDays(t){
+  document.querySelectorAll('.cal-days span').forEach((el, i) => {
+    if(t.calendarDays && t.calendarDays[i]){
+      el.textContent = t.calendarDays[i];
+    }
+  });
+
+  const opt1 = document.querySelector('#bookDuration option[value="1"]');
+  const opt2 = document.querySelector('#bookDuration option[value="2"]');
+
+  if(opt1) opt1.textContent = t.hour1;
+  if(opt2) opt2.textContent = t.hour2;
 }
   // قراءة البيانات من Google Apps Script عبر doGet + JSONP لتجنب مشكلة CORS.
   function apiGet(action, params = {}) {
