@@ -661,6 +661,8 @@ function applyAppLang(){
   const learningTitle = document.querySelector('#dailyLearn')?.closest('.card')?.querySelector('.title h3');
   if(learningTitle) learningTitle.textContent = '🎓 ' + t.learningCenter;
 
+const titles = {
+
   const registerBtn = document.querySelector('#authRegister button');
   if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
 
