@@ -1006,46 +1006,66 @@ function renderBookingCalendar(){
   const title = $('bookingCalTitle');
   if(!grid || !title) return;
 
-  const t = I18N[appLang] || I18N.ar;
+  try {
+    const t = I18N[appLang] || I18N.ar;
 
-  const year = bookingCalendarDate.getFullYear();
-  const month = bookingCalendarDate.getMonth();
+    const year = bookingCalendarDate.getFullYear();
+    const month = bookingCalendarDate.getMonth();
 
-  const monthNames = t.months || [];
-  title.textContent = (monthNames[month] || '') + ' ' + year;
+    const fallbackMonths = [
+      'يناير','فبراير','مارس','أبريل','مايو','يونيو',
+      'يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'
+    ];
 
-  grid.innerHTML = '';
+    const monthNames = t.months || fallbackMonths;
+    title.textContent = (monthNames[month] || fallbackMonths[month]) + ' ' + year;
 
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const today = new Date();
-  today.setHours(0,0,0,0);
+    grid.innerHTML = '';
 
-  for(let i = 0; i < firstDay.getDay(); i++){
-    grid.insertAdjacentHTML('beforeend', '<div class="cal-empty"></div>');
-  }
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const today = new Date();
+    today.setHours(0,0,0,0);
 
-  for(let day = 1; day <= lastDay.getDate(); day++){
-    const d = new Date(year, month, day);
-    d.setHours(12,0,0,0);
+    for(let i = 0; i < firstDay.getDay(); i++){
+      grid.insertAdjacentHTML('beforeend', '<div class="cal-empty"></div>');
+    }
 
-    const iso = d.toISOString().slice(0,10);
-    const isPast = d < today;
-    const hasBookings = bookingDayHasSlots[iso];
-    const available = !isPast && isBookingDateAvailable(d);
-    const selected = $('bookDate')?.value === iso;
+    for(let day = 1; day <= lastDay.getDate(); day++){
+      const d = new Date(year, month, day);
+      d.setHours(12,0,0,0);
 
-    const cls =
-      'cal-day ' +
-      (available ? 'available ' : '') +
-      (hasBookings ? 'busy ' : '') +
-      (selected ? 'selected ' : '') +
-      (isPast ? 'disabled ' : '');
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const iso = `${yyyy}-${mm}-${dd}`;
 
-    grid.insertAdjacentHTML(
-      'beforeend',
-      `<button type="button" class="${cls}" onclick="selectBookingDate('${iso}', ${available})">${day}</button>`
-    );
+      const isPast = d < today;
+      const hasBookings = bookingDayHasSlots && bookingDayHasSlots[iso];
+
+      let available = !isPast;
+      if(typeof isBookingDateAvailable === 'function'){
+        available = !isPast && isBookingDateAvailable(d);
+      }
+
+      const selected = $('bookDate') && $('bookDate').value === iso;
+
+      const cls =
+        'cal-day ' +
+        (available ? 'available ' : '') +
+        (hasBookings ? 'busy ' : '') +
+        (selected ? 'selected ' : '') +
+        (isPast ? 'disabled ' : '');
+
+      grid.insertAdjacentHTML(
+        'beforeend',
+        `<button type="button" class="${cls}" onclick="selectBookingDate('${iso}', ${available})">${day}</button>`
+      );
+    }
+
+  } catch(err) {
+    console.error('renderBookingCalendar error:', err);
+    if(typeof renderBookingCalendar === 'function') renderBookingCalendar();
   }
 }
 function selectBookingDate(iso, available){
