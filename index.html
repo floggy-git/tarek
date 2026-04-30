@@ -364,6 +364,7 @@ selectTrainerFirst: 'اختر المدرب أولاً',
 selectDateFirst: 'اختر التاريخ أولاً',
 selectTimeFirst: 'اختر الوقت أولاً',
 noUpcomingBookings: 'لا يوجد حجز قادم',
+    noLessons: 'لا توجد دروس',
 priceLabel: 'السعر'
 
   },
@@ -467,6 +468,7 @@ selectTrainerFirst: 'Kies eerst een instructeur',
 selectDateFirst: 'Kies eerst een datum',
 selectTimeFirst: 'Kies eerst een tijd',
 noUpcomingBookings: 'Geen aankomende boekingen',
+    noLessons: 'Geen lessen',
 priceLabel: 'Prijs'
 
   },
@@ -570,6 +572,7 @@ selectTrainerFirst: 'Select trainer first',
 selectDateFirst: 'Select date first',
 selectTimeFirst: 'Select time first',
 noUpcomingBookings: 'No upcoming bookings',
+    noLessons: 'No lessons',
 priceLabel: 'Price'
 
   }
@@ -1246,7 +1249,7 @@ async function loadStudentLessons(){
   $('lessonCount').textContent=arr.length;
   $('sLessonsList').innerHTML=arr.length
     ? arr.slice().reverse().map(l=>`<div class="item"><div><strong>#${esc(l.lessonNum)} · ${compactDate(l.date)} ${compactTime(l.time)}</strong><small>${esc(l.trainer)} · ${esc(l.method||'—')}</small></div><span class="badge ${l.isPaid?'green':'red'}">${esc(l.status)}</span></div>`).join('')
-    : '<div class="notice">لا توجد دروس</div>';
+    : `<div class="notice">${(I18N[appLang] || I18N.ar).noLessons}</div>`;
 }
 
 async function loadStudentBookings(){
