@@ -599,49 +599,6 @@ function applyAppLang(){
     renderBookingCalendar();
   }
 }
-
-  // ===== Register =====
-  const registerLabels = document.querySelectorAll('#authRegister label');
-  const registerText = [
-    t.name,
-    t.phone,
-    t.email,
-    t.carType,
-    t.language,
-    t.trainer,
-    t.address
-  ];
-
-  registerLabels.forEach((label, i) => {
-    if(registerText[i]) label.textContent = registerText[i];
-  });
-
-  const registerBtn = document.querySelector('#authRegister button');
-  if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
-
-  // ===== Trainer Login =====
-  const trainerLabels = document.querySelectorAll('#authTrainer label');
-  const trainerText = [
-    t.trainerEmail,
-    t.password
-  ];
-
-  trainerLabels.forEach((label, i) => {
-    if(trainerText[i]) label.textContent = trainerText[i];
-  });
-
-  const trainerBtn = document.querySelector('#authTrainer button');
-  if(trainerBtn) trainerBtn.innerHTML = '👨‍🏫 ' + t.trainerLogin;
-
-  setHtml('logoutBtn', '🚪 ' + t.logout);
-
-  // ===== 🆕 Calendar Days =====
-  document.querySelectorAll('.cal-days span').forEach((el, i) => {
-    if(t.calendarDays && t.calendarDays[i]){
-      el.textContent = t.calendarDays[i];
-    }
-  });
-  
 function translateStaticLabels(t){
   const map = [
     ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
