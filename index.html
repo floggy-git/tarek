@@ -382,6 +382,7 @@ selectTrainerFirst: 'اختر المدرب أولاً',
 selectDateFirst: 'اختر التاريخ أولاً',
 selectTimeFirst: 'اختر الوقت أولاً',
 noUpcomingBookings: 'لا يوجد حجز قادم',
+    noBookings: 'لا توجد حجوزات',
     noLessons: 'لا توجد دروس',
 priceLabel: 'السعر'
 
@@ -486,6 +487,7 @@ selectTrainerFirst: 'Kies eerst een instructeur',
 selectDateFirst: 'Kies eerst een datum',
 selectTimeFirst: 'Kies eerst een tijd',
 noUpcomingBookings: 'Geen aankomende boekingen',
+    noBookings: 'Geen boekingen',
     noLessons: 'Geen lessen',
 priceLabel: 'Prijs'
 
@@ -590,6 +592,7 @@ selectTrainerFirst: 'Select trainer first',
 selectDateFirst: 'Select date first',
 selectTimeFirst: 'Select time first',
 noUpcomingBookings: 'No upcoming bookings',
+    noBookings: 'No bookings',
     noLessons: 'No lessons',
 priceLabel: 'Price'
 
@@ -1248,11 +1251,14 @@ async function loadStudentLessons(){
 }
 
 async function loadStudentBookings(){
-  const r=await apiPost('getStudentBookings',{email:state.user.email});
-  const arr=r.bookings||[];
-  $('sBookingsList').innerHTML=arr.length
-    ? arr.slice().reverse().map(b=>bookingCard(b)).join('')
-    : '<div class="notice">لا توجد حجوزات</div>';
+  const r = await apiPost('getStudentBookings', { email: state.user.email });
+  const arr = r.bookings || [];
+  const t = I18N[appLang] || I18N.ar;
+
+  $('sBookingsList').innerHTML = arr.length
+    ? arr.slice().reverse().map(b => bookingCard(b)).join('')
+    : `<div class="notice">${t.noBookings}</div>`;
+
   renderUpcomingStudent(arr);
 }
 
