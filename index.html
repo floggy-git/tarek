@@ -839,7 +839,15 @@ function isoToday(){
   ).join('');
 
   ['rTrainer','bookTrainer','trLessonTrainer'].forEach(id=>{
-    if($(id)) $(id).innerHTML = opts;
+  if($(id)){
+    const oldValue = $(id).value;
+    $(id).innerHTML = opts;
+
+    if(oldValue){
+      $(id).value = oldValue;
+    }
+  }
+});
   });
 
   // 👇 هذا السطر مهم جدًا
