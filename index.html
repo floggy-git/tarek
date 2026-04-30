@@ -691,10 +691,37 @@ function translateStaticLabels(t){
   const reminderBtn = document.querySelector('#tReminder button.full');
   if(reminderBtn) reminderBtn.textContent = t.send;
 
-  const invoiceBtn = document.querySelector('#tDocs button.full');
+   const invoiceBtn = document.querySelector('#tDocs button.full');
   if(invoiceBtn) invoiceBtn.textContent = t.sendInvoice;
 }
+function translateNavs(t){
+  const student = [
+    ['🏠', t.navHome],
+    ['📚', t.navLessons],
+    ['📅', t.navBookings],
+    ['🚗', t.navBook],
+    ['💳', t.navWallet],
+    ['🎓', t.navLearn],
+    ['👤', t.navProfile]
+  ];
 
+  const trainer = [
+    ['🏠', t.navHome],
+    ['✅', t.navLesson],
+    ['💰', t.navDeposit],
+    ['💌', t.navReminder],
+    ['🧾', t.navDocs],
+    ['👥', t.navStudents]
+  ];
+
+  document.querySelectorAll('#studentNav button').forEach((btn, i) => {
+    if(student[i]) btn.innerHTML = `<b>${student[i][0]}</b>${student[i][1]}`;
+  });
+
+  document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
+    if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
+  });
+}
   // قراءة البيانات من Google Apps Script عبر doGet + JSONP لتجنب مشكلة CORS.
   function apiGet(action, params = {}) {
     return new Promise(resolve => {
