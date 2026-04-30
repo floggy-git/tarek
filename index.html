@@ -251,7 +251,17 @@ let state={role:null,user:null,students:[],trainers:[],bookings:[]};
 let appLang = localStorage.getItem('appLang') || 'ar';
 
 const $ = id => document.getElementById(id);
-  function translateCalendarDays(t){
+
+function setAppLang(lang, btn){
+  appLang = lang;
+  localStorage.setItem('appLang', lang);
+
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  applyAppLang();
+}
+   function translateCalendarDays(t){
   document.querySelectorAll('.cal-days span').forEach((el, i) => {
     if(t.calendarDays && t.calendarDays[i]){
       el.textContent = t.calendarDays[i];
@@ -263,16 +273,6 @@ const $ = id => document.getElementById(id);
 
   if(opt1) opt1.textContent = t.hour1;
   if(opt2) opt2.textContent = t.hour2;
-}
-
-function setAppLang(lang, btn){
-  appLang = lang;
-  localStorage.setItem('appLang', lang);
-
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-
-  applyAppLang();
 }
 
 window.setAppLang = setAppLang;
