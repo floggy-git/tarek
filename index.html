@@ -363,6 +363,7 @@ errorBooking: 'حدث خطأ أثناء الحجز',
 selectTrainerFirst: 'اختر المدرب أولاً',
 selectDateFirst: 'اختر التاريخ أولاً',
 selectTimeFirst: 'اختر الوقت أولاً',
+noUpcomingBookings: 'لا يوجد حجز قادم',
 priceLabel: 'السعر'
 
   },
@@ -465,6 +466,7 @@ errorBooking: 'Er is een fout opgetreden',
 selectTrainerFirst: 'Kies eerst een instructeur',
 selectDateFirst: 'Kies eerst een datum',
 selectTimeFirst: 'Kies eerst een tijd',
+noUpcomingBookings: 'Geen aankomende boekingen',
 priceLabel: 'Prijs'
 
   },
@@ -567,6 +569,7 @@ errorBooking: 'Something went wrong',
 selectTrainerFirst: 'Select trainer first',
 selectDateFirst: 'Select date first',
 selectTimeFirst: 'Select time first',
+noUpcomingBookings: 'No upcoming bookings',
 priceLabel: 'Price'
 
   }
@@ -1282,7 +1285,7 @@ function renderUpcomingStudent(arr){
   const confirmed=(arr||[]).filter(b=>String(b.status)==='Confirmed'&&String(b.date)>=isoToday());
   $('sUpcoming').innerHTML=confirmed.length
     ? confirmed.slice(0,3).map(b=>bookingCard(b,true)).join('')
-    : '<div class="notice">لا يوجد حجز قادم</div>';
+    : `<div class="notice">${(I18N[appLang] || I18N.ar).noUpcomingBookings}</div>`;
 }
 
 function bookingCard(b,highlight=false){
