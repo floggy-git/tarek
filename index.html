@@ -1523,21 +1523,19 @@ function applyAppLang(){
   setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
   setHtml('logoutBtn', '🚪 ' + t.logout);
 
-  if(typeof translateStaticLabels === 'function'){
-    translateStaticLabels(t);
-  }
+  if(typeof translateStaticLabels === 'function') translateStaticLabels(t);
+  if(typeof translateNavs === 'function') translateNavs(t);
+  if(typeof translateCalendarDays === 'function') translateCalendarDays(t);
 
-  if(typeof translateNavs === 'function'){
-    translateNavs(t);
-  }
+  // 🔥 أهم إضافة (حل مشكلة نصف الترجمة)
+  if(typeof renderBookingCalendar === 'function') renderBookingCalendar();
+  if(typeof updateBookingPrice === 'function') updateBookingPrice();
+  if(typeof loadBookedSlots === 'function') loadBookedSlots();
 
-  if(typeof translateCalendarDays === 'function'){
-    translateCalendarDays(t);
-  }
-
-  if(typeof renderBookingCalendar === 'function'){
-    renderBookingCalendar();
-  }
+  // 🔥 إعادة ترجمة النصوص داخل الصفحة الحالية
+  setTimeout(()=>{
+    if(typeof translateStaticLabels === 'function') translateStaticLabels(t);
+  },100);
 }
 
 const LEARNING_QUESTIONS = [
