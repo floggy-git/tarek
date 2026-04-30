@@ -1700,7 +1700,8 @@ if(btn){
   setDefaults();
   sessionStorage.clear();
 });
-async function submitBooking(btn){
+
+  async function submitBooking(btn){
 
   const t = I18N[appLang] || I18N.ar;
 
@@ -1713,16 +1714,13 @@ async function submitBooking(btn){
   if(!trainer || !date || !time){
     showToast(t.selectBookingFields || 'اختر المدرب والتاريخ والوقت', 'err');
     return;
-    await loadStudentBookings();
   }
 
-  // 🔥 Loading state
   btn.disabled = true;
   const original = btn.innerHTML;
   btn.innerHTML = t.bookingLoading || '⏳ جاري حجز الدرس...';
 
   try {
-
     const res = await apiPost('saveBooking',{
       studentName: state.user.name,
       studentEmail: state.user.email,
@@ -1739,12 +1737,21 @@ async function submitBooking(btn){
     if(res.success){
       showToast(t.bookingSuccess || 'تم الحجز بنجاح', 'ok');
 
-      // 🔥 تحديث الحجوزات مباشرة
-
+      await loadStudentBookings();
       studentPage('sBookings');
+
     }else{
       showToast(res.message || 'خطأ في الحجز', 'err');
     }
+
+  } catch(e){
+    showToast('Server error', 'err');
+
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = original;
+  }
+}
 
   } catch(e){
     showToast('Server error', 'err');
