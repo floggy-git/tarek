@@ -799,7 +799,6 @@ function translateCalendarDays(t){
   function showScreen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');$('logoutBtn').classList.toggle('hidden',id==='loginScreen');$('studentNav').classList.toggle('active',id==='studentScreen');$('trainerNav').classList.toggle('active',id==='trainerScreen')}
   function switchAuth(tab){['student','register','trainer'].forEach(x=>{$('tab'+x[0].toUpperCase()+x.slice(1)).classList.toggle('active',x===tab);$('auth'+x[0].toUpperCase()+x.slice(1)).classList.toggle('hidden',x!==tab)})}
   function logout(){sessionStorage.clear();state.role=null;state.user=null;showScreen('loginScreen')}
-  const API_TIMEOUT = 15000;
 
 function isoToday(){
   return new Date().toISOString().slice(0,10);
