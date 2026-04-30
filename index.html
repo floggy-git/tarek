@@ -1000,7 +1000,7 @@ function isBookingDateAvailable(dateObj){
     workDays.includes(d.toLowerCase())
   );
 }
-
+let bookingDayHasSlots = {};
 function renderBookingCalendar(){
   const grid = $('bookingCalendar');
   const title = $('bookingCalTitle');
