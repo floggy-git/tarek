@@ -974,7 +974,8 @@ async function loadBookingDaysStatus(){
 }
   let bookingCalendarDate = new Date();
 
-function getTrainerWorkDaysForBooking(){
+function getTrainerWorkDaysForBooking(...){
+  const t = I18N[appLang] || I18N.ar;
   const trainer = $('bookTrainer')?.value;
   if(!trainer) return '';
 
