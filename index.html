@@ -239,7 +239,9 @@
   const total = duration * pricePerHour;
 
  if($('bookingPriceBox')){
-  $('bookingPriceBox').textContent = 'السعر: €' + total;
+  const t = I18N[appLang] || I18N.ar;
+
+$('bookingPriceBox').textContent = t.priceLabel + ': €' + total;
 }
 }
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
@@ -361,6 +363,7 @@ errorBooking: 'حدث خطأ أثناء الحجز',
 selectTrainerFirst: 'اختر المدرب أولاً',
 selectDateFirst: 'اختر التاريخ أولاً',
 selectTimeFirst: 'اختر الوقت أولاً'
+priceLabel: 'السعر'
   },
 
   nl: {
@@ -461,6 +464,7 @@ errorBooking: 'Er is een fout opgetreden',
 selectTrainerFirst: 'Kies eerst een instructeur',
 selectDateFirst: 'Kies eerst een datum',
 selectTimeFirst: 'Kies eerst een tijd'
+priceLabel: 'Prijs'
   },
 
   en: {
@@ -561,6 +565,7 @@ errorBooking: 'Something went wrong',
 selectTrainerFirst: 'Select trainer first',
 selectDateFirst: 'Select date first',
 selectTimeFirst: 'Select time first'
+priceLabel: 'Price'
   }
 };
 
