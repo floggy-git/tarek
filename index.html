@@ -356,6 +356,11 @@ hour2: '2 ساعة',
 selectTime: '— اختر الوقت —',
 trainerOffDay: 'المدرب لا يعمل هذا اليوم',
 noSlots: 'لا توجد أوقات متاحة قبل'
+successBooking: 'تم الحجز بنجاح',
+errorBooking: 'حدث خطأ أثناء الحجز',
+selectTrainerFirst: 'اختر المدرب أولاً',
+selectDateFirst: 'اختر التاريخ أولاً',
+selectTimeFirst: 'اختر الوقت أولاً'
   },
 
   nl: {
@@ -451,6 +456,11 @@ hour2: '2 uur',
 selectTime: '— Kies tijd —',
 trainerOffDay: 'Instructeur werkt niet op deze dag',
 noSlots: 'Geen beschikbare tijden vóór'
+ successBooking: 'Boeking succesvol',
+errorBooking: 'Er is een fout opgetreden',
+selectTrainerFirst: 'Kies eerst een instructeur',
+selectDateFirst: 'Kies eerst een datum',
+selectTimeFirst: 'Kies eerst een tijd'
   },
 
   en: {
@@ -546,6 +556,11 @@ hour2: '2 hours',
 selectTime: '— Select time —',
 trainerOffDay: 'Trainer does not work on this day',
 noSlots: 'No available slots before'
+successBooking: 'Booking successful',
+errorBooking: 'Something went wrong',
+selectTrainerFirst: 'Select trainer first',
+selectDateFirst: 'Select date first',
+selectTimeFirst: 'Select time first'
   }
 };
 
@@ -893,7 +908,10 @@ function isTooSoonToBook(date, time){
   return diffHours < window.MIN_BOOKING_HOURS;
 }
 
-function showToast(message, type = 'info'){
+function showToast(key, type = 'info'){
+  const t = I18N[appLang] || I18N.ar;
+  const message = t[key] || key;
+
   const toast = document.getElementById('toast');
   if(!toast){
     alert(message);
@@ -1625,13 +1643,13 @@ if(bookedNow.includes(requestedTime)){
 
   btn.disabled = false;
 
-  if(r.success){
-    showToast('✅ تم الحجز بنجاح', 'ok');
-    loadStudentBookings();
-    studentPage('sBookings');
-  }else{
-    showToast(r.message || 'خطأ في الحجز', 'err');
-  }
+ if(r.success){
+  showToast('successBooking', 'ok');
+  loadStudentBookings();
+  studentPage('sBookings');
+}else{
+  showToast('errorBooking', 'err');
+}
 }
   window.submitBooking = submitBooking;
 </script></body></html>
