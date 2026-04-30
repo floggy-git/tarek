@@ -1753,14 +1753,6 @@ if(btn){
   }
 }
 
-  } catch(e){
-    showToast('Server error', 'err');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = original;
-  }
-}
-
   const check = await apiGet('getSlots', {
     date: date,
     trainer: trainer
