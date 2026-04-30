@@ -1751,11 +1751,6 @@ if(btn){
   }
 }
 
-  const check = await apiGet('getSlots', {
-    date: date,
-    trainer: trainer
-  });
-
  const bookedNow = (check.booked || []).map(x => String(x).padStart(5, '0'));
 const requestedTime = String(time).padStart(5, '0');
 
