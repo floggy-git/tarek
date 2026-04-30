@@ -1473,23 +1473,30 @@ async function trainerSendReminder(btn){
   setBtn(btn,false);
   toast('تم إرسال التذكير','ok');
 }
-
 function trainerSendInvoice(btn){
-  const student=$('trInvoiceStudent').value;
-  const from=$('trInvoiceFrom').value;
-  const to=$('trInvoiceTo').value;
-  const vatRate=Number($('trInvoiceVat').value);
+  const student = $('trInvoiceStudent').value;
+  const from = $('trInvoiceFrom').value;
+  const to = $('trInvoiceTo').value;
+  const vatRate = Number($('trInvoiceVat').value);
 
-  if(!student||!from||!to) return toast('أكمل البيانات','err');
+  if(!student || !from || !to) return toast('أكمل البيانات','err');
 
-  const s=state.students.find(x=>x.name===student)||{};
+  const s = state.students.find(x => x.name === student) || {};
 
   setBtn(btn,true,'⏳');
 
   fetch(API,{
     method:'POST',
     mode:'no-cors',
-    body:JSON.stringify({action:'generateInvoice',student,email:s.email||'',from,to,vatRate,sendEmail:true}),
+    body:JSON.stringify({
+      action:'generateInvoice',
+      student,
+      email:s.email || '',
+      from,
+      to,
+      vatRate,
+      sendEmail:true
+    }),
     headers:{'Content-Type':'text/plain;charset=utf-8'}
   });
 
@@ -1498,8 +1505,88 @@ function trainerSendInvoice(btn){
     toast('✅ تم إرسال الفاتورة','ok');
   },700);
 }
-  const LEARNING_QUESTIONS=[{img:'🛑',q:'ترى إشارة STOP. ماذا تفعل؟',a:['أتوقف بالكامل','أخفف فقط','أتابع'],c:0},{img:'🚸',q:'طفل قرب معبر مشاة. ماذا تفعل؟',a:['أخفف وأستعد للتوقف','أزيد السرعة','أتابع'],c:0},{img:'🌫️',q:'تقود في ضباب كثيف. ما الأفضل؟',a:['أخفف السرعة وأزيد المسافة','أستخدم الضوء العالي','أقود عادي'],c:0}];function renderDailyLearn(){let q=LEARNING_QUESTIONS[Math.floor(Date.now()/18000000)%LEARNING_QUESTIONS.length];$('dailyLearn').innerHTML=`<div class="learnbox"><div style="font-size:44px">${q.img}</div><strong>${esc(q.q)}</strong></div>`}function renderLearning(){let q=LEARNING_QUESTIONS[Math.floor(Math.random()*LEARNING_QUESTIONS.length)];$('learningBox').innerHTML=`<div class="learnbox"><div style="font-size:54px">${q.img}</div><h3>${esc(q.q)}</h3>${q.a.map((x,i)=>`<button class="choice" onclick="answerLearn(this,${i},${q.c})">${esc(x)}</button>`).join('')}<div id="learnMsg" style="margin-top:12px"></div></div>`}function answerLearn(btn,i,c){document.querySelectorAll('.choice').forEach(b=>b.disabled=true);let ok=i===c;btn.classList.add(ok?'correct':'wrong');$('learnMsg').innerHTML=ok?'<div class="notice">إجابة صحيحة 👏</div>':'<div class="notice warn">إجابة غير صحيحة</div>';setTimeout(renderLearning,1800)}
-  document.addEventListener('DOMContentLoaded',async()=>{
+
+function applyAppLang(){
+  const t = I18N[appLang] || I18N.ar;
+
+  document.documentElement.lang = appLang;
+  document.documentElement.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
+  document.body.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
+
+  setText('tabStudent', t.studentTab);
+  setText('tabRegister', t.registerTab);
+  setText('tabTrainer', t.trainerTab);
+  setText('loginTitle', t.loginTitle);
+  setText('loginSubtitle', t.loginSubtitle);
+  setText('studentEmailLabel', t.studentEmail);
+  setText('studentPhoneLabel', t.studentPhone);
+  setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
+  setHtml('logoutBtn', '🚪 ' + t.logout);
+
+  if(typeof translateStaticLabels === 'function'){
+    translateStaticLabels(t);
+  }
+
+  if(typeof translateNavs === 'function'){
+    translateNavs(t);
+  }
+
+  if(typeof translateCalendarDays === 'function'){
+    translateCalendarDays(t);
+  }
+
+  if(typeof renderBookingCalendar === 'function'){
+    renderBookingCalendar();
+  }
+}
+
+const LEARNING_QUESTIONS = [
+  {
+    img:'🛑',
+    q:'ترى إشارة STOP. ماذا تفعل؟',
+    a:['أتوقف بالكامل','أخفف فقط','أتابع'],
+    c:0
+  },
+  {
+    img:'🚸',
+    q:'طفل قرب معبر مشاة. ماذا تفعل؟',
+    a:['أخفف وأستعد للتوقف','أزيد السرعة','أتابع'],
+    c:0
+  },
+  {
+    img:'🌫️',
+    q:'تقود في ضباب كثيف. ما الأفضل؟',
+    a:['أخفف السرعة وأزيد المسافة','أستخدم الضوء العالي','أقود عادي'],
+    c:0
+  }
+];
+
+function renderDailyLearn(){
+  let q = LEARNING_QUESTIONS[Math.floor(Date.now()/18000000) % LEARNING_QUESTIONS.length];
+  $('dailyLearn').innerHTML = `<div class="learnbox"><div style="font-size:44px">${q.img}</div><strong>${esc(q.q)}</strong></div>`;
+}
+
+function renderLearning(){
+  let q = LEARNING_QUESTIONS[Math.floor(Math.random() * LEARNING_QUESTIONS.length)];
+  $('learningBox').innerHTML =
+    `<div class="learnbox">
+      <div style="font-size:54px">${q.img}</div>
+      <h3>${esc(q.q)}</h3>
+      ${q.a.map((x,i)=>`<button class="choice" onclick="answerLearn(this,${i},${q.c})">${esc(x)}</button>`).join('')}
+      <div id="learnMsg" style="margin-top:12px"></div>
+    </div>`;
+}
+
+function answerLearn(btn,i,c){
+  document.querySelectorAll('.choice').forEach(b=>b.disabled=true);
+  let ok = i === c;
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  $('learnMsg').innerHTML = ok
+    ? '<div class="notice">إجابة صحيحة 👏</div>'
+    : '<div class="notice warn">إجابة غير صحيحة</div>';
+  setTimeout(renderLearning,1800);
+}
+
     applyAppLang();
     // تثبيت اللغة عند تحميل الصفحة
 const savedLang = localStorage.getItem('appLang') || 'ar';
