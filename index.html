@@ -1713,6 +1713,7 @@ async function submitBooking(btn){
   if(!trainer || !date || !time){
     showToast(t.selectBookingFields || 'اختر المدرب والتاريخ والوقت', 'err');
     return;
+    await loadStudentBookings();
   }
 
   // 🔥 Loading state
@@ -1739,7 +1740,6 @@ async function submitBooking(btn){
       showToast(t.bookingSuccess || 'تم الحجز بنجاح', 'ok');
 
       // 🔥 تحديث الحجوزات مباشرة
-      await loadStudentBookings();
 
       studentPage('sBookings');
     }else{
