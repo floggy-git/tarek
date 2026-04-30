@@ -384,6 +384,9 @@ selectTimeFirst: 'اختر الوقت أولاً',
 noUpcomingBookings: 'لا يوجد حجز قادم',
     noBookings: 'لا توجد حجوزات',
     noLessons: 'لا توجد دروس',
+    selectBookingFields: 'اختر المدرب والتاريخ والوقت',
+bookingLoading: '⏳ جاري حجز الدرس...',
+bookingSuccess: 'تم حجز الدرس بنجاح',
 priceLabel: 'السعر'
 
   },
@@ -489,6 +492,9 @@ selectTimeFirst: 'Kies eerst een tijd',
 noUpcomingBookings: 'Geen aankomende boekingen',
     noBookings: 'Geen boekingen',
     noLessons: 'Geen lessen',
+    selectBookingFields: 'Kies trainer, datum en tijd',
+bookingLoading: '⏳ Bezig met boeken...',
+bookingSuccess: 'Les succesvol geboekt',
 priceLabel: 'Prijs'
 
   },
@@ -594,6 +600,9 @@ selectTimeFirst: 'Select time first',
 noUpcomingBookings: 'No upcoming bookings',
     noBookings: 'No bookings',
     noLessons: 'No lessons',
+    selectBookingFields: 'Select trainer, date and time',
+bookingLoading: '⏳ Booking lesson...',
+bookingSuccess: 'Lesson booked successfully',
 priceLabel: 'Price'
 
   }
@@ -1691,7 +1700,10 @@ if(btn){
   setDefaults();
   sessionStorage.clear();
 });
- async function submitBooking(btn){
+async function submitBooking(btn){
+
+  const t = I18N[appLang] || I18N.ar;
+
   const trainer = $('bookTrainer')?.value || '';
   const date = $('bookDate')?.value || '';
   const time = $('bookTime')?.value || '';
@@ -1699,9 +1711,48 @@ if(btn){
   const pickupAddress = $('bookAddress')?.value || '';
 
   if(!trainer || !date || !time){
-    showToast('اختر المدرب والتاريخ والوقت', 'err');
+    showToast(t.selectBookingFields || 'اختر المدرب والتاريخ والوقت', 'err');
     return;
   }
+
+  // 🔥 Loading state
+  btn.disabled = true;
+  const original = btn.innerHTML;
+  btn.innerHTML = t.bookingLoading || '⏳ جاري حجز الدرس...';
+
+  try {
+
+    const res = await apiPost('saveBooking',{
+      studentName: state.user.name,
+      studentEmail: state.user.email,
+      studentPhone: state.user.phone,
+      trainer,
+      date,
+      time,
+      duration,
+      carType: state.user.carType,
+      lang: appLang,
+      pickupAddress
+    });
+
+    if(res.success){
+      showToast(t.bookingSuccess || 'تم الحجز بنجاح', 'ok');
+
+      // 🔥 تحديث الحجوزات مباشرة
+      await loadStudentBookings();
+
+      studentPage('sBookings');
+    }else{
+      showToast(res.message || 'خطأ في الحجز', 'err');
+    }
+
+  } catch(e){
+    showToast('Server error', 'err');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = original;
+  }
+}
 
   const check = await apiGet('getSlots', {
     date: date,
