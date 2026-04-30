@@ -852,7 +852,7 @@ try {
   function showScreen(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');$('logoutBtn').classList.toggle('hidden',id==='loginScreen');$('studentNav').classList.toggle('active',id==='studentScreen');$('trainerNav').classList.toggle('active',id==='trainerScreen')}
   function switchAuth(tab){['student','register','trainer'].forEach(x=>{$('tab'+x[0].toUpperCase()+x.slice(1)).classList.toggle('active',x===tab);$('auth'+x[0].toUpperCase()+x.slice(1)).classList.toggle('hidden',x!==tab)})}
   function logout(){sessionStorage.clear();state.role=null;state.user=null;showScreen('loginScreen')}
-async function loadTrainers(){
+  async function loadTrainers(){
   const r = await apiGet('getTrainers');
   state.trainers = r.trainers || [];
 
@@ -872,6 +872,34 @@ async function loadTrainers(){
     loadTrainers();
   }
 }, 30000);
+  const MIN_BOOKING_HOURS = 12;
+
+function isTooSoonToBook(date, time){
+  if(!date || !time) return true;
+
+  const lessonDateTime = new Date(date + 'T' + time + ':00');
+  const now = new Date();
+
+  const diffHours = (lessonDateTime - now) / (1000 * 60 * 60);
+
+  return diffHours < MIN_BOOKING_HOURS;
+}
+
+function showToast(message, type = 'info'){
+  const toast = document.getElementById('toast');
+  if(!toast){
+    alert(message);
+    return;
+  }
+
+  toast.textContent = message;
+  toast.className = 'toast show ' + type;
+
+  setTimeout(() => {
+    toast.className = 'toast';
+  }, 3000);
+}
+  
  async function loadBookedSlots(){
   const trainer = $('bookTrainer')?.value;
   const date = $('bookDate')?.value;
