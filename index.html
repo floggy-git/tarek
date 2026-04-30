@@ -974,15 +974,15 @@ async function loadBookingDaysStatus(){
 }
   let bookingCalendarDate = new Date();
 
-function getTrainerWorkDaysForBooking(...){
-  const t = I18N[appLang] || I18N.ar;
+function getTrainerWorkDaysForBooking(){
   const trainer = $('bookTrainer')?.value;
   if(!trainer) return '';
 
   const trainerObj = state.trainers.find(x => x.name === trainer);
-  return String(t?.workDays || '').toLowerCase();
-}
+  if(!trainerObj) return '';
 
+  return String(trainerObj.workDays || '').toLowerCase();
+}
 function isBookingDateAvailable(dateObj){
   const trainer = $('bookTrainer')?.value;
   if(!trainer) return false;
