@@ -565,12 +565,12 @@ selectTimeFirst: 'Select time first'
 };
 
 function setText(id, value){
-  const el = $(id);
+  const el = document.getElementById(id);
   if(el) el.textContent = value;
 }
 
 function setHtml(id, value){
-  const el = $(id);
+  const el = document.getElementById(id);
   if(el) el.innerHTML = value;
 }
 
