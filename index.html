@@ -611,7 +611,7 @@ function applyAppLang(){
   }
 }
 
-  function translateStaticLabels(t){
+function translateStaticLabels(t){
   const map = [
     ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
     ['#authTrainer label', [t.trainerEmail, t.password]],
@@ -661,8 +661,6 @@ function applyAppLang(){
   const learningTitle = document.querySelector('#dailyLearn')?.closest('.card')?.querySelector('.title h3');
   if(learningTitle) learningTitle.textContent = '🎓 ' + t.learningCenter;
 
-const titles = {
-
   const registerBtn = document.querySelector('#authRegister button');
   if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
 
@@ -694,9 +692,38 @@ const titles = {
   if(invoiceBtn) invoiceBtn.textContent = t.sendInvoice;
 }
 
+function translateNavs(t){
+  const student = [
+    ['🏠', t.navHome],
+    ['📚', t.navLessons],
+    ['📅', t.navBookings],
+    ['🚗', t.navBook],
+    ['💳', t.navWallet],
+    ['🎓', t.navLearn],
+    ['👤', t.navProfile]
+  ];
+
+  const trainer = [
+    ['🏠', t.navHome],
+    ['✅', t.navLesson],
+    ['💰', t.navDeposit],
+    ['💌', t.navReminder],
+    ['🧾', t.navDocs],
+    ['👥', t.navStudents]
+  ];
+
+  document.querySelectorAll('#studentNav button').forEach((btn, i) => {
+    if(student[i]) btn.innerHTML = `<b>${student[i][0]}</b>${student[i][1]}`;
+  });
+
+  document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
+    if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
+  });
+}
+
 function translateCalendarDays(t){
   document.querySelectorAll('.cal-days span').forEach((el, i) => {
-    if(t.calendarDays[i]) el.textContent = t.calendarDays[i];
+    if(t.calendarDays && t.calendarDays[i]) el.textContent = t.calendarDays[i];
   });
 
   const opt1 = document.querySelector('#bookDuration option[value="1"]');
