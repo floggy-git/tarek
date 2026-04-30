@@ -804,6 +804,17 @@ function translateCalendarDays(t){
 function isoToday(){
   return new Date().toISOString().slice(0,10);
 }
+  function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, function(m){
+    return {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    }[m];
+  });
+}
   async function loadTrainers(){
   const r = await apiGet('getTrainers');
   state.trainers = r.trainers || [];
