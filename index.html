@@ -251,6 +251,19 @@ let state={role:null,user:null,students:[],trainers:[],bookings:[]};
 let appLang = localStorage.getItem('appLang') || 'ar';
 
 const $ = id => document.getElementById(id);
+  function translateCalendarDays(t){
+  document.querySelectorAll('.cal-days span').forEach((el, i) => {
+    if(t.calendarDays && t.calendarDays[i]){
+      el.textContent = t.calendarDays[i];
+    }
+  });
+
+  const opt1 = document.querySelector('#bookDuration option[value="1"]');
+  const opt2 = document.querySelector('#bookDuration option[value="2"]');
+
+  if(opt1) opt1.textContent = t.hour1;
+  if(opt2) opt2.textContent = t.hour2;
+}
 
 function setAppLang(lang, btn){
   appLang = lang;
