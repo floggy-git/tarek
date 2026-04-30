@@ -1007,6 +1007,7 @@ function isBookingDateAvailable(dateObj){
 }
   window.bookingDayHasSlots = window.bookingDayHasSlots || {};
 function renderBookingCalendar(){
+  const t = I18N[appLang] || I18N.ar;
   const grid = $('bookingCalendar');
   const title = $('bookingCalTitle');
   if(!grid || !title) return;
