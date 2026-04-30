@@ -209,7 +209,12 @@
     <button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button>
   </div>
 </div>
-  <div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a><button class="btn ghost full" style="margin-top:12px" onclick="updateStudentAddress(this)">حفظ العنوان</button></div></div></div></section>
+  <div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a>
+   <button class="btn ghost full" style="margin-top:12px"
+        data-i18n="saveAddress"
+        onclick="updateStudentAddress(this)">
+  حفظ العنوان
+</button></div></div></div></section>
 <section class="screen" id="trainerScreen"><div class="page active" id="tHome"><div class="card"><div class="title">
 <h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span>
 </div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div>
@@ -1574,8 +1579,9 @@ function applyAppLang(){
 
   document.documentElement.lang = appLang;
   document.documentElement.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
-  document.body.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
+  document.body.dir = document.documentElement.dir;
 
+  // ترجمة العناصر القديمة بالـ id
   setText('tabStudent', t.studentTab);
   setText('tabRegister', t.registerTab);
   setText('tabTrainer', t.trainerTab);
@@ -1586,21 +1592,33 @@ function applyAppLang(){
   setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
   setHtml('logoutBtn', '🚪 ' + t.logout);
 
+  // ترجمة احترافية لأي عنصر عليه data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if(t[key]) el.textContent = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if(t[key]) el.innerHTML = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if(t[key]) el.placeholder = t[key];
+  });
+
   if(typeof translateStaticLabels === 'function') translateStaticLabels(t);
   if(typeof translateNavs === 'function') translateNavs(t);
   if(typeof translateCalendarDays === 'function') translateCalendarDays(t);
 
-  // 🔥 أهم إضافة (حل مشكلة نصف الترجمة)
   if(typeof renderBookingCalendar === 'function') renderBookingCalendar();
   if(typeof updateBookingPrice === 'function') updateBookingPrice();
-  if(typeof loadBookedSlots === 'function') loadBookedSlots();
 
-  // 🔥 إعادة ترجمة النصوص داخل الصفحة الحالية
   setTimeout(()=>{
     if(typeof translateStaticLabels === 'function') translateStaticLabels(t);
   },100);
 }
-
 const LEARNING_QUESTIONS = [
   {
     img:'🛑',
