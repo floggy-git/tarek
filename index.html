@@ -890,13 +890,15 @@ function showToast(key, type = 'info'){
 
   if(!timeSelect) return;
 
- const t = I18N[appLang] || I18N.ar;
-timeSelect.innerHTML = `<option value="">${t.selectTime}</option>`;
+  const langText = I18N[appLang] || I18N.ar;
+
+  // نص اختيار الوقت
+  timeSelect.innerHTML = `<option value="">${langText.selectTime}</option>`;
 
   if(!trainer || !date) return;
 
-  const t = state.trainers.find(x => x.name === trainer);
-  if(!t) return;
+  const trainerObj = state.trainers.find(x => x.name === trainer);
+  if(!trainerObj) return;
 
   const dayNames = [
     ['Sunday','Zondag','Zondag'],
@@ -909,28 +911,31 @@ timeSelect.innerHTML = `<option value="">${t.selectTime}</option>`;
   ];
 
   const dayOptions = dayNames[new Date(date + 'T12:00:00').getDay()];
-  const workDays = String(t.workDays || '').toLowerCase();
+  const workDays = String(trainerObj.workDays || '').toLowerCase();
 
   const worksToday = dayOptions.some(d =>
     workDays.includes(d.toLowerCase())
   );
 
   if(!worksToday){
-    timeSelect.innerHTML = '<option value="">المدرب لا يعمل هذا اليوم</option>';
+    timeSelect.innerHTML = `<option value="">${langText.trainerOffDay}</option>`;
     return;
   }
 
-  let [start,end] = String(t.hours || '08:00 - 16:00').split(/-|–/).map(x=>x.trim());
+  let [start,end] = String(trainerObj.hours || '08:00 - 16:00')
+    .split(/-|–/)
+    .map(x=>x.trim());
 
   const r = await apiGet('getSlots',{date:date,trainer:trainer});
   const booked = (r.booked || []).map(x => String(x).padStart(5, '0'));
 
   bookingDayHasSlots[date] = booked.length > 0;
+
   const duration = Number($('bookDuration')?.value || 1);
 
   const slots = [];
   let [h,m] = start.split(':').map(Number);
-  let [eh,em] = end.split(':').map(Number);
+  let [eh] = end.split(':').map(Number);
 
   while(h < eh){
     const time = String(h).padStart(2,'0') + ':' + String(m || 0).padStart(2,'0');
@@ -938,13 +943,12 @@ timeSelect.innerHTML = `<option value="">${t.selectTime}</option>`;
     let blockedByDuration = false;
 
     for(let bookedTime of booked){
-  const [bh] = bookedTime.split(':').map(Number);
+      const [bh] = bookedTime.split(':').map(Number);
 
-  // إذا الوقت الحالي يقع داخل حجز سابق (مدته ساعتين)
-  if(h === bh || h === bh + 1){
-    blockedByDuration = true;
-  }
-}
+      if(h === bh || h === bh + 1){
+        blockedByDuration = true;
+      }
+    }
 
     const tooSoon = isTooSoonToBook(date, time);
 
@@ -956,13 +960,13 @@ timeSelect.innerHTML = `<option value="">${t.selectTime}</option>`;
   }
 
   if(!slots.length){
-    timeSelect.innerHTML = `<option value="">${tLang.noSlots} ${window.MIN_BOOKING_HOURS}h</option>`;
+    timeSelect.innerHTML = `<option value="">${langText.noSlots} ${MIN_BOOKING_HOURS}h</option>`;
     return;
   }
 
   timeSelect.innerHTML =
-  `<option value="">${t.selectTime}</option>` +
-  slots.map(s=>`<option value="${s}">${s}</option>`).join('');
+    `<option value="">${langText.selectTime}</option>` +
+    slots.map(s => `<option value="${s}">${s}</option>`).join('');
 }
 async function loadBookingDaysStatus(){
   const trainer = $('bookTrainer')?.value;
