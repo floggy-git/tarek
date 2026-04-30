@@ -610,7 +610,8 @@ function applyAppLang(){
     renderBookingCalendar();
   }
 }
-function translateStaticLabels(t){
+
+  function translateStaticLabels(t){
   const map = [
     ['#authRegister label', [t.name, t.phone, t.email, t.carType, t.language, t.trainer, t.address]],
     ['#authTrainer label', [t.trainerEmail, t.password]],
@@ -628,21 +629,12 @@ function translateStaticLabels(t){
     });
   });
 
-  // ✅ إضافة ترجمة Upcoming Lessons و Learning Center
-  const upcomingTitle = document.querySelector('#sUpcoming')?.closest('.card')?.querySelector('.title h3');
-  if(upcomingTitle) upcomingTitle.textContent = '📅 ' + t.upcomingLessons;
-
-  const learningTitle = document.querySelector('#dailyLearn')?.closest('.card')?.querySelector('.title h3');
-  if(learningTitle) learningTitle.textContent = '🎓 ' + t.learningCenter;
-}
   const titles = {
     '#sHome .wallet small': t.walletBalance,
     '#sHome .kpi:nth-child(1) span': t.lessons,
     '#sHome .kpi:nth-child(2) span': t.paid,
     '#sHome .kpi:nth-child(3) span': t.unpaid,
     '#sHome .kpi:nth-child(4) span': t.total,
-    '#sHome .card:nth-child(1) .title h3': '📅 ' + t.upcomingLessons,
-    '#sHome .card:nth-child(2) .title h3': '🎓 ' + t.learningCenter,
     '#sLessons h3': '📚 ' + t.lessons,
     '#sBookings h3': '📅 ' + t.bookings,
     '#sBook h3': '🚗 ' + t.bookLesson,
@@ -662,6 +654,12 @@ function translateStaticLabels(t){
     const el = document.querySelector(selector);
     if(el) el.textContent = value;
   });
+
+  const upcomingTitle = document.querySelector('#sUpcoming')?.closest('.card')?.querySelector('.title h3');
+  if(upcomingTitle) upcomingTitle.textContent = '📅 ' + t.upcomingLessons;
+
+  const learningTitle = document.querySelector('#dailyLearn')?.closest('.card')?.querySelector('.title h3');
+  if(learningTitle) learningTitle.textContent = '🎓 ' + t.learningCenter;
 
   const registerBtn = document.querySelector('#authRegister button');
   if(registerBtn) registerBtn.innerHTML = '📝 ' + t.registerBtn;
@@ -692,35 +690,6 @@ function translateStaticLabels(t){
 
   const invoiceBtn = document.querySelector('#tDocs button.full');
   if(invoiceBtn) invoiceBtn.textContent = t.sendInvoice;
-}
-
-function translateNavs(t){
-  const student = [
-    ['🏠', t.navHome],
-    ['📚', t.navLessons],
-    ['📅', t.navBookings],
-    ['🚗', t.navBook],
-    ['💳', t.navWallet],
-    ['🎓', t.navLearn],
-    ['👤', t.navProfile]
-  ];
-
-  const trainer = [
-    ['🏠', t.navHome],
-    ['✅', t.navLesson],
-    ['💰', t.navDeposit],
-    ['💌', t.navReminder],
-    ['🧾', t.navDocs],
-    ['👥', t.navStudents]
-  ];
-
-  document.querySelectorAll('#studentNav button').forEach((btn, i) => {
-    if(student[i]) btn.innerHTML = `<b>${student[i][0]}</b>${student[i][1]}`;
-  });
-
-  document.querySelectorAll('#trainerNav button').forEach((btn, i) => {
-    if(trainer[i]) btn.innerHTML = `<b>${trainer[i][0]}</b>${trainer[i][1]}`;
-  });
 }
 
 function translateCalendarDays(t){
