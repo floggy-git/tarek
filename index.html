@@ -238,11 +238,10 @@
   const pricePerHour = isAuto ? 65 : 60;
   const total = duration * pricePerHour;
 
- if($('bookingPriceBox')){
-  const t = I18N[appLang] || I18N.ar;
-
-$('bookingPriceBox').textContent = t.priceLabel + ': €' + total;
-}
+  if($('bookingPriceBox')){
+    const langText = I18N[appLang] || I18N.ar;
+    $('bookingPriceBox').textContent = langText.priceLabel + ': €' + total;
+  }
 }
 const API="https://script.google.com/macros/s/AKfycbzR-iOi1h-WeqQuuHd_7Nf-1wzcSoC09n-N5wmVJkCKNp1XMnLCQgaAmRTQVuSTrQmcXw/exec";
 window.TRAINER_PASS = 'admin123';
