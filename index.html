@@ -599,6 +599,16 @@ function applyAppLang(){
   setText('studentEmailLabel', t.studentEmail);
   setText('studentPhoneLabel', t.studentPhone);
   setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
+  setHtml('logoutBtn', '🚪 ' + t.logout);
+
+  translateStaticLabels(t);
+  translateNavs(t);
+  translateCalendarDays(t);
+
+  if(typeof renderBookingCalendar === 'function'){
+    renderBookingCalendar();
+  }
+}
 
   // ===== Register =====
   const registerLabels = document.querySelectorAll('#authRegister label');
