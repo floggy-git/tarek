@@ -845,11 +845,12 @@ function isoToday(){
   // 👇 هذا السطر مهم جدًا
   loadBookedSlots();
 }
-  setInterval(() => {
-  if ($('bookTrainer') && $('bookDate')) {
-    loadTrainers();
-  }
-}, 60000);
+ // setInterval(() => {
+//   if ($('bookTrainer') && $('bookDate')) {
+//     loadTrainers();
+//   }
+// }, 30000);
+  
   window.MIN_BOOKING_HOURS = window.MIN_BOOKING_HOURS || 12;
 
 function isTooSoonToBook(date, time){
