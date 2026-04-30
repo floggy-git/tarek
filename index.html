@@ -989,7 +989,7 @@ function getTrainerWorkDaysForBooking(){
   const trainer = $('bookTrainer')?.value;
   if(!trainer) return '';
 
-  const t = state.trainers.find(x => x.name === trainer);
+  const trainerObj = state.trainers.find(x => x.name === trainer);
   return String(t?.workDays || '').toLowerCase();
 }
 
