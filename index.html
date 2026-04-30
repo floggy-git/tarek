@@ -1584,29 +1584,7 @@ function answerLearn(btn,i,c){
     : '<div class="notice warn">إجابة غير صحيحة</div>';
   setTimeout(renderLearning,1800);
 }
-function applyAppLang(){
-  const t = I18N[appLang] || I18N.ar;
 
-  document.documentElement.lang = appLang;
-  document.documentElement.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
-  document.body.dir = t.dir || (appLang === 'ar' ? 'rtl' : 'ltr');
-
-  setText('tabStudent', t.studentTab);
-  setText('tabRegister', t.registerTab);
-  setText('tabTrainer', t.trainerTab);
-  setText('loginTitle', t.loginTitle);
-  setText('loginSubtitle', t.loginSubtitle);
-  setText('studentEmailLabel', t.studentEmail);
-  setText('studentPhoneLabel', t.studentPhone);
-  setHtml('studentLoginBtn', '🔓 ' + t.studentLogin);
-  setHtml('logoutBtn', '🚪 ' + t.logout);
-
-  if(typeof translateStaticLabels === 'function') translateStaticLabels(t);
-  if(typeof translateNavs === 'function') translateNavs(t);
-  if(typeof translateCalendarDays === 'function') translateCalendarDays(t);
-}
-
-  
   document.addEventListener('DOMContentLoaded',async()=>{
 
     applyAppLang();
