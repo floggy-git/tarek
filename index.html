@@ -1000,7 +1000,7 @@ function isBookingDateAvailable(dateObj){
     workDays.includes(d.toLowerCase())
   );
 }
-let bookingDayHasSlots = {};
+  window.bookingDayHasSlots = window.bookingDayHasSlots || {};
 function renderBookingCalendar(){
   const grid = $('bookingCalendar');
   const title = $('bookingCalTitle');
@@ -1041,7 +1041,7 @@ function renderBookingCalendar(){
       const iso = `${yyyy}-${mm}-${dd}`;
 
       const isPast = d < today;
-      const hasBookings = bookingDayHasSlots && bookingDayHasSlots[iso];
+      const hasBookings = window.bookingDayHasSlots && window.bookingDayHasSlots[iso];
 
       let available = !isPast;
       if(typeof isBookingDateAvailable === 'function'){
@@ -1065,7 +1065,6 @@ function renderBookingCalendar(){
 
   } catch(err) {
     console.error('renderBookingCalendar error:', err);
-    if(typeof renderBookingCalendar === 'function') renderBookingCalendar();
   }
 }
 function selectBookingDate(iso, available){
