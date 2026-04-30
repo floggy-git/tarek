@@ -1701,7 +1701,7 @@ if(btn){
   sessionStorage.clear();
 });
 
-  async function submitBooking(btn){
+ async function submitBooking(btn){
 
   const t = I18N[appLang] || I18N.ar;
 
@@ -1736,10 +1736,8 @@ if(btn){
 
     if(res.success){
       showToast(t.bookingSuccess || 'تم الحجز بنجاح', 'ok');
-
-      loadStudentBookings(); // بدون await
+      loadStudentBookings();
       studentPage('sBookings');
-
     }else{
       showToast(res.message || 'خطأ في الحجز', 'err');
     }
