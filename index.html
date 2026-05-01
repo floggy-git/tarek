@@ -2161,9 +2161,33 @@ const explanation = typeof q.exp === 'object' ? (q.exp[lang] || q.exp.ar) : (q.e
     ? `<div class="notice">✅ إجابة صحيحة 👏<br><br>💡 ${esc(explanation)}</div>`
     : `<div class="notice warn">❌ إجابة غير صحيحة<br><br>💡 ${esc(explanation)}</div>`;
 
- learningIndex++;
+learningIndex++;
 
-setTimeout(renderLearning,4500);
+if(examMode && learningIndex >= examTotal){
+  setTimeout(showExamResult,2000);
+  return;
+}
+
+setTimeout(renderLearning,7000);
+}
+  function showExamResult(){
+  clearInterval(learnTimer);
+  examMode = false;
+
+  const pass = examScore >= Math.floor(examTotal * 0.8);
+
+  $('learningBox').innerHTML = `
+    <div class="learnbox">
+      <div style="font-size:54px">🏁</div>
+      <h2>Exam Result</h2>
+      <h3>${examScore} / ${examTotal}</h3>
+      <div class="badge ${pass ? 'greenb' : 'redb'}">
+        ${pass ? '✅ Passed' : '❌ Failed'}
+      </div>
+      <br><br>
+      <button class="btn primary" onclick="startExam()">🔁 Try Again</button>
+    </div>
+  `;
 }
 
   document.addEventListener('DOMContentLoaded',async()=>{
