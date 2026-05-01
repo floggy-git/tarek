@@ -1753,104 +1753,16 @@ const LEARNING_QUESTIONS = [
       en:'You see a STOP sign. What should you do?'
     },
     a:{
-      ar:['أتوقف بالكامل ثم أتابع بأمان','أخفف السرعة فقط','أتابع إذا لم أرَ سيارات','أضغط البوق وأنطلق'],
-      nl:['Volledig stoppen en veilig verder rijden','Alleen snelheid verminderen','Doorrijden als ik geen auto zie','Claxonneren en doorrijden'],
-      en:['Stop completely, then continue safely','Only slow down','Continue if I see no cars','Honk and drive on']
+      ar:['أتوقف بالكامل','أخفف السرعة فقط','أتابع','أضغط البوق'],
+      nl:['Volledig stoppen','Alleen vertragen','Doorrijden','Claxonneren'],
+      en:['Stop completely','Only slow down','Continue','Honk']
     },
     c:0,
     exp:{
-      ar:'عند إشارة STOP يجب التوقف الكامل، ثم النظر جيدًا قبل المتابعة.',
-      nl:'Bij een STOP-bord moet je volledig stoppen en goed kijken voordat je verder rijdt.',
-      en:'At a STOP sign, you must stop completely and check carefully before continuing.'
+      ar:'يجب التوقف الكامل عند STOP.',
+      nl:'Je moet volledig stoppen bij STOP.',
+      en:'You must stop completely at a STOP sign.'
     }
-  },
-  {
-    img:'🚸',
-    q:{
-      ar:'طفل يقف قرب معبر مشاة. ما التصرف الصحيح؟',
-      nl:'Een kind staat bij een zebrapad. Wat doe je?',
-      en:'A child is standing near a pedestrian crossing. What should you do?'
-    },
-    a:{
-      ar:['أزيد السرعة قبل أن يعبر','أخفف السرعة وأستعد للتوقف','أستخدم الضوء العالي','أتجاوز السيارة أمامي'],
-      nl:['Sneller rijden voordat het kind oversteekt','Snelheid verminderen en klaar zijn om te stoppen','Groot licht gebruiken','De auto voor mij inhalen'],
-      en:['Speed up before the child crosses','Slow down and be ready to stop','Use high beam','Overtake the car in front']
-    },
-    c:1,
-    exp:{
-      ar:'قرب معبر المشاة يجب تخفيف السرعة والاستعداد للتوقف، خصوصًا عند وجود أطفال.',
-      nl:'Bij een zebrapad moet je snelheid verminderen en klaar zijn om te stoppen, vooral bij kinderen.',
-      en:'Near a pedestrian crossing, slow down and be ready to stop, especially when children are nearby.'
-    }
-  },
-  {
-    img:'👀',
-    q:{
-      ar:'قبل تغيير المسار، ما أهم شيء؟',
-      nl:'Wat is het belangrijkste voordat je van rijstrook wisselt?',
-      en:'What is most important before changing lanes?'
-    },
-    a:{
-      ar:['النظر في المرآة فقط','استخدام الغماز فقط','المرآة + النقطة العمياء + الغماز','تغيير المسار بسرعة'],
-      nl:['Alleen in de spiegel kijken','Alleen richting aangeven','Spiegel + dode hoek + richting aangeven','Snel van rijstrook wisselen'],
-      en:['Only check the mirror','Only use the indicator','Mirror + blind spot + indicator','Change lanes quickly']
-    },
-    c:2,
-    exp:{
-      ar:'قبل تغيير المسار يجب فحص المرآة والنقطة العمياء واستخدام الغماز.',
-      nl:'Voor het wisselen van rijstrook moet je de spiegel controleren, de dode hoek checken en richting aangeven.',
-      en:'Before changing lanes, check the mirror, blind spot, and use the indicator.'
-    }
-  }
-];
-  {
-    img:'🚲',
-    q:'تقترب من درّاج على طريق ضيق. ماذا تفعل؟',
-    a:['أتجاوزه بسرعة','أقترب منه حتى يتحرك','أحافظ على مسافة آمنة وأنتظر فرصة مناسبة','أستخدم البوق باستمرار'],
-    c:2,
-    exp:'في هولندا يجب الانتباه كثيرًا للدراجين وترك مسافة آمنة عند التجاوز.'
-  },
-  {
-    img:'🔄',
-    q:'عند دخول دوّار، من له الأولوية غالبًا؟',
-    a:['السيارة التي تدخل الدوار دائمًا','السيارة داخل الدوار إذا كانت العلامات تعطيها الأولوية','السيارة الأسرع','لا أحد'],
-    c:1,
-    exp:'غالبًا المركبات داخل الدوار لها الأولوية إذا كانت إشارات الطريق توضّح ذلك.'
-  },
-  {
-    img:'🚦',
-    q:'الإشارة أصبحت صفراء وأنت بعيد عن التقاطع. ماذا تفعل؟',
-    a:['أزيد السرعة بسرعة','أتوقف بأمان إذا كان ذلك ممكنًا','أتابع دائمًا','أغيّر المسار فجأة'],
-    c:1,
-    exp:'عند الضوء الأصفر يجب التوقف إذا كان ذلك آمنًا، وليس زيادة السرعة.'
-  },
-  {
-    img:'👀',
-    q:'قبل تغيير المسار، ما أهم شيء؟',
-    a:['النظر في المرآة فقط','استخدام الغماز فقط','المرآة + النقطة العمياء + الغماز','تغيير المسار بسرعة'],
-    c:2,
-    exp:'قبل تغيير المسار يجب فحص المرآة والنقطة العمياء واستخدام الغماز.'
-  },
-  {
-    img:'🚗',
-    q:'ما معنى ترك مسافة أمان كافية؟',
-    a:['أن أكون قريبًا من السيارة أمامي','أن يكون لدي وقت كافٍ للتوقف إذا حدث خطر','أن أقود في منتصف الطريق','أن أستخدم الضوء العالي'],
-    c:1,
-    exp:'مسافة الأمان تعطيك وقتًا للتصرف والتوقف عند حدوث خطر مفاجئ.'
-  },
-  {
-    img:'⛔',
-    q:'ترى طريقًا عليه إشارة ممنوع الدخول. ماذا تفعل؟',
-    a:['أدخل إذا كان الطريق فارغًا','أدخل فقط لمسافة قصيرة','لا أدخل هذا الطريق','أدخل إذا كنت مستعجلًا'],
-    c:2,
-    exp:'إشارة ممنوع الدخول تعني أن الدخول غير مسموح إطلاقًا من هذا الاتجاه.'
-  },
-  {
-    img:'🌧️',
-    q:'في المطر، ماذا يجب أن تفعل؟',
-    a:['أزيد السرعة','أقلل مسافة الأمان','أخفف السرعة وأزيد مسافة الأمان','أستخدم الهاتف بحذر'],
-    c:2,
-    exp:'في المطر تصبح الفرامل أقل فعالية، لذلك يجب تخفيف السرعة وزيادة المسافة.'
   }
 ];
 
