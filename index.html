@@ -2092,7 +2092,9 @@ function renderDailyLearn(){
     </div>`;
 }
 function renderLearning(){
-  const q = LEARNING_QUESTIONS[learningIndex % LEARNING_QUESTIONS.length];
+  const q = examMode
+  ? examQuestions[learningIndex]
+  : LEARNING_QUESTIONS[learningIndex % LEARNING_QUESTIONS.length];
   window.currentLearnQuestion = q;
   const lang = appLang || 'ar';
 const questionText = typeof q.q === 'object' ? (q.q[lang] || q.q.ar) : q.q;
