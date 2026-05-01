@@ -1331,9 +1331,18 @@ async function loadStudentBookings(){
 }
 
 function renderUpcomingStudent(arr){
-  const confirmed=(arr||[]).filter(b=>String(b.status)==='Confirmed'&&String(b.date)>=isoToday());
-  $('sUpcoming').innerHTML=confirmed.length
-    ? confirmed.slice(0,3).map(b=>bookingCard(b,true)).join('')
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  const confirmed = (arr || []).filter(b => {
+    const bookingDate = new Date(b.date);
+    bookingDate.setHours(0,0,0,0);
+
+    return String(b.status) === 'Confirmed' && bookingDate >= today;
+  });
+
+  $('sUpcoming').innerHTML = confirmed.length
+    ? confirmed.slice(0,3).map(b => bookingCard(b,true)).join('')
     : `<div class="notice">${(I18N[appLang] || I18N.ar).noUpcomingBookings}</div>`;
 }
 
