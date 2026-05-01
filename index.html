@@ -259,7 +259,18 @@
     <button class="btn primary full" onclick="submitBooking(this)">✅ تأكيد الحجز</button>
   </div>
 </div>
-  <div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div><div class="page" id="sLearning"><div class="card"><div class="title"><h3>🎓 Learning Center</h3></div><div id="learningBox"></div></div></div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title"><h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a>
+  <div class="page" id="sWalletPage"><div class="card wallet"><small>Wallet Balance</small><h2 id="sWallet2">€0</h2></div></div>
+  <div class="page" id="sLearning">
+  <div class="card">
+    <div class="title">
+      <h3>🎓 Learning Center</h3>
+      <button class="btn primary" onclick="startExam()">🧪 Start Exam</button>
+    </div>
+    <div id="learningBox"></div>
+  </div>
+</div>
+  </div><div class="page" id="sProfile"><div class="grid cols2"><div class="card"><div class="title">
+    <h3>👤 Profile</h3></div><div id="profileInfo" class="list"></div></div><div class="card"><div class="title"><h3>📍 Address</h3></div><div class="group"><label>عنوان الانطلاق</label><input class="input" id="profileAddress"></div><a id="mapLink" target="_blank">📍 Google Maps</a>
    <button class="btn ghost full" style="margin-top:12px"
         data-i18n="saveAddress"
         onclick="updateStudentAddress(this)">
