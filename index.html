@@ -2227,8 +2227,18 @@ learnTimer = setInterval(()=>{
   $('learningBox').innerHTML =
     `<div class="learnbox">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+
   <div class="badge blue">
-    السؤال ${learningIndex + 1} / ${LEARNING_QUESTIONS.length}
+    السؤال ${learningIndex + 1} / ${examMode ? examTotal : LEARNING_QUESTIONS.length}
+  </div>
+
+  ${q.type === 'hazard'
+    ? `<div class="badge redb">👁️ Hazard</div>`
+    : `<div class="badge greenb">📘 Theory</div>`
+  }
+
+</div>
   </div>
 
   <div class="badge greenb" id="learnTimer">
