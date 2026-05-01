@@ -2053,6 +2053,21 @@ const LEARNING_QUESTIONS = [
 let learnTimer = null;
 let learnSeconds = 8;
 let learningIndex = 0;
+let examMode = false;
+let examScore = 0;
+let examTotal = 10; // مؤقتاً 10، لاحقاً نجعلها 50
+let examQuestions = [];
+  function startExam(){
+  examMode = true;
+  examScore = 0;
+  learningIndex = 0;
+
+  examQuestions = [...LEARNING_QUESTIONS]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, examTotal);
+
+  renderLearning();
+}
 
 function renderDailyLearn(){
   let q = LEARNING_QUESTIONS[Math.floor(Date.now()/18000000) % LEARNING_QUESTIONS.length];
