@@ -1346,9 +1346,51 @@ function renderUpcomingStudent(arr){
     : `<div class="notice">${(I18N[appLang] || I18N.ar).noUpcomingBookings}</div>`;
 }
 
-function bookingCard(b,highlight=false){
-  let cls=String(b.status)==='Confirmed'?(highlight?'red':'blue'):String(b.status)==='Cancelled'?'red':'gold';
-  return `<div class="item"><div><strong>${compactDate(b.date)} · ${compactTime(b.time)}</strong><small>${esc(b.id)} · ${esc(b.trainer||'—')} · ${esc(b.car||'—')}</small></div><span class="badge ${cls}">${esc(b.status)}</span></div>`;
+function bookingCard(b, highlight=false){
+  let cls = String(b.status) === 'Confirmed'
+    ? (highlight ? 'red' : 'blue')
+    : String(b.status) === 'Cancelled'
+      ? 'red'
+      : 'gold';
+
+  const d = new Date(b.date);
+  const time = compactTime(b.time);
+  const dateText = d.toLocaleDateString('en-US', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  let countdown = '';
+  const start = new Date(d);
+  if (time && time.includes(':')) {
+    const parts = time.split(':');
+    start.setHours(Number(parts[0]), Number(parts[1] || 0), 0, 0);
+  }
+
+  const diff = start - new Date();
+  if (diff > 0) {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+    if (days > 0) {
+      countdown = `⏳ باقي ${days} أيام و ${hours} ساعات`;
+    } else {
+      countdown = `⏳ باقي ${hours} ساعات`;
+    }
+  }
+
+  return `
+    <div class="item">
+      <div>
+        <strong>📅 ${dateText}</strong>
+        <small>⏰ ${esc(time || '—')}</small>
+        <small>${countdown}</small>
+        <small>${esc(b.id)} · ${esc(b.trainer || '—')} · ${esc(b.car || '—')}</small>
+      </div>
+      <span class="badge ${cls}">${esc(b.status)}</span>
+    </div>`;
 }
 
 function renderProfile(){
