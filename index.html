@@ -2148,6 +2148,9 @@ function answerLearn(btn,i,c){
   document.querySelectorAll('.choice').forEach(b=>b.disabled=true);
 
   let ok = i === c;
+  if(examMode && ok){
+  examScore++;
+}
   btn.classList.add(ok ? 'correct' : 'wrong');
 
   const q = window.currentLearnQuestion || {};
