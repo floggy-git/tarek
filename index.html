@@ -1766,14 +1766,21 @@ const LEARNING_QUESTIONS = [
   }
 ];
 
-function renderDailyLearn(){
-  let q = LEARNING_QUESTIONS[Math.floor(Date.now()/18000000) % LEARNING_QUESTIONS.length];
-  $('dailyLearn').innerHTML = `<div class="learnbox"><div style="font-size:44px">${q.img}</div><strong>${esc(q.q)}</strong></div>`;
-}
 let learnTimer = null;
 let learnSeconds = 8;
 let learningIndex = 0;
 
+function renderDailyLearn(){
+  let q = LEARNING_QUESTIONS[Math.floor(Date.now()/18000000) % LEARNING_QUESTIONS.length];
+  const lang = appLang || 'ar';
+  const questionText = typeof q.q === 'object' ? (q.q[lang] || q.q.ar) : q.q;
+
+  $('dailyLearn').innerHTML =
+    `<div class="learnbox">
+      <div style="font-size:44px">${q.img}</div>
+      <strong>${esc(questionText)}</strong>
+    </div>`;
+}
 function renderLearning(){
   const q = LEARNING_QUESTIONS[learningIndex % LEARNING_QUESTIONS.length];
   window.currentLearnQuestion = q;
