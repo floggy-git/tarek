@@ -1824,6 +1824,8 @@ function renderDailyLearn(){
 
 function renderLearning(){
   let q = LEARNING_QUESTIONS[Math.floor(Math.random() * LEARNING_QUESTIONS.length)];
+  window.currentLearnQuestion = q;
+
   $('learningBox').innerHTML =
     `<div class="learnbox">
       <div style="font-size:54px">${q.img}</div>
@@ -1835,12 +1837,18 @@ function renderLearning(){
 
 function answerLearn(btn,i,c){
   document.querySelectorAll('.choice').forEach(b=>b.disabled=true);
+
   let ok = i === c;
   btn.classList.add(ok ? 'correct' : 'wrong');
+
+  const q = window.currentLearnQuestion || {};
+  const explanation = q.exp || '';
+
   $('learnMsg').innerHTML = ok
-    ? '<div class="notice">إجابة صحيحة 👏</div>'
-    : '<div class="notice warn">إجابة غير صحيحة</div>';
-  setTimeout(renderLearning,1800);
+    ? `<div class="notice">✅ إجابة صحيحة 👏<br><br>💡 ${esc(explanation)}</div>`
+    : `<div class="notice warn">❌ إجابة غير صحيحة<br><br>💡 ${esc(explanation)}</div>`;
+
+  setTimeout(renderLearning,3500);
 }
 
   document.addEventListener('DOMContentLoaded',async()=>{
