@@ -1745,25 +1745,309 @@ function applyAppLang(){
   },100);
 }
 const LEARNING_QUESTIONS = [
-  {
-    img:'🛑',
-    q:{
-      ar:'ترى إشارة STOP. ماذا يجب أن تفعل؟',
-      nl:'Je ziet een STOP-bord. Wat moet je doen?',
-      en:'You see a STOP sign. What should you do?'
-    },
-    a:{
-      ar:['أتوقف بالكامل','أخفف السرعة فقط','أتابع','أضغط البوق'],
-      nl:['Volledig stoppen','Alleen vertragen','Doorrijden','Claxonneren'],
-      en:['Stop completely','Only slow down','Continue','Honk']
-    },
-    c:0,
-    exp:{
-      ar:'يجب التوقف الكامل عند STOP.',
-      nl:'Je moet volledig stoppen bij STOP.',
-      en:'You must stop completely at a STOP sign.'
-    }
+ // ===== 20 QUESTIONS =====
+
+{
+  img:'🚗➡️   🚲⬅️',
+  q:{
+    ar:'سيارة تنعطف ودراجة قادمة. من له الأولوية؟',
+    nl:'Auto slaat af en fietser komt. Wie heeft voorrang?',
+    en:'A car turns and a cyclist approaches. Who has priority?'
+  },
+  a:{
+    ar:['السيارة','الدراجة','كلاهما','لا أحد'],
+    nl:['De auto','De fiets','Beide','Niemand'],
+    en:['The car','The bicycle','Both','No one']
+  },
+  c:1,
+  exp:{
+    ar:'الدراج له الأولوية عند التقاطعات داخل المدن.',
+    nl:'De fietser heeft vaak voorrang in steden.',
+    en:'Cyclists often have priority in urban areas.'
   }
+},
+
+{
+  img:'🚗⬆️   🚶',
+  q:{
+    ar:'تقترب من معبر مشاة. ماذا تفعل؟',
+    nl:'Je nadert een zebrapad. Wat doe je?',
+    en:'You approach a pedestrian crossing. What do you do?'
+  },
+  a:{
+    ar:['أسرع','أتوقف','أتجاهل','أستخدم البوق'],
+    nl:['Versnellen','Stoppen','Negeren','Claxonneren'],
+    en:['Speed up','Stop','Ignore','Honk']
+  },
+  c:1,
+  exp:{
+    ar:'المشاة لهم الأولوية دائمًا.',
+    nl:'Voetgangers hebben altijd voorrang.',
+    en:'Pedestrians always have priority.'
+  }
+},
+
+{
+  img:'🚗➡️   🚗⬅️   ⚠️',
+  q:{
+    ar:'تقاطع بدون إشارات. من له الأولوية؟',
+    nl:'Kruispunt zonder borden. Wie heeft voorrang?',
+    en:'Intersection without signs. Who has priority?'
+  },
+  a:{
+    ar:['اليمين','اليسار','الأسرع','لا أحد'],
+    nl:['Rechts','Links','Snelste','Niemand'],
+    en:['Right','Left','Fastest','No one']
+  },
+  c:0,
+  exp:{
+    ar:'الأولوية للقادم من اليمين.',
+    nl:'Voorrang van rechts.',
+    en:'Priority is given to the right.'
+  }
+},
+
+{
+  img:'🚗➡️   🚗🔄',
+  q:{
+    ar:'أنت تدخل دوار. ماذا تفعل؟',
+    nl:'Je nadert een rotonde. Wat doe je?',
+    en:'You approach a roundabout. What do you do?'
+  },
+  a:{
+    ar:['أدخل مباشرة','أعطي الأولوية','أسرع','أتوقف دائمًا'],
+    nl:['Direct rijden','Voorrang geven','Versnellen','Altijd stoppen'],
+    en:['Enter directly','Give priority','Speed up','Always stop']
+  },
+  c:1,
+  exp:{
+    ar:'السيارات داخل الدوار لها الأولوية.',
+    nl:'Auto’s op de rotonde hebben voorrang.',
+    en:'Cars inside the roundabout have priority.'
+  }
+},
+
+{
+  img:'🚗⬆️   🚗⬆️',
+  q:{
+    ar:'تقود خلف سيارة. ماذا تفعل؟',
+    nl:'Je rijdt achter een auto. Wat doe je?',
+    en:'You drive behind a car. What do you do?'
+  },
+  a:{
+    ar:['أقترب','أحافظ على مسافة','أستخدم البوق','أسرع'],
+    nl:['Dichterbij','Afstand houden','Claxonneren','Versnellen'],
+    en:['Get closer','Keep distance','Honk','Speed up']
+  },
+  c:1,
+  exp:{
+    ar:'المسافة الآمنة ضرورية.',
+    nl:'Veilige afstand is belangrijk.',
+    en:'Safe distance is important.'
+  }
+},
+
+{
+  img:'🚗➡️   🚴',
+  q:{
+    ar:'تريد تجاوز دراج. ماذا تفعل؟',
+    nl:'Je wilt een fietser inhalen. Wat doe je?',
+    en:'You want to overtake a cyclist. What do you do?'
+  },
+  a:{
+    ar:['أقترب جدًا','أحافظ على مسافة','أستخدم البوق','أسرع'],
+    nl:['Dichtbij','Afstand houden','Claxonneren','Versnellen'],
+    en:['Drive close','Keep distance','Honk','Speed up']
+  },
+  c:1,
+  exp:{
+    ar:'يجب ترك مسافة آمنة.',
+    nl:'Houd voldoende afstand.',
+    en:'Keep a safe distance.'
+  }
+},
+
+{
+  img:'🌧️   🚗',
+  q:{
+    ar:'تقود في المطر. ماذا تفعل؟',
+    nl:'Je rijdt in de regen. Wat doe je?',
+    en:'You drive in the rain. What do you do?'
+  },
+  a:{
+    ar:['أسرع','أخفف السرعة','أستخدم الهاتف','أقترب'],
+    nl:['Versnellen','Langzamer','Telefoon','Dichterbij'],
+    en:['Speed up','Slow down','Use phone','Drive closer']
+  },
+  c:1,
+  exp:{
+    ar:'الطريق زلق، خفف السرعة.',
+    nl:'De weg is glad, rijd langzamer.',
+    en:'The road is slippery, slow down.'
+  }
+},
+
+{
+  img:'🚗➡️   🛑',
+  q:{
+    ar:'إشارة STOP. ماذا تفعل؟',
+    nl:'STOP-bord. Wat doe je?',
+    en:'STOP sign. What do you do?'
+  },
+  a:{
+    ar:['أتوقف','أخفف','أتابع','أسرع'],
+    nl:['Stoppen','Vertragen','Doorrijden','Versnellen'],
+    en:['Stop','Slow','Continue','Speed up']
+  },
+  c:0,
+  exp:{
+    ar:'يجب التوقف الكامل.',
+    nl:'Volledig stoppen verplicht.',
+    en:'You must fully stop.'
+  }
+},
+
+{
+  img:'🚗➡️   🚦🟡',
+  q:{
+    ar:'ضوء أصفر. ماذا تفعل؟',
+    nl:'Geel licht. Wat doe je?',
+    en:'Yellow light. What do you do?'
+  },
+  a:{
+    ar:['أتوقف إذا ممكن','أسرع','أتجاهل','أغير المسار'],
+    nl:['Stoppen indien mogelijk','Versnellen','Negeren','Wisselen'],
+    en:['Stop if possible','Speed up','Ignore','Change lane']
+  },
+  c:0,
+  exp:{
+    ar:'يجب التوقف إذا كان ذلك آمنًا.',
+    nl:'Stop als het veilig kan.',
+    en:'Stop if safe.'
+  }
+},
+
+{
+  img:'🚗⬆️   👀',
+  q:{
+    ar:'قبل تغيير المسار؟',
+    nl:'Voor rijstrook wisselen?',
+    en:'Before changing lanes?'
+  },
+  a:{
+    ar:['مرآة فقط','مرآة + نقطة عمياء','إشارة فقط','سرعة'],
+    nl:['Spiegel','Spiegel + dode hoek','Richting','Snelheid'],
+    en:['Mirror','Mirror + blind spot','Signal','Speed']
+  },
+  c:1,
+  exp:{
+    ar:'النقطة العمياء مهمة جدًا.',
+    nl:'Dode hoek controleren.',
+    en:'Check blind spot.'
+  }
+},
+
+// -------- 10 EXTRA --------
+
+{
+  img:'🚗➡️   🚓',
+  q:{
+    ar:'ترى سيارة شرطة. ماذا تفعل؟',
+    nl:'Je ziet politie. Wat doe je?',
+    en:'You see police. What do you do?'
+  },
+  a:{
+    ar:['أتجاهل','أتبع القوانين','أسرع','أتوقف فجأة'],
+    nl:['Negeren','Regels volgen','Versnellen','Plots stoppen'],
+    en:['Ignore','Follow rules','Speed up','Brake suddenly']
+  },
+  c:1,
+  exp:{
+    ar:'يجب دائمًا اتباع القوانين.',
+    nl:'Volg altijd de regels.',
+    en:'Always follow rules.'
+  }
+},
+
+{
+  img:'🚗➡️   🚧',
+  q:{
+    ar:'أعمال طريق. ماذا تفعل؟',
+    nl:'Wegwerkzaamheden. Wat doe je?',
+    en:'Road works. What do you do?'
+  },
+  a:{
+    ar:['أسرع','أبطئ','أتجاهل','أغير المسار فجأة'],
+    nl:['Versnellen','Langzamer','Negeren','Plots wisselen'],
+    en:['Speed up','Slow down','Ignore','Change suddenly']
+  },
+  c:1,
+  exp:{
+    ar:'يجب الحذر وتخفيف السرعة.',
+    nl:'Rijd voorzichtig en langzamer.',
+    en:'Drive carefully and slow down.'
+  }
+},
+
+{
+  img:'🚗➡️   🚶‍♂️',
+  q:{
+    ar:'مشاة يعبرون فجأة. ماذا تفعل؟',
+    nl:'Voetgangers steken over. Wat doe je?',
+    en:'Pedestrians cross suddenly. What do you do?'
+  },
+  a:{
+    ar:['أسرع','أتوقف','أستخدم البوق','أتجاهل'],
+    nl:['Versnellen','Stoppen','Claxonneren','Negeren'],
+    en:['Speed up','Stop','Honk','Ignore']
+  },
+  c:1,
+  exp:{
+    ar:'السلامة أولًا.',
+    nl:'Veiligheid eerst.',
+    en:'Safety first.'
+  }
+},
+
+{
+  img:'🚗⬆️   📱',
+  q:{
+    ar:'استخدام الهاتف أثناء القيادة؟',
+    nl:'Telefoon tijdens rijden?',
+    en:'Phone while driving?'
+  },
+  a:{
+    ar:['مسموح','ممنوع','مسموح أحيانًا','حسب المزاج'],
+    nl:['Toegestaan','Verboden','Soms','Hangt af'],
+    en:['Allowed','Not allowed','Sometimes','Depends']
+  },
+  c:1,
+  exp:{
+    ar:'الهاتف ممنوع أثناء القيادة.',
+    nl:'Telefoon verboden tijdens rijden.',
+    en:'Phone use is forbidden.'
+  }
+},
+
+{
+  img:'🚗➡️   🛣️',
+  q:{
+    ar:'على الطريق السريع؟',
+    nl:'Op de snelweg?',
+    en:'On the highway?'
+  },
+  a:{
+    ar:['أقود ببطء شديد','ألتزم بالسرعة','أتوقف','أستخدم البوق'],
+    nl:['Heel langzaam','Snelheid volgen','Stoppen','Claxonneren'],
+    en:['Very slow','Follow speed','Stop','Honk']
+  },
+  c:1,
+  exp:{
+    ar:'يجب الالتزام بالسرعة.',
+    nl:'Houd je aan de snelheid.',
+    en:'Follow the speed limit.'
+  }
+}
 ];
 
 let learnTimer = null;
