@@ -1747,25 +1747,62 @@ function applyAppLang(){
 const LEARNING_QUESTIONS = [
   {
     img:'🛑',
-    q:'ترى إشارة STOP. ماذا يجب أن تفعل؟',
-    a:['أتوقف بالكامل ثم أتابع بأمان','أخفف السرعة فقط','أتابع إذا لم أرَ سيارات','أضغط البوق وأنطلق'],
+    q:{
+      ar:'ترى إشارة STOP. ماذا يجب أن تفعل؟',
+      nl:'Je ziet een STOP-bord. Wat moet je doen?',
+      en:'You see a STOP sign. What should you do?'
+    },
+    a:{
+      ar:['أتوقف بالكامل ثم أتابع بأمان','أخفف السرعة فقط','أتابع إذا لم أرَ سيارات','أضغط البوق وأنطلق'],
+      nl:['Volledig stoppen en veilig verder rijden','Alleen snelheid verminderen','Doorrijden als ik geen auto zie','Claxonneren en doorrijden'],
+      en:['Stop completely, then continue safely','Only slow down','Continue if I see no cars','Honk and drive on']
+    },
     c:0,
-    exp:'عند إشارة STOP يجب التوقف الكامل، ثم النظر جيدًا قبل المتابعة.'
+    exp:{
+      ar:'عند إشارة STOP يجب التوقف الكامل، ثم النظر جيدًا قبل المتابعة.',
+      nl:'Bij een STOP-bord moet je volledig stoppen en goed kijken voordat je verder rijdt.',
+      en:'At a STOP sign, you must stop completely and check carefully before continuing.'
+    }
   },
   {
     img:'🚸',
-    q:'طفل يقف قرب معبر مشاة. ما التصرف الصحيح؟',
-    a:['أزيد السرعة قبل أن يعبر','أخفف السرعة وأستعد للتوقف','أستخدم الضوء العالي','أتجاوز السيارة أمامي'],
+    q:{
+      ar:'طفل يقف قرب معبر مشاة. ما التصرف الصحيح؟',
+      nl:'Een kind staat bij een zebrapad. Wat doe je?',
+      en:'A child is standing near a pedestrian crossing. What should you do?'
+    },
+    a:{
+      ar:['أزيد السرعة قبل أن يعبر','أخفف السرعة وأستعد للتوقف','أستخدم الضوء العالي','أتجاوز السيارة أمامي'],
+      nl:['Sneller rijden voordat het kind oversteekt','Snelheid verminderen en klaar zijn om te stoppen','Groot licht gebruiken','De auto voor mij inhalen'],
+      en:['Speed up before the child crosses','Slow down and be ready to stop','Use high beam','Overtake the car in front']
+    },
     c:1,
-    exp:'قرب معبر المشاة يجب تخفيف السرعة والاستعداد للتوقف، خصوصًا عند وجود أطفال.'
+    exp:{
+      ar:'قرب معبر المشاة يجب تخفيف السرعة والاستعداد للتوقف، خصوصًا عند وجود أطفال.',
+      nl:'Bij een zebrapad moet je snelheid verminderen en klaar zijn om te stoppen, vooral bij kinderen.',
+      en:'Near a pedestrian crossing, slow down and be ready to stop, especially when children are nearby.'
+    }
   },
   {
-    img:'🌫️',
-    q:'تقود في ضباب كثيف. ما الأفضل؟',
-    a:['أقود بسرعة عادية','أستخدم الضوء العالي','أخفف السرعة وأزيد مسافة الأمان','أقترب من السيارة أمامي'],
+    img:'👀',
+    q:{
+      ar:'قبل تغيير المسار، ما أهم شيء؟',
+      nl:'Wat is het belangrijkste voordat je van rijstrook wisselt?',
+      en:'What is most important before changing lanes?'
+    },
+    a:{
+      ar:['النظر في المرآة فقط','استخدام الغماز فقط','المرآة + النقطة العمياء + الغماز','تغيير المسار بسرعة'],
+      nl:['Alleen in de spiegel kijken','Alleen richting aangeven','Spiegel + dode hoek + richting aangeven','Snel van rijstrook wisselen'],
+      en:['Only check the mirror','Only use the indicator','Mirror + blind spot + indicator','Change lanes quickly']
+    },
     c:2,
-    exp:'في الضباب يجب تخفيف السرعة وزيادة المسافة، والضوء العالي قد يضعف الرؤية.'
-  },
+    exp:{
+      ar:'قبل تغيير المسار يجب فحص المرآة والنقطة العمياء واستخدام الغماز.',
+      nl:'Voor het wisselen van rijstrook moet je de spiegel controleren, de dode hoek checken en richting aangeven.',
+      en:'Before changing lanes, check the mirror, blind spot, and use the indicator.'
+    }
+  }
+];
   {
     img:'🚲',
     q:'تقترب من درّاج على طريق ضيق. ماذا تفعل؟',
@@ -1828,6 +1865,9 @@ let learningIndex = 0;
 function renderLearning(){
   const q = LEARNING_QUESTIONS[learningIndex % LEARNING_QUESTIONS.length];
   window.currentLearnQuestion = q;
+  const lang = appLang || 'ar';
+const questionText = typeof q.q === 'object' ? (q.q[lang] || q.q.ar) : q.q;
+const answers = typeof q.a === 'object' ? (q.a[lang] || q.a.ar) : q.a;
   clearInterval(learnTimer);
 
 let timeLeft = learnSeconds;
@@ -1866,8 +1906,8 @@ learnTimer = setInterval(()=>{
   </div>
 </div>
       <div style="font-size:54px">${q.img}</div>
-      <h3>${esc(q.q)}</h3>
-      ${q.a.map((x,i)=>`<button class="choice" onclick="answerLearn(this,${i},${q.c})">${esc(x)}</button>`).join('')}
+      <h3>${esc(questionText)}</h3>
+      ${answers.map((x,i)=>`<button class="choice" onclick="answerLearn(this,${i},${q.c})">${esc(x)}</button>`).join('')}
       <div id="learnMsg" style="margin-top:12px"></div>
     </div>`;
 }
@@ -1880,7 +1920,8 @@ function answerLearn(btn,i,c){
   btn.classList.add(ok ? 'correct' : 'wrong');
 
   const q = window.currentLearnQuestion || {};
-  const explanation = q.exp || '';
+  const lang = appLang || 'ar';
+const explanation = typeof q.exp === 'object' ? (q.exp[lang] || q.exp.ar) : (q.exp || '');
 
   $('learnMsg').innerHTML = ok
     ? `<div class="notice">✅ إجابة صحيحة 👏<br><br>💡 ${esc(explanation)}</div>`
