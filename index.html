@@ -2059,6 +2059,106 @@ const LEARNING_QUESTIONS = [
     en:'Follow the speed limit.'
   }
 }
+  {
+  img:'👁️ 🚗⬆️   🚶‍♂️➡️',
+  type:'hazard',
+  q:{
+    ar:'أين الخطر الرئيسي في هذا الموقف؟',
+    nl:'Waar zit het grootste gevaar in deze situatie?',
+    en:'Where is the main danger in this situation?'
+  },
+  a:{
+    ar:['المشاة الذي قد يعبر','السيارة نفسها','الطريق المستقيم','لا يوجد خطر'],
+    nl:['De voetganger die kan oversteken','De auto zelf','De rechte weg','Geen gevaar'],
+    en:['The pedestrian who may cross','The car itself','The straight road','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'الخطر أن المشاة قد يعبر فجأة، لذلك يجب تخفيف السرعة والاستعداد للتوقف.',
+    nl:'Het gevaar is dat de voetganger plots kan oversteken. Verminder snelheid en wees klaar om te stoppen.',
+    en:'The danger is that the pedestrian may cross suddenly. Slow down and be ready to stop.'
+  }
+},
+{
+  img:'👁️ 🚗⬆️   🚲↔️',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر الأقرب هنا؟',
+    nl:'Wat is hier het directe gevaar?',
+    en:'What is the immediate danger here?'
+  },
+  a:{
+    ar:['الدراجة قد تتحرك أمامك','السرعة منخفضة','الطريق واسع','لا يوجد خطر'],
+    nl:['De fietser kan voor je komen','De snelheid is laag','De weg is breed','Geen gevaar'],
+    en:['The cyclist may move in front of you','The speed is low','The road is wide','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'الدراجون قد يغيرون الاتجاه بسرعة، لذلك يجب ترك مسافة والانتباه.',
+    nl:'Fietsers kunnen snel van richting veranderen. Houd afstand en let goed op.',
+    en:'Cyclists can change direction quickly. Keep distance and pay attention.'
+  }
+},
+{
+  img:'👁️ 🌧️ 🚗⬆️   🚗⬆️',
+  type:'hazard',
+  q:{
+    ar:'أين الخطر في هذا الموقف؟',
+    nl:'Waar zit het gevaar in deze situatie?',
+    en:'Where is the danger in this situation?'
+  },
+  a:{
+    ar:['المسافة قصيرة والطريق مبلل','السيارة أمامك بعيدة','المطر لا يؤثر','لا يوجد خطر'],
+    nl:['Korte afstand en nat wegdek','De auto is ver weg','Regen heeft geen invloed','Geen gevaar'],
+    en:['Short distance and wet road','The car is far away','Rain has no effect','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'في المطر تزيد مسافة التوقف، لذلك القرب من السيارة أمامك خطر.',
+    nl:'Bij regen is de remweg langer. Te dicht rijden is gevaarlijk.',
+    en:'In rain, braking distance increases. Driving too close is dangerous.'
+  }
+},
+{
+  img:'👁️ 🚗➡️   🚪🚲',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر المتوقع؟',
+    nl:'Welk gevaar kun je verwachten?',
+    en:'What danger can you expect?'
+  },
+  a:{
+    ar:['باب سيارة قد يفتح أمام الدراجة','الطريق فارغ','السيارة متوقفة فقط','لا يوجد خطر'],
+    nl:['Een autodeur kan opengaan voor de fietser','De weg is leeg','De auto staat alleen stil','Geen gevaar'],
+    en:['A car door may open in front of the cyclist','The road is empty','The car is only parked','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'فتح باب السيارة فجأة خطر شائع على الدراجين داخل المدن.',
+    nl:'Een plots geopende autodeur is gevaarlijk voor fietsers in de stad.',
+    en:'A suddenly opened car door is a common danger for cyclists in cities.'
+  }
+},
+{
+  img:'👁️ 🚗⬆️   🚌🚶‍♂️',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر خلف الحافلة؟',
+    nl:'Wat is het gevaar achter de bus?',
+    en:'What is the danger behind the bus?'
+  },
+  a:{
+    ar:['مشاة قد يظهرون فجأة','الحافلة سريعة','لا يوجد أحد','الطريق واضح'],
+    nl:['Voetgangers kunnen plots verschijnen','De bus is snel','Er is niemand','De weg is vrij'],
+    en:['Pedestrians may suddenly appear','The bus is fast','There is nobody','The road is clear']
+  },
+  c:0,
+  exp:{
+    ar:'الحافلة قد تحجب رؤية المشاة، لذلك يجب تخفيف السرعة.',
+    nl:'De bus kan voetgangers verbergen. Verminder snelheid.',
+    en:'The bus may hide pedestrians. Slow down.'
+  }
+}
 ];
 
 let learnTimer = null;
@@ -2066,7 +2166,7 @@ let learnSeconds = 8;
 let learningIndex = 0;
 let examMode = false;
 let examScore = 0;
-let examTotal = 10; // مؤقتاً 10، لاحقاً نجعلها 50
+let examTotal = 20; // مؤقتاً 20، لاحقاً نجعلها 50
 let examQuestions = [];
   function startExam(){
   examMode = true;
