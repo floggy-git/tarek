@@ -483,6 +483,8 @@
 <h3>👨‍🏫 Trainer Dashboard</h3></div><div class="grid cols4"><div class="kpi"><i>👥</i><div><b id="trStudents">0</b><span>Students</span>
 </div></div><div class="kpi"><i>💶</i><div><b id="trRevenue">€0</b><span>Revenue</span></div></div><div class="kpi"><i>⏳</i><div>
 <b id="trUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>📅</i><div><b id="trBookings">0</b><span>Bookings</span>
+</div></div>
+<div class="kpi"><i>🚗</i><div><b id="trTodayLessons">0</b><span>Today</span>
 </div></div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
 </div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
 <div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"> <div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label> <select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group">
@@ -1777,6 +1779,10 @@ async function trainerDashboard(){
     $('trRevenue').textContent=money(r.revenue);
     $('trUnpaid').textContent=r.unpaidLessons||0;
     $('trBookings').textContent=r.bookings||0;
+
+    if($('trTodayLessons')){
+      $('trTodayLessons').textContent = r.todayLessons || 0;
+    }
   }
 }
 
