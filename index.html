@@ -2156,6 +2156,216 @@ const LEARNING_QUESTIONS = [
     ar:'الحافلة قد تحجب رؤية المشاة، لذلك يجب تخفيف السرعة.',
     nl:'De bus kan voetgangers verbergen. Verminder snelheid.',
     en:'The bus may hide pedestrians. Slow down.'
+ }
+},
+
+// ===== HARD LEVEL QUESTIONS 🔥 =====
+
+{
+  img:'👁️ 🚗⬆️   🚲➡️   🌧️',
+  type:'hazard',
+  q:{
+    ar:'ما أكبر خطر في هذا الموقف؟',
+    nl:'Wat is het grootste gevaar in deze situatie?',
+    en:'What is the biggest danger in this situation?'
+  },
+  a:{
+    ar:['الدراجة قد تنزلق بالمطر','الطريق واسع','السيارة بطيئة','لا يوجد خطر'],
+    nl:['De fietser kan slippen in de regen','De weg is breed','De auto rijdt langzaam','Geen gevaar'],
+    en:['The cyclist may slip in the rain','The road is wide','The car is slow','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'في المطر تصبح الدراجات أقل استقرارًا، لذلك يجب الانتباه جيدًا.',
+    nl:'Bij regen zijn fietsen minder stabiel, dus wees extra voorzichtig.',
+    en:'In rain, bicycles are less stable, so be extra careful.'
+  }
+},
+
+{
+  img:'🚗➡️   🚶‍♂️📱',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر المتوقع هنا؟',
+    nl:'Welk gevaar verwacht je hier?',
+    en:'What danger do you expect here?'
+  },
+  a:{
+    ar:['المشاة مشتت بالهاتف','السيارة متوقفة','الطريق فارغ','لا يوجد خطر'],
+    nl:['De voetganger is afgeleid door de telefoon','De auto staat stil','De weg is leeg','Geen gevaar'],
+    en:['The pedestrian is distracted by the phone','The car is parked','The road is empty','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'المشاة الذي يستخدم الهاتف قد يعبر دون انتباه.',
+    nl:'Een voetganger met telefoon let mogelijk niet goed op.',
+    en:'A pedestrian using a phone may cross without paying attention.'
+  }
+},
+
+{
+  img:'🚗⬆️   🚌   🚶‍♂️',
+  type:'hazard',
+  q:{
+    ar:'لماذا يجب تخفيف السرعة هنا؟',
+    nl:'Waarom moet je hier snelheid verminderen?',
+    en:'Why should you slow down here?'
+  },
+  a:{
+    ar:['قد يظهر مشاة خلف الحافلة','الحافلة سريعة','الطريق فارغ','لا يوجد خطر'],
+    nl:['Voetgangers kunnen achter de bus verschijnen','De bus rijdt snel','De weg is leeg','Geen gevaar'],
+    en:['Pedestrians may appear behind the bus','The bus is fast','The road is empty','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'الحافلات تحجب الرؤية، وقد يظهر مشاة فجأة.',
+    nl:'Bussen blokkeren zicht en voetgangers kunnen plots verschijnen.',
+    en:'Buses block visibility and pedestrians may suddenly appear.'
+  }
+},
+
+{
+  img:'🚗➡️   🚗⬅️   🌫️',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر في الضباب؟',
+    nl:'Wat is het gevaar bij mist?',
+    en:'What is the danger in fog?'
+  },
+  a:{
+    ar:['ضعف الرؤية','الطريق واسع','السيارات بطيئة','لا يوجد خطر'],
+    nl:['Slecht zicht','Brede weg','Auto’s rijden langzaam','Geen gevaar'],
+    en:['Poor visibility','Wide road','Cars drive slowly','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'الضباب يقلل الرؤية ومسافة التوقف تصبح أخطر.',
+    nl:'Mist vermindert zicht en vergroot het risico.',
+    en:'Fog reduces visibility and increases danger.'
+  }
+},
+
+{
+  img:'🚗➡️   🚲⬅️   🔄',
+  type:'hazard',
+  q:{
+    ar:'ما الذي يجب الانتباه له عند الدوار؟',
+    nl:'Waar moet je op letten bij de rotonde?',
+    en:'What should you pay attention to at the roundabout?'
+  },
+  a:{
+    ar:['الدراجات القادمة','الطريق فقط','السرعة العالية','لا شيء'],
+    nl:['Aankomende fietsers','Alleen de weg','Hoge snelheid','Niets'],
+    en:['Approaching cyclists','Only the road','High speed','Nothing']
+  },
+  c:0,
+  exp:{
+    ar:'الدراجات حول الدوار من أكثر الأخطار شيوعًا في هولندا.',
+    nl:'Fietsers rond rotondes zijn een veelvoorkomend gevaar in Nederland.',
+    en:'Cyclists around roundabouts are a common danger in the Netherlands.'
+  }
+},
+
+{
+  img:'🚗⬆️   🚪   🚴',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر هنا؟',
+    nl:'Wat is hier het gevaar?',
+    en:'What is the danger here?'
+  },
+  a:{
+    ar:['باب السيارة قد يفتح','السيارة متوقفة فقط','الطريق فارغ','لا يوجد خطر'],
+    nl:['De autodeur kan openen','De auto staat stil','De weg is leeg','Geen gevaar'],
+    en:['The car door may open','The car is only parked','The road is empty','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'فتح باب السيارة فجأة خطر كبير على الدراجين.',
+    nl:'Een plots geopende autodeur is gevaarlijk voor fietsers.',
+    en:'A suddenly opened car door is dangerous for cyclists.'
+  }
+},
+
+{
+  img:'🚗➡️   🚦🔴',
+  q:{
+    ar:'الإشارة حمراء وأنت مستعجل. ماذا تفعل؟',
+    nl:'Het licht is rood en je hebt haast. Wat doe je?',
+    en:'The light is red and you are in a hurry. What do you do?'
+  },
+  a:{
+    ar:['أتوقف','أتابع بسرعة','أنظر فقط','أستخدم البوق'],
+    nl:['Stoppen','Snel doorrijden','Alleen kijken','Claxonneren'],
+    en:['Stop','Drive through quickly','Only look','Honk']
+  },
+  c:0,
+  exp:{
+    ar:'الإشارة الحمراء تعني التوقف الكامل دائمًا.',
+    nl:'Rood betekent altijd stoppen.',
+    en:'Red always means stop.'
+  }
+},
+
+{
+  img:'🚗⬆️   🚲➡️   👶',
+  type:'hazard',
+  q:{
+    ar:'ما الخطر الإضافي هنا؟',
+    nl:'Wat is hier het extra gevaar?',
+    en:'What is the extra danger here?'
+  },
+  a:{
+    ar:['وجود طفل قرب الدراجة','الطريق فارغ','السيارة بطيئة','لا يوجد خطر'],
+    nl:['Een kind bij de fiets','De weg is leeg','De auto rijdt langzaam','Geen gevaar'],
+    en:['A child near the bicycle','The road is empty','The car is slow','No danger']
+  },
+  c:0,
+  exp:{
+    ar:'الأطفال قد يتحركون بشكل غير متوقع.',
+    nl:'Kinderen kunnen onverwacht bewegen.',
+    en:'Children may move unpredictably.'
+  }
+},
+
+{
+  img:'🚗➡️   ⚠️   🛣️',
+  q:{
+    ar:'ماذا يعني هذا التحذير؟',
+    nl:'Wat betekent deze waarschuwing?',
+    en:'What does this warning mean?'
+  },
+  a:{
+    ar:['خطر محتمل أمامك','يمكن زيادة السرعة','الطريق مغلق','لا شيء'],
+    nl:['Mogelijk gevaar voor je','Je mag versnellen','De weg is gesloten','Niets'],
+    en:['Possible danger ahead','You may speed up','Road closed','Nothing']
+  },
+  c:0,
+  exp:{
+    ar:'علامات التحذير تعني الانتباه والاستعداد للخطر.',
+    nl:'Waarschuwingsborden betekenen opletten en voorbereid zijn.',
+    en:'Warning signs mean pay attention and prepare for danger.'
+  }
+},
+
+{
+  img:'🚗⬆️   💤',
+  type:'hazard',
+  q:{
+    ar:'تشعر بالنعاس أثناء القيادة. ماذا تفعل؟',
+    nl:'Je bent slaperig tijdens het rijden. Wat doe je?',
+    en:'You feel sleepy while driving. What do you do?'
+  },
+  a:{
+    ar:['أتابع القيادة','أتوقف للراحة','أسرع','أستخدم الهاتف'],
+    nl:['Doorrijden','Stoppen om te rusten','Versnellen','Telefoon gebruiken'],
+    en:['Keep driving','Stop and rest','Speed up','Use your phone']
+  },
+  c:1,
+  exp:{
+    ar:'النعاس من أخطر أسباب الحوادث.',
+    nl:'Slaperigheid is een groot risico in het verkeer.',
+    en:'Sleepiness is one of the biggest driving risks.'
   }
 }
 ];
