@@ -1416,17 +1416,26 @@ notifyUpcomingLesson(arr);
   const next = upcoming[0];
   const time = compactTime(next.time);
 
-  const dayName = next.lessonDate.toLocaleDateString(
+ const dayName = next.lessonDate.toLocaleDateString(
   appLang === 'ar' ? 'ar-EG' : appLang === 'nl' ? 'nl-NL' : 'en-US',
   { weekday:'long' }
 );
 
-showToast(
-  `👋 أهلاً ${state.user.name}
+const msg = {
+  ar: `👋 أهلاً ${state.user.name}
 🚗 لديك درس قيادة قريب
 📅 ${dayName} • ${time}`,
-  'info'
-);
+
+  nl: `👋 Hallo ${state.user.name}
+🚗 Je hebt binnenkort een rijles
+📅 ${dayName} • ${time}`,
+
+  en: `👋 Hi ${state.user.name}
+🚗 You have an upcoming driving lesson
+📅 ${dayName} • ${time}`
+};
+
+showToast(msg[appLang] || msg.ar, 'info');
 }
 
 function renderUpcomingStudent(arr){
