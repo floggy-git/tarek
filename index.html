@@ -1416,7 +1416,17 @@ notifyUpcomingLesson(arr);
   const next = upcoming[0];
   const time = compactTime(next.time);
 
-  showToast(`👋 ${state.user.name}، لديك درس قادم الساعة ${time}`, 'info');
+  const dayName = next.lessonDate.toLocaleDateString(
+  appLang === 'ar' ? 'ar-EG' : appLang === 'nl' ? 'nl-NL' : 'en-US',
+  { weekday:'long' }
+);
+
+showToast(
+  `👋 أهلاً ${state.user.name}
+🚗 لديك درس قيادة قريب
+📅 ${dayName} • ${time}`,
+  'info'
+);
 }
 
 function renderUpcomingStudent(arr){
