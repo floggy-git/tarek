@@ -1916,14 +1916,24 @@ async function trainerSubmitDeposit(btn){
 }
 
 async function trainerSendReminder(btn){
-  const student=$('trReminderStudent').value;
-  const amount=$('trReminderAmount').value;
-  const message=$('trReminderMessage').value;
+  const student = $('trReminderStudent').value;
+  const amount = $('trReminderAmount').value;
+  const message = $('trReminderMessage').value;
+  const paymentLink = $('trReminderLink') ? $('trReminderLink').value.trim() : '';
 
   if(!student) return toast('اختر الطالب','err');
 
   setBtn(btn,true,'⏳');
-  await apiPost('sendPaymentReminder',{student,amount,customAmount:amount,message},false);
+
+  await apiPost('sendPaymentReminder',{
+    student,
+    amount,
+    customAmount:amount,
+    message,
+    paymentLink,
+    payLink:paymentLink
+  },false);
+
   setBtn(btn,false);
   toast('تم إرسال التذكير','ok');
 }
