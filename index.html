@@ -397,7 +397,14 @@
     id="trReminderLink"
     placeholder="https://payment-link.com">
     </div>
-   <div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage"></textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
+   <div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage">
+     Beste student,
+
+Wij willen u vriendelijk herinneren dat er een openstaand bedrag is voor uw rijlessen bij Al-Andalos Rijschool.
+
+Gelieve dit zo spoedig mogelijk te voldoen.
+
+Hartelijk dank!</textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
 </main><nav class="nav student" id="studentNav"><button class="active" onclick="studentPage('sHome',this)">
 <b>🏠</b>Home</button><button onclick="studentPage('sLessons',this)">
 <b>📚</b>Lessons</button><button onclick="studentPage('sBookings',this)"><b>📅</b>Bookings</button><button onclick="studentPage('sBook',this)"><b>🚗</b>Book</button>
