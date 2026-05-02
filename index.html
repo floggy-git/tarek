@@ -2487,7 +2487,7 @@ if(examMode && learningIndex >= examTotal){
   return;
 }
 
-setTimeout(renderLearning,7000);
+setTimeout(renderLearning, ok ? 2500 : 5000);
 }
   function showExamResult(){
   clearInterval(learnTimer);
