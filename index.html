@@ -1413,6 +1413,7 @@ function renderProfile(){
 
 function studentPage(id,btn){
   clearInterval(learnTimer);
+  clearTimeout(learnNextTimer);
 
   document.querySelectorAll('#studentScreen .page').forEach(p=>p.classList.remove('active'));
   $(id).classList.add('active');
@@ -2375,6 +2376,7 @@ const LEARNING_QUESTIONS = [
 let learnTimer = null;
 let learnSeconds = 8;
 let learningIndex = 0;
+let learnNextTimer = null;
 let examMode = false;
 let examScore = 0;
 let examTotal = 20; // مؤقتاً 20، لاحقاً نجعلها 50
@@ -2431,7 +2433,7 @@ learnTimer = setInterval(()=>{
 
     learningIndex++;
 
-    setTimeout(renderLearning,2000);
+   learnNextTimer = setTimeout(renderLearning, ok ? 2500 : 5000);
   }
 
 },1000);
