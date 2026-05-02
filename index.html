@@ -1387,7 +1387,36 @@ async function loadStudentBookings(){
     ? arr.slice().reverse().map(b => bookingCard(b)).join('')
     : `<div class="notice">${t.noBookings}</div>`;
 
-  renderUpcomingStudent(arr);
+ renderUpcomingStudent(arr);
+notifyUpcomingLesson(arr);
+}
+  function notifyUpcomingLesson(arr){
+  if(!state.user || !state.user.name) return;
+
+  const now = new Date();
+
+  const upcoming = (arr || [])
+    .filter(b => String(b.status) === 'Confirmed')
+    .map(b => {
+      const d = new Date(b.date);
+      const time = compactTime(b.time);
+
+      if(time && time.includes(':')){
+        const parts = time.split(':');
+        d.setHours(Number(parts[0]), Number(parts[1] || 0), 0, 0);
+      }
+
+      return { ...b, lessonDate: d };
+    })
+    .filter(b => b.lessonDate > now)
+    .sort((a,b) => a.lessonDate - b.lessonDate);
+
+  if(!upcoming.length) return;
+
+  const next = upcoming[0];
+  const time = compactTime(next.time);
+
+  showToast(`👋 ${state.user.name}، لديك درس قادم الساعة ${time}`, 'info');
 }
 
 function renderUpcomingStudent(arr){
