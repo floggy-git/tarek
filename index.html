@@ -191,6 +191,50 @@
   height:48px;
   border-radius:14px;
 }
+  /* ===== Payment Reminder UI ===== */
+#tReminder .card{
+  max-width:760px;
+  margin:0 auto;
+  padding:24px;
+}
+
+#tReminder .title{
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+
+#tReminder .group{
+  margin-bottom:14px;
+}
+
+#tReminder .input,
+#tReminder .textarea,
+#tReminder .select{
+  border-radius:14px;
+  background:#fbfdff;
+}
+
+#tReminder .input,
+#tReminder .select{
+  height:48px;
+}
+
+#tReminder .textarea{
+  min-height:180px;
+  line-height:1.9;
+  padding:16px;
+}
+
+#tReminder .grid.cols2{
+  gap:16px;
+}
+
+#tReminder .btn.full{
+  margin-top:10px;
+  height:50px;
+  border-radius:14px;
+}
 </style>
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
@@ -333,7 +377,8 @@
 </div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
 <div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"> <div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label> <select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group">
 <label>Trainer</label><select class="select" id="trLessonTrainer"></select></div><div class="group"><label>Date</label>
-<input class="input" id="trLessonDate" type="date"></div><div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div><div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div><div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div><div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div><div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div></div><div class="group" style="margin-top:12px"><label>Payment Status</label><div class="statusgrid"><button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button><button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button></div></div><div class="group" id="trPayMethodBox"><label>Payment Method</label><div class="paygrid" id="trPayMethods"></div></div><button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button></div></div><div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><input class="input" id="trDepositNotes"></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div><div class="page" id="tReminder"><div class="card"><div class="title"><h3>💌 Payment Reminder</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trReminderStudent"></select></div><div class="group"><label>Suggested Amount</label><input class="input" id="trReminderAmount" type="number" placeholder="مبلغ مقترح"></div></div><div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage"></textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
+<input class="input" id="trLessonDate" type="date"></div><div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div><div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div><div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div><div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div><div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div></div><div class="group" style="margin-top:12px"><label>Payment Status</label><div class="statusgrid"><button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button><button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button></div></div><div class="group" id="trPayMethodBox"><label>Payment Method</label><div class="paygrid" id="trPayMethods"></div></div><button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button></div></div><div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><input class="input" id="trDepositNotes"></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div>
+  <div class="page" id="tReminder"><div class="card"><div class="title"><h3>💌 Payment Reminder</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trReminderStudent"></select></div><div class="group"><label>Suggested Amount</label><input class="input" id="trReminderAmount" type="number" placeholder="مبلغ مقترح"></div></div><div class="group"><label>Message</label><textarea class="textarea" id="trReminderMessage"></textarea></div><button class="btn red full" onclick="trainerSendReminder(this)">إرسال</button></div></div><div class="page" id="tDocs"><div class="card"><div class="title"><h3>🧾 Invoice</h3></div><div class="group"><label>Student</label><select class="select" id="trInvoiceStudent"></select></div><div class="grid cols2"><div class="group"><label>From</label><input class="input" id="trInvoiceFrom" type="date"></div><div class="group"><label>To</label><input class="input" id="trInvoiceTo" type="date"></div></div><div class="group"><label>VAT</label><select class="select" id="trInvoiceVat"><option value="0">0%</option><option value="9">9%</option><option value="21">21%</option></select></div><button class="btn primary full" onclick="trainerSendInvoice(this)">إرسال فاتورة</button></div></div><div class="page" id="tStudents"><div class="card"><div class="title"><h3>👥 Students Center</h3></div><input class="input" placeholder="Search..." oninput="trainerRenderStudents(this.value)"><div id="trStudentsList" class="list" style="margin-top:12px"></div></div><div class="card hidden" style="margin-top:14px" id="trSelectedStudentCard"></div></div></section>
 </main><nav class="nav student" id="studentNav"><button class="active" onclick="studentPage('sHome',this)">
 <b>🏠</b>Home</button><button onclick="studentPage('sLessons',this)">
 <b>📚</b>Lessons</button><button onclick="studentPage('sBookings',this)"><b>📅</b>Bookings</button><button onclick="studentPage('sBook',this)"><b>🚗</b>Book</button>
