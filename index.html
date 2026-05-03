@@ -373,7 +373,6 @@
   font-size:12px;
   margin-top:3px;
 }
-/* Safe Desktop Compact Size */
 /* Safe Desktop Zoom */
 @media(min-width:1200px){
   body{
@@ -456,6 +455,30 @@ html, body{
   font-weight:900;
 }
   html, body{
+  overflow-x:hidden;
+}
+  /* ===== Fix Login Center After Zoom ===== */
+@media(min-width:1200px){
+  body{
+    zoom:85%;
+  }
+
+  #loginScreen .login-grid{
+    direction:ltr !important;
+    max-width:980px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    grid-template-columns:1fr 420px !important;
+    gap:20px !important;
+  }
+
+  #loginScreen .welcome,
+  #loginScreen .login-card{
+    direction:ltr !important;
+  }
+}
+
+html, body{
   overflow-x:hidden;
 }
 </style>
