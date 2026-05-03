@@ -485,7 +485,17 @@
 <b id="trUnpaid">0</b><span>Unpaid</span></div></div><div class="kpi"><i>📅</i><div><b id="trBookings">0</b><span>Bookings</span>
 </div></div>
 <div class="kpi"><i>🚗</i><div><b id="trTodayLessons">0</b><span>Today</span>
-</div></div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
+</div></div><div class="card" style="margin-top:14px">
+  <div class="title">
+    <h3>🚗 Today's Lessons</h3>
+  </div>
+
+  <div id="trTodayLessonsList" class="list">
+    <div class="notice">
+      No lessons today
+    </div>
+  </div>
+</div></div></div><div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
 </div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
 <div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"> <div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label> <select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group">
 <label>Trainer</label><select class="select" id="trLessonTrainer"></select></div><div class="group"><label>Date</label>
@@ -1783,6 +1793,32 @@ async function trainerDashboard(){
     if($('trTodayLessons')){
       $('trTodayLessons').textContent = r.todayLessons || 0;
     }
+    if($('trTodayLessonsList')){
+
+  const lessons = r.todayLessonsList || [];
+
+  if(!lessons.length){
+    $('trTodayLessonsList').innerHTML =
+      `<div class="notice">No lessons today</div>`;
+  } else {
+
+    $('trTodayLessonsList').innerHTML =
+      lessons.map(x => `
+        <div class="item">
+          <div>
+            <strong>${x.time || '--:--'} — ${x.student || ''}</strong>
+            <small>
+              ${x.car || ''} · ${x.duration || 1}h
+            </small>
+          </div>
+
+          <span class="badge blue">
+            ${x.status || 'Confirmed'}
+          </span>
+        </div>
+      `).join('');
+  }
+}
   }
 }
 
