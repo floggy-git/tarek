@@ -2108,15 +2108,15 @@ async function trainerLoadStudentDetails(){
     }
 
     const booking = (state.bookings || []).find(b =>
-      String(b.student || '').trim() === String(name || '').trim() &&
-      String(b.status || '').trim() !== 'Completed'
-    );
+  String(b.student || '').trim() === String(name || '').trim() &&
+  String(b.status || '').trim() !== 'Completed'
+);
 
-    if(booking){
-      if($('trLessonDate')) $('trLessonDate').value = booking.date || '';
-      if($('trLessonTime')) $('trLessonTime').value = booking.time || '';
-      if($('trLessonDuration')) $('trLessonDuration').value = booking.duration || 1;
-    }
+if(booking){
+  if($('trLessonDate')) $('trLessonDate').value = booking.date || '';
+  if($('trLessonTime')) $('trLessonTime').value = booking.time || '';
+  if($('trLessonDuration')) $('trLessonDuration').value = booking.duration || 1;
+}
 
   }
 }
