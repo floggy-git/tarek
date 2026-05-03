@@ -345,127 +345,33 @@
   height:50px;
   border-radius:14px;
 }
-  /* ===== Today's Lessons ===== */
-#trTodayLessonsList{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+/* ===== Trainer Dashboard Safe Compact Fix ===== */
+#tHome .card{
+  max-width:760px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 #trTodayLessonsList .item{
-  display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:14px;
-  padding:14px;
-  border-radius:16px;
-  background:#f8fbff;
-  border:1px solid #e5eefc;
-}
-
-#trTodayLessonsList .item strong{
-  display:block;
-  font-size:14px;
-  margin-bottom:6px;
-}
-
-#trTodayLessonsList .item small{
-  display:block;
-  color:#64748b;
-  line-height:1.7;
-}
-
-#trTodayLessonsList .lesson-meta{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-#trTodayLessonsList .lesson-time{
-  font-weight:700;
-  color:#0f172a;
-}
-
-#trTodayLessonsList .badge{
-  white-space:nowrap;
-}
- /* ===== Trainer Dashboard Compact UI ===== */
-#tHome .card:first-child{
-  max-width:760px;
-  margin:0 auto;
-  padding:18px;
-}
-
-#tHome .grid.cols4{
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-#tHome .kpi{
-  min-height:86px;
-  border-radius:18px;
-  padding:13px;
-}
-
-#tHome .kpi i{
-  width:40px;
-  height:40px;
-  border-radius:14px;
-  font-size:21px;
-}
-
-#tHome .kpi b{
-  font-size:20px;
-}
-
-#tHome .card:has(#trTodayLessonsList){
-  max-width:760px;
-  margin:14px auto 0 !important;
-  padding:18px;
-}
-
-#trTodayLessonsList{
-  display:grid;
-  gap:10px;
-}
-
-#trTodayLessonsList .item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
   padding:13px 14px;
   border-radius:16px;
-  background:#f8fbff;
-  border:1px solid #dbeafe;
 }
 
 #trTodayLessonsList .lesson-meta{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px 16px;
+  display:block;
 }
 
-#trTodayLessonsList .lesson-meta strong,
+#trTodayLessonsList .lesson-meta strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
 #trTodayLessonsList .lesson-meta small{
-  margin:0;
-  font-size:13px;
-  line-height:1.5;
-}
-
-#trTodayLessonsList .lesson-time{
-  font-weight:900;
-  color:#1565C0;
-}
-
-@media(max-width:860px){
-  #tHome .grid.cols4{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  #trTodayLessonsList .lesson-meta{
-    grid-template-columns:1fr;
-  }
+  display:block;
+  font-size:12px;
+  margin-top:3px;
 }
 </style>
 </head>
