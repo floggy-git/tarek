@@ -345,6 +345,50 @@
   height:50px;
   border-radius:14px;
 }
+  /* ===== Today's Lessons ===== */
+#trTodayLessonsList{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+#trTodayLessonsList .item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:14px;
+  border-radius:16px;
+  background:#f8fbff;
+  border:1px solid #e5eefc;
+}
+
+#trTodayLessonsList .item strong{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+#trTodayLessonsList .item small{
+  display:block;
+  color:#64748b;
+  line-height:1.7;
+}
+
+#trTodayLessonsList .lesson-meta{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+#trTodayLessonsList .lesson-time{
+  font-weight:700;
+  color:#0f172a;
+}
+
+#trTodayLessonsList .badge{
+  white-space:nowrap;
+}
 </style>
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
@@ -1804,19 +1848,30 @@ async function trainerDashboard(){
 
     $('trTodayLessonsList').innerHTML =
       lessons.map(x => `
-        <div class="item">
-          <div>
-            <strong>${x.time || '--:--'} — ${x.student || ''}</strong>
-            <small>
-              ${x.car || ''} · ${x.duration || 1}h
-            </small>
-          </div>
+  <div class="item">
 
-          <span class="badge blue">
-            ${x.status || 'Confirmed'}
-          </span>
-        </div>
-      `).join('');
+    <div class="lesson-meta">
+      <strong>👨‍🎓 ${x.student || ''}</strong>
+
+      <small class="lesson-time">
+        🕒 ${x.time || '--:--'}
+      </small>
+
+      <small>
+        🚗 ${x.car || ''}
+      </small>
+
+      <small>
+        ⏱️ ${x.duration || 1}h
+      </small>
+    </div>
+
+    <span class="badge blue">
+      ${x.status || 'Confirmed'}
+    </span>
+
+  </div>
+`).join('');
   }
 }
   }
