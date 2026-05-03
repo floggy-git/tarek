@@ -377,6 +377,56 @@
 body{
   zoom:70%;
 }
+  /* Today's Lesson Card */
+.today-lesson-card{
+  background:linear-gradient(135deg,#ffffff,#f8fbff);
+  border:1px solid #dbeafe;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 10px 24px rgba(15,23,42,.06);
+}
+
+.today-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.today-student{
+  font-size:15px;
+  font-weight:800;
+  color:#0f172a;
+}
+
+.today-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.today-info{
+  background:#fff;
+  border-radius:14px;
+  padding:10px 12px;
+  border:1px solid #edf2ff;
+}
+
+.today-info span{
+  display:block;
+  font-size:11px;
+  color:#64748b;
+  margin-bottom:4px;
+}
+
+.today-info strong{
+  font-size:14px;
+  color:#0f172a;
+}
+
+.today-info.full{
+  grid-column:1/-1;
+}
 </style>
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
@@ -1835,28 +1885,37 @@ async function trainerDashboard(){
   } else {
 
     $('trTodayLessonsList').innerHTML =
-      lessons.map(x => `
-  <div class="item">
+     lessons.map(x => `
+  <div class="today-lesson-card">
 
-    <div class="lesson-meta">
-      <strong>👨‍🎓 ${x.student || ''}</strong>
+    <div class="today-top">
+      <div class="today-student">
+        👨‍🎓 ${x.student || ''}
+      </div>
 
-      <small class="lesson-time">
-        🕒 ${x.time || '--:--'}
-      </small>
-
-      <small>
-        🚗 ${x.car || ''}
-      </small>
-
-      <small>
-        ⏱️ ${x.duration || 1}h
-      </small>
+      <div class="badge blue">
+        ${x.status || 'Confirmed'}
+      </div>
     </div>
 
-    <span class="badge blue">
-      ${x.status || 'Confirmed'}
-    </span>
+    <div class="today-grid">
+
+      <div class="today-info">
+        <span>🕒 Time</span>
+        <strong>${x.time || '--:--'}</strong>
+      </div>
+
+      <div class="today-info">
+        <span>⏱️ Duration</span>
+        <strong>${x.duration || 1}h</strong>
+      </div>
+
+      <div class="today-info full">
+        <span>🚗 Car</span>
+        <strong>${x.car || ''}</strong>
+      </div>
+
+    </div>
 
   </div>
 `).join('');
