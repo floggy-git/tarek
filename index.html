@@ -2110,7 +2110,9 @@ async function trainerCompleteLesson(btn){
     }
   }
 
-  const customPrice = $('trLessonPrice').value;
+  const customPrice = String($('trLessonPrice').value || '')
+  .replace('€','')
+  .trim();
   const carType = $('trLessonCar').value;
 
   if(!student || !date || !time || !trainer){
