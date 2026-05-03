@@ -638,12 +638,41 @@ html, body{
 </div>
   <div class="card" style="margin-top:14px"><div class="title"><h3>🔎 Student Search</h3>
 </div><input class="input" placeholder="Search student..." oninput="trainerRenderStudents(this.value)">
-<div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div><div class="page" id="tLesson"> <div class="card"><div class="title"><h3>✅ Complete Lesson</h3></div><div class="grid cols2"><div class="group"><label>Student</label> <select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div><div class="group">
-<label>Trainer</label><select class="select" id="trLessonTrainer"></select></div><div class="group"><label>Date</label>
-<input class="input" id="trLessonDate" type="date"></div><div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div><div class="group">
- <input type="hidden" id="trLessonDuration" value="1">
+<div id="trStudentCards" class="list" style="margin-top:12px"></div></div></div>
+ <div class="page" id="tLesson">
+  <div class="card">
+    <div class="title"><h3>✅ Complete Lesson</h3></div>
 
-<div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div><div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div><div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div><div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div></div><div class="group" style="margin-top:12px"><label>Payment Status</label><div class="statusgrid"><button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button><button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button></div></div><div class="group" id="trPayMethodBox"><label>Payment Method</label><div class="paygrid" id="trPayMethods"></div></div><button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button></div></div><div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><textarea class="textarea" id="trDepositNotes" placeholder="اكتب ملاحظات الإيداع هنا..."></textarea></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div>
+    <input type="hidden" id="trLessonDuration" value="1">
+
+    <div class="grid cols2">
+      <div class="group"><label>Student</label><select class="select" id="trLessonStudent" onchange="trainerLoadStudentDetails()"></select></div>
+      <div class="group"><label>Trainer</label><select class="select" id="trLessonTrainer"></select></div>
+      <div class="group"><label>Date</label><input class="input" id="trLessonDate" type="date"></div>
+      <div class="group"><label>Time</label><input class="input" id="trLessonTime" type="time"></div>
+      <div class="group"><label>Lesson Number</label><input class="input" id="trLessonNumber" readonly></div>
+      <div class="group"><label>Car Type</label><input class="input" id="trLessonCar" readonly></div>
+      <div class="group"><label>Wallet Balance</label><input class="input" id="trLessonWallet" readonly></div>
+      <div class="group"><label>Custom Price</label><input class="input" id="trLessonPrice" type="number" placeholder="Optional"></div>
+    </div>
+
+    <div class="group" style="margin-top:12px">
+      <label>Payment Status</label>
+      <div class="statusgrid">
+        <button class="statusopt paid active" id="trPaidBtn" onclick="trainerSetPayStatus('Paid')">Paid</button>
+        <button class="statusopt unpaid" id="trUnpaidBtn" onclick="trainerSetPayStatus('Unpaid')">Unpaid</button>
+      </div>
+    </div>
+
+    <div class="group" id="trPayMethodBox">
+      <label>Payment Method</label>
+      <div class="paygrid" id="trPayMethods"></div>
+    </div>
+
+    <button class="btn green full" onclick="trainerCompleteLesson(this)">✅ Save Lesson</button>
+  </div>
+</div>
+    <div class="page" id="tDeposit"><div class="card"><div class="title"><h3>💰 Wallet Deposit</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trDepositStudent" onchange="trainerFillDepositEmail()"></select></div><div class="group"><label>Email</label><input class="input" id="trDepositEmail" readonly></div></div><div class="group"><label>Amount</label><input class="input" id="trDepositAmount" type="number"></div><div class="quick"><button onclick="trSetDepositAmount(50)">50</button><button onclick="trSetDepositAmount(100)">100</button><button onclick="trSetDepositAmount(200)">200</button><button onclick="trSetDepositAmount(500)">500</button><button onclick="trSetDepositAmount(1000)">1000</button></div><div class="group"><label>Notes</label><textarea class="textarea" id="trDepositNotes" placeholder="اكتب ملاحظات الإيداع هنا..."></textarea></div><button class="btn gold full" onclick="trainerSubmitDeposit(this)">💳 Confirm Deposit</button></div></div>
  <div class="page" id="tReminder"><div class="card"><div class="title"><h3>💌 Payment Reminder</h3></div><div class="grid cols2"><div class="group"><label>Student</label><select class="select" id="trReminderStudent"></select></div><div class="group"><label>Suggested Amount</label><input class="input" id="trReminderAmount" type="number" placeholder="مبلغ مقترح"></div></div><div class="group">
   <label>🔗 Payment Link (اختياري)</label>
   <input
