@@ -448,27 +448,41 @@ body{
   padding:4px 9px;
   font-weight:900;
 }
-  /* ===== Safe Login Width Fix ===== */
-.login-grid{
+/* ===== Safe Login Layout Fix ===== */
+#loginScreen .login-grid{
   max-width:980px;
   margin:0 auto;
-  grid-template-columns:minmax(0,1fr) 360px;
-  align-items:start;
+  display:grid;
+  grid-template-columns:1fr 360px;
+  gap:20px;
+  align-items:stretch;
 }
 
-.login-card{
+#loginScreen .welcome{
   width:100%;
+  min-width:0;
+}
+
+#loginScreen .login-card{
+  width:360px;
   max-width:360px;
+  min-width:360px;
 }
 
 @media(max-width:860px){
-  .login-grid{
+  #loginScreen .login-grid{
     max-width:100%;
     grid-template-columns:1fr;
   }
 
-  .login-card{
+  #loginScreen .welcome{
+    display:none;
+  }
+
+  #loginScreen .login-card{
+    width:100%;
     max-width:100%;
+    min-width:0;
   }
 }
 </style>
