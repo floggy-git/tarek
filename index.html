@@ -448,6 +448,29 @@ body{
   padding:4px 9px;
   font-weight:900;
 }
+  /* ===== Safe Login Width Fix ===== */
+.login-grid{
+  max-width:980px;
+  margin:0 auto;
+  grid-template-columns:minmax(0,1fr) 360px;
+  align-items:start;
+}
+
+.login-card{
+  width:100%;
+  max-width:360px;
+}
+
+@media(max-width:860px){
+  .login-grid{
+    max-width:100%;
+    grid-template-columns:1fr;
+  }
+
+  .login-card{
+    max-width:100%;
+  }
+}
 </style>
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
