@@ -2100,9 +2100,10 @@ function trainerSetPayStatus(status){
 }
 async function trainerCompleteLesson(btn){
   const student = $('trLessonStudent').value;
-  const date = $('trLessonDate').value;
-  const time = $('trLessonTime').value;
-  const lessonNumber = $('trLessonNumber').value || '1';
+const date = $('trLessonDate').value;
+const time = $('trLessonTime').value;
+const duration = $('trLessonDuration') ? $('trLessonDuration').value : 1;
+const lessonNumber = $('trLessonNumber').value || '1';
   let trainer = $('trLessonTrainer').value;
 
   if(!trainer){
