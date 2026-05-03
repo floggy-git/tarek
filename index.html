@@ -2140,8 +2140,8 @@ function trainerSetPayStatus(status){
 }
 async function trainerCompleteLesson(btn){
   const student = $('trLessonStudent').value;
-const date = $('trLessonDate').value;
-const time = $('trLessonTime').value;
+let date = $('trLessonDate').value;
+let time = $('trLessonTime').value;
 let duration = $('trLessonDuration') ? $('trLessonDuration').value : 1;
 
 const booking = (state.bookings || []).find(b =>
@@ -2150,6 +2150,8 @@ const booking = (state.bookings || []).find(b =>
 );
 
 if(booking){
+  date = booking.date || date;
+  time = booking.time || time;
   duration = booking.duration || duration;
 }
 const lessonNumber = $('trLessonNumber').value || '1';
