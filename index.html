@@ -1785,8 +1785,15 @@ function bookingCard(b, highlight=false){
     start.setHours(Number(parts[0]), Number(parts[1] || 0), 0, 0);
   }
 
-  const diff = start - new Date();
-  if (diff > 0) {
+  const now = new Date();
+const duration = Number(b.duration || 1);
+const end = new Date(start.getTime() + duration * 60 * 60 * 1000);
+
+const diff = start - now;
+
+if (now >= start && now < end) {
+  countdown = `🚗 الدرس جاري الآن`;
+} else if (diff > 0) {
   const totalMinutes = Math.floor(diff / (1000 * 60));
   const days = Math.floor(totalMinutes / (60 * 24));
   const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
