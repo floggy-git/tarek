@@ -2108,7 +2108,7 @@ if(!student || !date || !time || !trainer){
 }
 
   setBtn(btn,true,'⏳');
-  const r=await apiPost('completeLesson',{student,date,time,trainer,carType,paymentStatus:trainerPayStatus,paymentMethod:trainerPayMethod,lessonNumber,customPrice,notes:'',sendEmail:true}, false);
+  const r=await apiPost('completeLesson',{student,date,time,trainer,carType,paymentStatus:trainerPayStatus,paymentMethod:'',lessonNumber,customPrice,notes:'',sendEmail:true}, false);
   setBtn(btn,false);
 
   if(r.success){
