@@ -400,12 +400,15 @@ body{
 }
 
 .today-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+  display:flex;
+  align-items:stretch;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
 .today-info{
+  flex:1;
+  min-width:120px;
   background:#fff;
   border-radius:14px;
   padding:10px 12px;
@@ -422,10 +425,6 @@ body{
 .today-info strong{
   font-size:14px;
   color:#0f172a;
-}
-
-.today-info.full{
-  grid-column:1/-1;
 }
 </style>
 </head>
