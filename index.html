@@ -373,11 +373,28 @@
   font-size:12px;
   margin-top:3px;
 }
-/* Safe Desktop Scale */
+/* Safe Desktop Compact Size */
 @media(min-width:1200px){
   .main{
-    transform:scale(.85);
-    transform-origin:top center;
+    max-width:980px;
+  }
+
+  .login-grid{
+    max-width:920px;
+    grid-template-columns:1fr 340px;
+  }
+
+  .welcome{
+    min-height:360px;
+    padding:26px;
+  }
+
+  .welcome h2{
+    font-size:28px;
+  }
+
+  .login-card{
+    padding:16px;
   }
 }
   /* Today's Lesson Card */
@@ -450,6 +467,9 @@
   border-radius:999px;
   padding:4px 9px;
   font-weight:900;
+}
+  html, body{
+  overflow-x:hidden;
 }
 </style>
 </head>
