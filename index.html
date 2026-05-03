@@ -2089,33 +2089,35 @@ async function trainerLoadStudentDetails(){
   const r = await apiPost('getStudentDetails',{name});
 
   if(r.success){
+
     $('trLessonNumber').value = r.nextLesson || 1;
     $('trLessonCar').value = r.carType || '';
     $('trLessonWallet').value = money(r.walletBalance);
 
     const currentTrainer = state.trainers.find(t =>
-      String(t.email || '').trim().toLowerCase() === String(state.user?.email || '').trim().toLowerCase()
+      String(t.email || '').trim().toLowerCase() ===
+      String(state.user?.email || '').trim().toLowerCase()
     );
 
-   if($('trLessonTrainer')){
-  if(r.trainer){
-    $('trLessonTrainer').value = r.trainer;
-  }else if(currentTrainer){
-    $('trLessonTrainer').value = currentTrainer.name;
-  }
-}
-
-const booking = (state.bookings || []).find(b =>
-  String(b.student || '').trim() === String(name || '').trim() &&
-  String(b.status || '').trim() !== 'Completed'
-);
-
-if(booking){
-  if($('trLessonDate')) $('trLessonDate').value = booking.date || '';
-  if($('trLessonTime')) $('trLessonTime').value = booking.time || '';
-  if($('trLessonDuration')) $('trLessonDuration').value = booking.duration || 1;
-}
+    if($('trLessonTrainer')){
+      if(r.trainer){
+        $('trLessonTrainer').value = r.trainer;
+      }else if(currentTrainer){
+        $('trLessonTrainer').value = currentTrainer.name;
+      }
     }
+
+    const booking = (state.bookings || []).find(b =>
+      String(b.student || '').trim() === String(name || '').trim() &&
+      String(b.status || '').trim() !== 'Completed'
+    );
+
+    if(booking){
+      if($('trLessonDate')) $('trLessonDate').value = booking.date || '';
+      if($('trLessonTime')) $('trLessonTime').value = booking.time || '';
+      if($('trLessonDuration')) $('trLessonDuration').value = booking.duration || 1;
+    }
+
   }
 }
 function trainerRenderPayMethods(){
