@@ -427,6 +427,27 @@ body{
   font-size:14px;
   color:#0f172a;
 }
+  .lesson-live{
+  display:inline-block;
+  margin-top:4px;
+  color:#991b1b !important;
+  background:#fee2e2;
+  border:1px solid #fecaca;
+  border-radius:999px;
+  padding:4px 9px;
+  font-weight:900;
+}
+
+.lesson-ended{
+  display:inline-block;
+  margin-top:4px;
+  color:#166534 !important;
+  background:#dcfce7;
+  border:1px solid #bbf7d0;
+  border-radius:999px;
+  padding:4px 9px;
+  font-weight:900;
+}
 </style>
 </head>
 <body><div class="toast" id="toast"></div><div class="app">
@@ -1771,6 +1792,8 @@ function bookingCard(b, highlight=false){
 
   const d = new Date(b.date);
   const time = compactTime(b.time);
+  const duration = Number(b.duration || 1);
+
   const dateText = d.toLocaleDateString('en-US', {
     weekday: 'long',
     day: 'numeric',
@@ -1778,7 +1801,21 @@ function bookingCard(b, highlight=false){
     year: 'numeric'
   });
 
+  function addHours(time, hours){
+    if(!time || !time.includes(':')) return '';
+    const [h,m] = time.split(':').map(Number);
+    const x = new Date();
+    x.setHours(h, m || 0, 0, 0);
+    x.setHours(x.getHours() + Number(hours || 1));
+    return String(x.getHours()).padStart(2,'0') + ':' + String(x.getMinutes()).padStart(2,'0');
+  }
+
+  const end = addHours(time, duration);
+  const timeText = end ? `${time} → ${end}` : (time || '—');
+
   let countdown = '';
+  let countdownClass = '';
+
   const start = new Date(d);
   if (time && time.includes(':')) {
     const parts = time.split(':');
@@ -1786,34 +1823,36 @@ function bookingCard(b, highlight=false){
   }
 
   const now = new Date();
-const duration = Number(b.duration || 1);
-const end = new Date(start.getTime() + duration * 60 * 60 * 1000);
+  const endDate = new Date(start.getTime() + duration * 60 * 60 * 1000);
+  const diff = start - now;
 
-const diff = start - now;
+  if (now >= start && now < endDate) {
+    countdown = `🚗 الدرس جاري الآن`;
+    countdownClass = 'lesson-live';
+  } else if (now >= endDate) {
+    countdown = `✅ انتهى الدرس`;
+    countdownClass = 'lesson-ended';
+  } else if (diff > 0) {
+    const totalMinutes = Math.floor(diff / (1000 * 60));
+    const days = Math.floor(totalMinutes / (60 * 24));
+    const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+    const minutes = totalMinutes % 60;
 
-if (now >= start && now < end) {
-  countdown = `🚗 الدرس جاري الآن`;
-} else if (diff > 0) {
-  const totalMinutes = Math.floor(diff / (1000 * 60));
-  const days = Math.floor(totalMinutes / (60 * 24));
-  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-  const minutes = totalMinutes % 60;
-
-  if (days > 0) {
-    countdown = `⏳ باقي ${days} أيام و ${hours} ساعات`;
-  } else if (hours > 0) {
-    countdown = `⏳ باقي ${hours} ساعات و ${minutes} دقائق`;
-  } else {
-    countdown = `⏳ باقي ${minutes} دقائق`;
+    if (days > 0) {
+      countdown = `⏳ باقي ${days} أيام و ${hours} ساعات`;
+    } else if (hours > 0) {
+      countdown = `⏳ باقي ${hours} ساعات و ${minutes} دقائق`;
+    } else {
+      countdown = `⏳ باقي ${minutes} دقائق`;
+    }
   }
-}
 
   return `
     <div class="item">
       <div>
         <strong>📅 ${dateText}</strong>
-        <small>⏰ ${esc(time || '—')}</small>
-        <small>${countdown}</small>
+        <small>⏰ ${esc(timeText)}</small>
+        <small class="${countdownClass}">${countdown}</small>
         <small>${esc(b.id)} · ${esc(b.trainer || '—')} · ${esc(b.car || '—')}</small>
       </div>
       <span class="badge ${cls}">${esc(b.status)}</span>
