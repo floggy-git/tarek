@@ -2150,9 +2150,11 @@ const booking = (state.bookings || []).find(b =>
 );
 
 if(booking){
+  console.log('FOUND BOOKING:', booking);
+
   date = booking.date || date;
   time = booking.time || time;
-  duration = booking.duration || duration;
+  duration = booking.duration || booking.Duration || booking.dur || duration;
 }
 const lessonNumber = $('trLessonNumber').value || '1';
   let trainer = $('trLessonTrainer').value;
