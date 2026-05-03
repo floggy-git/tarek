@@ -374,38 +374,15 @@
   margin-top:3px;
 }
 /* Safe Desktop Compact Size */
+/* Safe Desktop Zoom */
 @media(min-width:1200px){
-  .main{
-    max-width:820px;
+  body{
+    zoom:85%;
   }
+}
 
-  .login-grid{
-    max-width:760px;
-    grid-template-columns:1fr 320px;
-    gap:16px;
-  }
-
-  .welcome{
-    min-height:320px;
-    padding:22px;
-  }
-
-  .welcome h2{
-    font-size:24px;
-  }
-
-  .login-card{
-    padding:14px;
-  }
-
-  .kpi{
-    padding:12px;
-  }
-
-  .btn{
-    padding:10px 12px;
-    font-size:13px;
-  }
+html, body{
+  overflow-x:hidden;
 }
   /* Today's Lesson Card */
 .today-lesson-card{
