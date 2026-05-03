@@ -2082,41 +2082,64 @@ function trainerSetPayStatus(status){
   $('trUnpaidBtn').className='statusopt unpaid '+(status==='Unpaid'?'active':'');
   $('trPayMethodBox').style.display=status==='Paid'?'block':'none';
 }
-
 async function trainerCompleteLesson(btn){
-  const student=$('trLessonStudent').value;
-  const date=$('trLessonDate').value;
-  const time=$('trLessonTime').value;
-  const lessonNumber=$('trLessonNumber').value||'1';
+  const student = $('trLessonStudent').value;
+  const date = $('trLessonDate').value;
+  const time = $('trLessonTime').value;
+  const lessonNumber = $('trLessonNumber').value || '1';
   let trainer = $('trLessonTrainer').value;
 
-if(!trainer){
-  const currentTrainer = state.trainers.find(t =>
-    String(t.email || '').trim().toLowerCase() === String(state.user?.email || '').trim().toLowerCase()
-  );
+  if(!trainer){
+    const currentTrainer = state.trainers.find(t =>
+      String(t.email || '').trim().toLowerCase() === String(state.user?.email || '').trim().toLowerCase()
+    );
 
-  if(currentTrainer){
-    trainer = currentTrainer.name;
-    $('trLessonTrainer').value = trainer;
+    if(currentTrainer){
+      trainer = currentTrainer.name;
+      $('trLessonTrainer').value = trainer;
+    }
   }
-}
-  const customPrice=$('trLessonPrice').value;
-  const carType=$('trLessonCar').value;
 
-if(!student || !date || !time || !trainer){
-  return toast('أكمل البيانات: الطالب، التاريخ، الوقت، والمدرب','err');
-}
+  const customPrice = $('trLessonPrice').value;
+  const carType = $('trLessonCar').value;
+
+  if(!student || !date || !time || !trainer){
+    return toast('أكمل البيانات: الطالب، التاريخ، الوقت، والمدرب','err');
+  }
 
   setBtn(btn,true,'⏳');
-  const r=await apiPost('completeLesson',{student,date,time,trainer,carType,paymentStatus:trainerPayStatus,paymentMethod:'',lessonNumber,customPrice,notes:'',sendEmail:true}, false);
+
+  let r;
+  try{
+    r = await apiPost('completeLesson',{
+      student: student,
+      date: date,
+      time: time,
+      trainer: trainer,
+      carType: carType,
+      paymentStatus: trainerPayStatus || 'Unpaid',
+      paymentMethod: '',
+      lessonNumber: lessonNumber,
+      customPrice: customPrice,
+      notes: '',
+      sendEmail: true
+    }, false);
+  }catch(e){
+    console.error('completeLesson error:', e);
+    setBtn(btn,false);
+    return toast('حدث خطأ أثناء حفظ الدرس','err');
+  }
+
   setBtn(btn,false);
 
-  if(r.success){
+  if(r && r.success){
     toast('تم حفظ الدرس','ok');
     await loadStudents();
     await trainerDashboard();
     await trainerLoadStudentDetails();
-  }else toast(r.message||'Error','err');
+  }else{
+    toast((r && r.message) || 'Error','err');
+  }
 }
 
 function trainerFillDepositEmail(){
