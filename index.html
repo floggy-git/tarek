@@ -2012,14 +2012,24 @@ async function trainerDashboard(){
   }
 }
 
-function trainerPage(id,btn){
+function trainerPage(id){
   document.querySelectorAll('#trainerScreen .page').forEach(p=>p.classList.remove('active'));
   $(id).classList.add('active');
-  document.querySelectorAll('#trainerNav button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  if(id==='tStudents') trainerRenderStudents();
-}
 
+  document.querySelectorAll('#trainerNav button').forEach(b=>b.classList.remove('active'));
+
+  if(id === 'tHome'){
+    trainerDashboard();
+  }
+
+  if(id === 'tStudents'){
+    loadStudents();
+  }
+
+  if(id === 'tLesson'){
+    loadStudents();
+  }
+}
 function trainerFillStudentSelects(){
   const opts='<option value="">—</option>'+(state.students||[]).map(s=>`<option value="${esc(s.name)}">${esc(s.name)}</option>`).join('');
   ['trLessonStudent','trDepositStudent','trReminderStudent','trInvoiceStudent'].forEach(id=>{if($(id))$(id).innerHTML=opts});
