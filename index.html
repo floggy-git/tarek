@@ -1787,15 +1787,19 @@ function bookingCard(b, highlight=false){
 
   const diff = start - new Date();
   if (diff > 0) {
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const totalMinutes = Math.floor(diff / (1000 * 60));
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
 
-    if (days > 0) {
-      countdown = `⏳ باقي ${days} أيام و ${hours} ساعات`;
-    } else {
-      countdown = `⏳ باقي ${hours} ساعات`;
-    }
+  if (days > 0) {
+    countdown = `⏳ باقي ${days} أيام و ${hours} ساعات`;
+  } else if (hours > 0) {
+    countdown = `⏳ باقي ${hours} ساعات و ${minutes} دقائق`;
+  } else {
+    countdown = `⏳ باقي ${minutes} دقائق`;
   }
+}
 
   return `
     <div class="item">
