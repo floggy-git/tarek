@@ -1770,6 +1770,12 @@ function renderStudentDashboard(){
 async function loadStudentLessons(){
   const r=await apiPost('getStudentLessons',{email:state.user.email});
   const arr=r.lessons||[];
+  state.user.totalLessons = arr.length;
+state.user.paidLessons = arr.filter(l => l.isPaid).length;
+state.user.unpaidLessons = arr.filter(l => !l.isPaid).length;
+state.user.revenue = arr.reduce((sum, l) => sum + Number(l.price || 0), 0);
+
+renderStudentDashboard();
   $('lessonCount').textContent=arr.length;
   $('sLessonsList').innerHTML=arr.length
     ? arr.slice().reverse().map(l=>`<div class="item"><div><strong>#${esc(l.lessonNum)} · ${compactDate(l.date)} ${compactTime(l.time)}</strong><small>${esc(l.trainer)} · ${esc(l.method||'—')}</small></div><span class="badge ${l.isPaid?'green':'red'}">${esc(l.status)}</span></div>`).join('')
