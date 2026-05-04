@@ -2113,10 +2113,9 @@ async function trainerLoadStudentDetails(){
       }
     }
 
-    const booking = (state.bookings || []).find(b =>
+   const booking = (state.bookings || []).find(b =>
   String(b.student || '').trim() === String(student || '').trim() &&
-  String(b.date || '').trim() === String(date || '').trim() &&
-  String(b.status || '').trim().toLowerCase() !== 'completed'
+  String(b.status || '').trim() !== 'Completed'
 );
 
 if(booking){
