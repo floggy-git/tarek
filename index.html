@@ -2199,11 +2199,21 @@ const lessonNumber = $('trLessonNumber').value || '1';
   setBtn(btn,false);
 
   if(r && r.success){
-    toast('تم حفظ الدرس','ok');
-    await loadStudents();
-    await trainerDashboard();
-    await trainerLoadStudentDetails();
-  }else{
+  toast('تم حفظ الدرس','ok');
+
+  $('trLessonStudent').value = '';
+  $('trLessonDate').value = isoToday();
+  $('trLessonTime').value = new Date().toTimeString().slice(0,5);
+  $('trLessonDuration').value = 1;
+  $('trLessonNumber').value = '';
+  $('trLessonCar').value = '';
+  $('trLessonWallet').value = '';
+  $('trLessonPrice').value = '';
+
+  await loadStudents();
+  await trainerDashboard();
+}
+  else{
     toast((r && r.message) || 'Error','err');
   }
 }
